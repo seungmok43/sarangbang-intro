@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>소그룹 건강진단 체크리스트 | 수영로교회 사랑방 영역</title>
+  <meta name="description" content="수영로교회 사랑방 시스템 기준 소그룹 건강 자가진단 체크리스트 — 15개 문항, 5분 소요" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #1B4332;
+      --mid:     #2D6A4F;
+      --accent:  #40916C;
+      --light:   #D8F3DC;
+      --lighter: #F0FBF2;
+      --white:   #FFFFFF;
+      --gray50:  #F9FAFB;
+      --gray100: #F3F4F6;
+      --gray200: #E5E7EB;
+      --gray300: #D1D5DB;
+      --gray400: #9CA3AF;
+      --gray500: #6B7280;
+      --gray700: #374151;
+      --gray900: #111827;
+      --warn:    #D97706;
+      --danger:  #B91C1C;
+      --radius:  16px;
+      --shadow:  0 2px 12px rgba(0,0,0,.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--lighter);
+      color: var(--gray900);
+      min-height: 100vh;
+      padding-bottom: 120px;
+    }
+
+    /* ─── Progress Bar (fixed top) ─────────────────────────────────── */
+    #progress-bar-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray200);
+      padding: 10px 20px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    #progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--gray500);
+      margin-bottom: 6px;
+    }
+
+    #progress-label span:last-child { color: var(--accent); }
+
+    #progress-track {
+      height: 6px;
+      background: var(--gray200);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    #progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #52B788);
+      border-radius: 99px;
+      width: 0%;
+      transition: width .4s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ─── Header ───────────────────────────────────────────────────── */
+    #app-header {
+      background: linear-gradient(135deg, var(--deep) 0%, var(--mid) 100%);
+      padding: 72px 20px 36px;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,.9);
+    }
+
+    .header-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.2));
+    }
+
+    #app-header h1 {
+      font-size: clamp(1.35rem, 5vw, 1.75rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .header-sub {
+      font-size: clamp(.85rem, 3vw, .95rem);
+      color: rgba(255,255,255,.8);
+      margin-bottom: 20px;
+    }
+
+    .header-meta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,.12);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: .78rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.9);
+    }
+
+    /* ─── Main Content ─────────────────────────────────────────────── */
+    #checklist-view { padding: 20px 0; }
+    #result-view    { display: none; padding: 20px 0; }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* ─── Category Section ─────────────────────────────────────────── */
+    .category-section { margin-bottom: 8px; }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 16px 14px;
+    }
+
+    .cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--deep);
+      color: var(--white);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+
+    .cat-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray700);
+    }
+
+    .cat-divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--gray200) 100%);
+      margin: 0 16px 12px;
+      border-radius: 99px;
+    }
+
+    /* ─── Question Card ────────────────────────────────────────────── */
+    .q-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      margin: 0 4px 10px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+
+    .q-card.answered {
+      box-shadow: 0 2px 12px rgba(64,145,108,.18);
+      border: 1.5px solid var(--light);
+    }
+
+    .q-card:hover { box-shadow: var(--shadow-lg); }
+
+    .q-num-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 16px 16px 12px;
+    }
+
+    .q-num {
+      min-width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--gray100);
+      color: var(--gray500);
+      font-size: .72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      transition: background .2s, color .2s;
+    }
+
+    .q-card.answered .q-num {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .q-text {
+      font-size: .9rem;
+      font-weight: 500;
+      line-height: 1.55;
+      color: var(--gray700);
+      flex: 1;
+    }
+
+    /* ─── Options ──────────────────────────────────────────────────── */
+    .option-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      padding: 0 12px 14px;
+    }
+
+    .option-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .option-label input[type="radio"] { display: none; }
+
+    .option-btn {
+      width: 100%;
+      padding: 9px 4px 8px;
+      border-radius: 10px;
+      border: 2px solid var(--gray200);
+      background: var(--gray50);
+      text-align: center;
+      transition: all .2s cubic-bezier(.4,0,.2,1);
+      cursor: pointer;
+    }
+
+    .opt-emoji  { font-size: 1.2rem; display: block; margin-bottom: 3px; }
+    .opt-score  { font-size: .62rem; font-weight: 700; color: var(--gray400); display: block; margin-bottom: 1px; }
+    .opt-label  { font-size: .72rem; font-weight: 600; color: var(--gray600); display: block; }
+
+    /* Selected states */
+    .option-label input:checked + .option-btn.opt-no {
+      background: #FEF2F2;
+      border-color: #F87171;
+    }
+    .option-label input:checked + .option-btn.opt-no .opt-label,
+    .option-label input:checked + .option-btn.opt-no .opt-score { color: #B91C1C; }
+
+    .option-label input:checked + .option-btn.opt-partial {
+      background: #FFFBEB;
+      border-color: #FCD34D;
+    }
+    .option-label input:checked + .option-btn.opt-partial .opt-label,
+    .option-label input:checked + .option-btn.opt-partial .opt-score { color: #92400E; }
+
+    .option-label input:checked + .option-btn.opt-yes {
+      background: var(--light);
+      border-color: var(--accent);
+    }
+    .option-label input:checked + .option-btn.opt-yes .opt-label,
+    .option-label input:checked + .option-btn.opt-yes .opt-score { color: var(--deep); }
+
+    .option-btn:hover {
+      border-color: var(--accent);
+      background: var(--lighter);
+      transform: translateY(-1px);
+    }
+
+    /* ─── Sticky CTA ───────────────────────────────────────────────── */
+    #cta-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 12px 20px 20px;
+      background: var(--white);
+      border-top: 1px solid var(--gray200);
+      box-shadow: 0 -4px 20px rgba(0,0,0,.08);
+    }
+
+    #cta-status {
+      font-size: .75rem;
+      font-weight: 500;
+      color: var(--gray400);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    #cta-btn {
+      width: 100%;
+      max-width: 480px;
+      display: block;
+      margin: 0 auto;
+      padding: 15px 24px;
+      border: none;
+      border-radius: 14px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .25s cubic-bezier(.4,0,.2,1);
+      letter-spacing: .02em;
+    }
+
+    #cta-btn:disabled {
+      background: var(--gray200);
+      color: var(--gray400);
+      cursor: not-allowed;
+    }
+
+    #cta-btn:not(:disabled) {
+      background: linear-gradient(135deg, var(--deep), var(--accent));
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(27,67,50,.35);
+    }
+
+    #cta-btn:not(:disabled):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(27,67,50,.45);
+    }
+
+    #cta-btn:not(:disabled):active { transform: translateY(0); }
+
+    /* ─── Result View ──────────────────────────────────────────────── */
+    #result-view h2 {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--deep);
+      padding: 8px 0 4px;
+    }
+
+    /* Gauge */
+    .gauge-wrap {
+      background: var(--white);
+      border-radius: var(--radius);
+      margin: 0 4px 16px;
+      padding: 28px 20px 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .gauge-svg-wrap { position: relative; width: 200px; height: 200px; margin: 0 auto 20px; }
+
+    .gauge-svg {
+      width: 200px;
+      height: 200px;
+      transform: rotate(-90deg);
+    }
+
+    .gauge-bg   { fill: none; stroke: var(--gray200); stroke-width: 14; }
+    .gauge-fill { fill: none; stroke-width: 14; stroke-linecap: round;
+                  stroke-dasharray: 502; stroke-dashoffset: 502;
+                  transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+    }
+
+    .gauge-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    #score-display {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--deep);
+      line-height: 1;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .score-max { font-size: 1rem; color: var(--gray400); font-weight: 600; }
+
+    .grade-emoji { font-size: 2rem; display: block; margin-bottom: 8px; }
+    .grade-name  {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 99px;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .grade-msg {
+      font-size: .88rem;
+      line-height: 1.6;
+      color: var(--gray700);
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* Suyeongno comparison */
+    .benchmark-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: var(--lighter);
+      border-radius: 10px;
+      border: 1px dashed var(--accent);
+    }
+
+    .benchmark-row .bm-label {
+      font-size: .78rem;
+      color: var(--gray500);
+      font-weight: 500;
+    }
+
+    .benchmark-row .bm-score {
+      font-size: .88rem;
+      font-weight: 800;
+      color: var(--deep);
+    }
+
+    /* Category bars */
+    .cat-bars-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      margin: 0 4px 16px;
+      padding: 22px 20px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .cat-bars-card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--gray700);
+      margin-bottom: 18px;
+    }
+
+    .bar-item { margin-bottom: 14px; }
+    .bar-item:last-child { margin-bottom: 0; }
+
+    .bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .bar-name  { font-size: .82rem; font-weight: 600; color: var(--gray700); }
+    .bar-score { font-size: .82rem; font-weight: 700; color: var(--deep); }
+    .bar-score span { color: var(--gray400); font-weight: 400; }
+
+    .bar-track {
+      height: 8px;
+      background: var(--gray200);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      width: 0%;
+      transition: width 1s cubic-bezier(.4,0,.2,1);
+    }
+
+    .focus-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #FEF3C7;
+      border: 1px solid #FCD34D;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: .68rem;
+      font-weight: 700;
+      color: #92400E;
+      margin-left: 6px;
+    }
+
+    /* Focus card */
+    .focus-card {
+      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      border: 1.5px solid #FCD34D;
+      border-radius: var(--radius);
+      margin: 0 4px 16px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .focus-card .fc-title {
+      font-size: .78rem;
+      font-weight: 700;
+      color: #92400E;
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+    }
+
+    .focus-card .fc-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #78350F;
+    }
+
+    .focus-card .fc-desc {
+      font-size: .82rem;
+      color: #92400E;
+      margin-top: 6px;
+      line-height: 1.55;
+    }
+
+    /* Action buttons */
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0 4px 20px;
+    }
+
+    .btn-share, .btn-restart {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: .92rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+
+    .btn-share {
+      background: linear-gradient(135deg, var(--deep), var(--accent));
+      color: var(--white);
+      box-shadow: 0 4px 16px rgba(27,67,50,.3);
+    }
+
+    .btn-share:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(27,67,50,.4); }
+
+    .btn-restart {
+      background: var(--gray100);
+      color: var(--gray700);
+      border: 1.5px solid var(--gray200);
+    }
+
+    .btn-restart:hover { background: var(--gray200); }
+
+    /* Branding footer */
+    .brand-footer {
+      text-align: center;
+      padding: 20px 20px 8px;
+      font-size: .72rem;
+      color: var(--gray400);
+      line-height: 1.6;
+    }
+
+    /* ─── Grade themes ─────────────────────────────────────────────── */
+    .grade-seed   .grade-name  { background: #FEE2E2; color: #991B1B; }
+    .grade-seed   .gauge-fill  { stroke: #F87171; }
+    .grade-grow   .grade-name  { background: #FEF3C7; color: #92400E; }
+    .grade-grow   .gauge-fill  { stroke: #FBBF24; }
+    .grade-mature .grade-name  { background: var(--light); color: var(--deep); }
+    .grade-mature .gauge-fill  { stroke: var(--accent); }
+    .grade-model  .grade-name  { background: #EDE9FE; color: #4C1D95; }
+    .grade-model  .gauge-fill  { stroke: #7C3AED; }
+
+    .grade-seed .bar-fill   { background: linear-gradient(90deg, #F87171, #FCA5A5); }
+    .grade-grow .bar-fill   { background: linear-gradient(90deg, #FBBF24, #FDE68A); }
+    .grade-mature .bar-fill { background: linear-gradient(90deg, var(--accent), #74C69D); }
+    .grade-model .bar-fill  { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+
+    /* ─── Print ────────────────────────────────────────────────────── */
+    @media print {
+      #progress-bar-wrap, #cta-bar, #checklist-view, .result-actions { display: none !important; }
+      #result-view  { display: block !important; }
+      body          { background: white; padding-bottom: 0; }
+      #app-header   { padding-top: 20px; }
+      .q-card, .gauge-wrap, .cat-bars-card, .focus-card { box-shadow: none; border: 1px solid #e5e7eb; }
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────────── */
+    @media (min-width: 540px) {
+      .option-row { gap: 10px; padding: 0 16px 16px; }
+      .opt-label  { font-size: .78rem; }
+      .opt-score  { font-size: .68rem; }
+    }
+
+    @media (min-width: 720px) {
+      .result-actions { flex-direction: row; }
+      .btn-share, .btn-restart { flex: 1; }
+    }
+
+    /* ─── Animations ───────────────────────────────────────────────── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in { animation: fadeSlideUp .5s ease both; }
+
+    .q-card  { animation: fadeSlideUp .4s ease both; }
+    .q-card:nth-child(1) { animation-delay: .05s; }
+    .q-card:nth-child(2) { animation-delay: .10s; }
+    .q-card:nth-child(3) { animation-delay: .15s; }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="15">
+  <div id="progress-label">
+    <span>진행률</span>
+    <span id="progress-text">0 / 15 완료</span>
+  </div>
+  <div id="progress-track">
+    <div id="progress-fill"></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header id="app-header">
+  <div class="header-badge">수영로교회 사랑방 영역 제공</div>
+  <span class="header-icon">🌿</span>
+  <h1>소그룹 건강진단 체크리스트</h1>
+  <p class="header-sub">우리 교회 소그룹, 얼마나 건강한가요?</p>
+  <div class="header-meta">
+    <span class="meta-chip">📋 15개 문항</span>
+    <span class="meta-chip">⏱️ 5분 소요</span>
+    <span class="meta-chip">✅ 점수 즉시 확인</span>
+  </div>
+</header>
+
+<!-- Checklist View -->
+<main id="checklist-view">
+  <div class="container" id="questions-container"></div>
+</main>
+
+<!-- Result View -->
+<section id="result-view">
+  <div class="container">
+    <h2 id="result-heading">진단 결과</h2>
+
+    <!-- Gauge -->
+    <div class="gauge-wrap" id="gauge-wrap">
+      <div class="gauge-svg-wrap">
+        <svg class="gauge-svg" viewBox="0 0 180 180">
+          <circle class="gauge-bg"   cx="90" cy="90" r="80"/>
+          <circle class="gauge-fill" cx="90" cy="90" r="80" id="gauge-circle"/>
+        </svg>
+        <div class="gauge-center">
+          <div id="score-display">0</div>
+          <div class="score-max">/ 30점</div>
+        </div>
+      </div>
+
+      <span class="grade-emoji" id="grade-emoji"></span>
+      <span class="grade-name" id="grade-name"></span>
+      <p class="grade-msg" id="grade-msg"></p>
+
+      <div class="benchmark-row">
+        <span class="bm-label">📊 수영로교회 기준점</span>
+        <span class="bm-score">27점</span>
+        <span class="bm-label">— 현재 교회:</span>
+        <span class="bm-score" id="bm-current"></span>
+      </div>
+    </div>
+
+    <!-- Category bars -->
+    <div class="cat-bars-card" id="cat-bars-card">
+      <h3>카테고리별 점수</h3>
+      <div id="cat-bars"></div>
+    </div>
+
+    <!-- Focus card -->
+    <div class="focus-card" id="focus-card">
+      <div class="fc-title">⚡ 집중 개선 영역</div>
+      <div class="fc-name" id="fc-name"></div>
+      <div class="fc-desc" id="fc-desc"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="result-actions">
+      <button class="btn-share" onclick="shareResult()" aria-label="결과 공유하기">
+        <span>📤</span> 결과 공유하기
+      </button>
+      <button class="btn-restart" onclick="restartQuiz()" aria-label="다시 진단하기">
+        <span>🔄</span> 다시 진단하기
+      </button>
+    </div>
+
+    <div class="brand-footer">
+      수영로교회 사랑방 영역 제공<br/>
+      소그룹 건강진단 체크리스트 v1.0
+    </div>
+  </div>
+</section>
+
+<!-- CTA Bar -->
+<div id="cta-bar">
+  <p id="cta-status">15개 문항 모두 답변하면 결과를 확인할 수 있습니다.</p>
+  <button id="cta-btn" disabled onclick="showResult()">결과 보기 →</button>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════════════════ */
+const CATEGORIES = [
+  {
+    id: 'structure',
+    emoji: '📐',
+    label: '소그룹 구조',
+    questions: [
+      '소그룹 리더십 계층(예: 담당 교역자 → 상위 리더 → 소그룹 리더 → 구성원)이 명확하게 정의되어 있다.',
+      '소그룹 적정 인원(4~10명)을 유지하고 있으며, 과대화 시 분가 계획이 있다.',
+      '소그룹 분가(새로운 그룹 개척)를 연 1회 이상 목표로 삼고 있다.',
+    ],
+    desc: '리더십 구조와 그룹 규모 관리 체계를 점검하세요.'
+  },
+  {
+    id: 'operation',
+    emoji: '🔄',
+    label: '모임 운영',
+    questions: [
+      '매 모임마다 따르는 구조화된 흐름(환영→찬양→말씀→사역 등)이 있다.',
+      '말씀 나눔이 중심이 되며, 리더가 독점하지 않고 구성원 모두가 참여한다.',
+      '모임 시간이 2시간 이내로 관리되며, 시작·종료 시간을 지킨다.',
+    ],
+    desc: '모임의 구조화 수준과 참여 문화를 점검하세요.'
+  },
+  {
+    id: 'newcomer',
+    emoji: '🌱',
+    label: '새가족 정착',
+    questions: [
+      '새가족이 등록 후 1주일 이내에 담당자로부터 첫 연락을 받는다.',
+      '새가족이 소그룹에 연결되기까지의 단계별 프로세스(온보딩 시스템)가 있다.',
+      '새가족 담당 팀 또는 전담 인원이 지정되어 있다.',
+    ],
+    desc: '새가족 환영과 정착 프로세스를 점검하세요.'
+  },
+  {
+    id: 'training',
+    emoji: '🎓',
+    label: '리더 교육',
+    questions: [
+      '소그룹 리더를 위한 정기 교육 과정(연 1회 이상)이 운영된다.',
+      '리더들이 한자리에 모이는 컨퍼런스 또는 연수 프로그램이 있다.',
+      '리더 교육 이수 후 일정 기간마다 재교육 또는 재수강 원칙이 있다.',
+    ],
+    desc: '리더 역량 강화와 지속 성장 체계를 점검하세요.'
+  },
+  {
+    id: 'care',
+    emoji: '💚',
+    label: '케어 시스템',
+    questions: [
+      '장기결석자(3주 이상)를 파악하고 별도로 관리하는 프로세스가 있다.',
+      '소그룹에 속하지 않은 성도들을 위한 연결 및 초대 프로그램이 있다.',
+      '소그룹 리더가 구성원의 기도제목과 삶의 필요를 정기적으로 파악하고 있다.',
+    ],
+    desc: '성도 돌봄과 연결 시스템의 촘촘함을 점검하세요.'
+  }
+];
+
+const GRADES = [
+  { min: 0,  max: 9,  class: 'grade-seed',   emoji: '🌱', name: '기초 단계',
+    msg: '소그룹 시스템의 기반을 다질 때입니다. 구조와 프로세스부터 시작하세요.' },
+  { min: 10, max: 17, class: 'grade-grow',   emoji: '🌿', name: '성장 단계',
+    msg: '핵심 요소는 갖춰져 있습니다. 이제 체계화와 일관성이 필요합니다.' },
+  { min: 18, max: 23, class: 'grade-mature', emoji: '🌳', name: '성숙 단계',
+    msg: '건강한 소그룹 문화가 형성되고 있습니다. 세부 강화로 더 견고해질 수 있습니다.' },
+  { min: 24, max: 30, class: 'grade-model',  emoji: '🏆', name: '모범 단계',
+    msg: '수영로교회 수준의 성숙한 소그룹 시스템을 갖추고 있습니다!' },
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════════════ */
+const answers = {};   // key: "catIdx-qIdx", value: 0|1|2
+
+/* ═══════════════════════════════════════════════════════════════
+   BUILD UI
+═══════════════════════════════════════════════════════════════ */
+function buildChecklist() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+
+  let globalQ = 0;
+
+  CATEGORIES.forEach((cat, catIdx) => {
+    const section = document.createElement('section');
+    section.className = 'category-section';
+    section.setAttribute('aria-label', cat.label);
+
+    const header = document.createElement('div');
+    header.className = 'category-header';
+    header.innerHTML = `
+      <span class="cat-badge">${cat.emoji} ${cat.label}</span>
+      <span class="cat-title"></span>
+    `;
+    section.appendChild(header);
+
+    const divider = document.createElement('div');
+    divider.className = 'cat-divider';
+    section.appendChild(divider);
+
+    cat.questions.forEach((q, qIdx) => {
+      globalQ++;
+      const key = `${catIdx}-${qIdx}`;
+      const card = document.createElement('div');
+      card.className = 'q-card';
+      card.id = `card-${key}`;
+
+      card.innerHTML = `
+        <div class="q-num-row">
+          <span class="q-num" id="qnum-${key}">${globalQ}</span>
+          <p class="q-text">${q}</p>
+        </div>
+        <div class="option-row" role="radiogroup" aria-label="문항 ${globalQ} 선택">
+          <label class="option-label">
+            <input type="radio" name="q-${key}" value="0" onchange="onAnswer('${key}',0)" />
+            <div class="option-btn opt-no">
+              <span class="opt-emoji">❌</span>
+              <span class="opt-score">0점</span>
+              <span class="opt-label">아니오</span>
+            </div>
+          </label>
+          <label class="option-label">
+            <input type="radio" name="q-${key}" value="1" onchange="onAnswer('${key}',1)" />
+            <div class="option-btn opt-partial">
+              <span class="opt-emoji">🔶</span>
+              <span class="opt-score">1점</span>
+              <span class="opt-label">부분적으로</span>
+            </div>
+          </label>
+          <label class="option-label">
+            <input type="radio" name="q-${key}" value="2" onchange="onAnswer('${key}',2)" />
+            <div class="option-btn opt-yes">
+              <span class="opt-emoji">✅</span>
+              <span class="opt-score">2점</span>
+              <span class="opt-label">예</span>
+            </div>
+          </label>
+        </div>
+      `;
+
+      section.appendChild(card);
+    });
+
+    container.appendChild(section);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INTERACTION
+═══════════════════════════════════════════════════════════════ */
+function onAnswer(key, value) {
+  answers[key] = value;
+  const card = document.getElementById(`card-${key}`);
+  card.classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress() {
+  const total    = 15;
+  const answered = Object.keys(answers).length;
+  const pct      = (answered / total) * 100;
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${answered} / ${total} 완료`;
+  document.querySelector('#progress-bar-wrap').setAttribute('aria-valuenow', answered);
+
+  const btn    = document.getElementById('cta-btn');
+  const status = document.getElementById('cta-status');
+
+  if (answered === total) {
+    btn.disabled = false;
+    status.textContent = '15개 문항 완료! 아래 버튼을 눌러 결과를 확인하세요. 🎉';
+    status.style.color = 'var(--accent)';
+    status.style.fontWeight = '600';
+  } else {
+    btn.disabled = true;
+    const remain = total - answered;
+    status.textContent = `${remain}개 문항이 남아 있습니다.`;
+    status.style.color = '';
+    status.style.fontWeight = '';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPUTE SCORES
+═══════════════════════════════════════════════════════════════ */
+function computeScores() {
+  const catScores = CATEGORIES.map((cat, catIdx) => {
+    let total = 0;
+    cat.questions.forEach((_, qIdx) => {
+      total += answers[`${catIdx}-${qIdx}`] || 0;
+    });
+    return total;
+  });
+  const totalScore = catScores.reduce((a, b) => a + b, 0);
+  return { catScores, totalScore };
+}
+
+function getGrade(score) {
+  return GRADES.find(g => score >= g.min && score <= g.max) || GRADES[0];
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHOW RESULT
+═══════════════════════════════════════════════════════════════ */
+function showResult() {
+  const { catScores, totalScore } = computeScores();
+  const grade = getGrade(totalScore);
+
+  // Switch views
+  document.getElementById('checklist-view').style.display = 'none';
+  document.getElementById('result-view').style.display    = 'block';
+  document.getElementById('cta-bar').style.display        = 'none';
+
+  // Apply grade class to result view
+  const rv = document.getElementById('result-view');
+  rv.className = grade.class;
+
+  // Gauge circle: circumference = 2π×80 ≈ 502.65
+  const CIRC = 502.65;
+  const offset = CIRC - (totalScore / 30) * CIRC;
+  const gCircle = document.getElementById('gauge-circle');
+  gCircle.style.strokeDashoffset = CIRC; // reset
+  setTimeout(() => { gCircle.style.strokeDashoffset = offset; }, 80);
+
+  // Animate score counter
+  animateCount('score-display', 0, totalScore, 1100);
+
+  // Grade info
+  document.getElementById('grade-emoji').textContent = grade.emoji;
+  document.getElementById('grade-name').textContent  = grade.name;
+  document.getElementById('grade-msg').textContent   = grade.msg;
+  document.getElementById('bm-current').textContent  = totalScore + '점';
+
+  // Category bars
+  const barsContainer = document.getElementById('cat-bars');
+  barsContainer.innerHTML = '';
+  const minScore  = Math.min(...catScores);
+  const focusCatIdx = catScores.indexOf(minScore);
+
+  CATEGORIES.forEach((cat, i) => {
+    const s   = catScores[i];
+    const pct = (s / 6) * 100;
+    const isFocus = (i === focusCatIdx);
+
+    const barEl = document.createElement('div');
+    barEl.className = 'bar-item animate-in';
+    barEl.style.animationDelay = (i * 0.1) + 's';
+    barEl.innerHTML = `
+      <div class="bar-header">
+        <span class="bar-name">${cat.emoji} ${cat.label}${isFocus ? '<span class="focus-tag">⚡ 집중 개선</span>' : ''}</span>
+        <span class="bar-score">${s}<span> / 6</span></span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" data-pct="${pct}" style="width:0%"></div></div>
+    `;
+    barsContainer.appendChild(barEl);
+  });
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(el => {
+      el.style.width = el.dataset.pct + '%';
+    });
+  }, 200);
+
+  // Focus card
+  const focusCat = CATEGORIES[focusCatIdx];
+  document.getElementById('fc-name').textContent = `${focusCat.emoji} ${focusCat.label}`;
+  document.getElementById('fc-desc').textContent = focusCat.desc;
+
+  // Scroll to top of result
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function animateCount(id, from, to, duration) {
+  const el = document.getElementById(id);
+  const start = performance.now();
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(from + (to - from) * ease);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARE
+═══════════════════════════════════════════════════════════════ */
+async function shareResult() {
+  const { totalScore } = computeScores();
+  const grade = getGrade(totalScore);
+  const text = `[소그룹 건강진단] 우리 교회 소그룹은 ${grade.name}이에요! (${totalScore}/30점)\n${grade.emoji} ${grade.msg}\n수영로교회 사랑방 영역 제공`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: '소그룹 건강진단 결과', text });
+    } catch(e) {
+      if (e.name !== 'AbortError') fallbackCopy(text);
+    }
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  try {
+    navigator.clipboard.writeText(text).then(() => alert('결과가 클립보드에 복사되었습니다.'));
+  } catch(e) {
+    alert('결과를 직접 복사해 공유해주세요:\n\n' + text);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESTART
+═══════════════════════════════════════════════════════════════ */
+function restartQuiz() {
+  // Clear answers
+  for (const key in answers) delete answers[key];
+
+  // Reset views
+  document.getElementById('checklist-view').style.display = 'block';
+  document.getElementById('result-view').style.display    = 'none';
+  document.getElementById('cta-bar').style.display        = 'block';
+
+  // Reset progress
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('progress-text').textContent  = '0 / 15 완료';
+  document.getElementById('cta-btn').disabled           = true;
+
+  const status = document.getElementById('cta-status');
+  status.textContent   = '15개 문항 모두 답변하면 결과를 확인할 수 있습니다.';
+  status.style.color   = '';
+  status.style.fontWeight = '';
+
+  // Rebuild to reset radio buttons
+  buildChecklist();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════════════ */
+buildChecklist();
+</script>
+</body>
+</html>
