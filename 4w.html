@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>사랑방 4W 온라인 키트 — 수영로교회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --primary:#1B4332;--secondary:#2D6A4F;--accent:#40916C;
+  --light:#D8F3DC;--mid:#74C69D;--white:#fff;
+  --gray:#f5f7f5;--gray2:#e8ede8;--text:#1a2e1a;--sub:#5a7a5a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--gray);color:var(--text);min-height:100vh}
+
+/* ── 헤더 ── */
+.site-header{background:var(--primary);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.site-header .logo{font-size:11px;opacity:.7;letter-spacing:1px}
+.site-header h1{font-size:17px;font-weight:800}
+.back-btn{margin-left:auto;font-size:12px;color:#fff;opacity:.8;text-decoration:none;border:1px solid rgba(255,255,255,.3);padding:4px 10px;border-radius:20px}
+
+/* ── 메인 탭 ── */
+.main-tabs{display:flex;background:var(--secondary);overflow-x:auto;scrollbar-width:none}
+.main-tabs::-webkit-scrollbar{display:none}
+.main-tab{flex:1;min-width:80px;padding:13px 8px;text-align:center;font-size:13px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.main-tab.active{color:#fff;border-bottom-color:var(--mid)}
+.main-tab:hover{color:#fff;background:rgba(255,255,255,.08)}
+
+/* ── 탭 패널 ── */
+.tab-panel{display:none;padding:0 0 80px}
+.tab-panel.active{display:block}
+
+/* ── 서브탭 ── */
+.sub-tabs{display:flex;overflow-x:auto;gap:8px;padding:14px 16px 0;scrollbar-width:none}
+.sub-tabs::-webkit-scrollbar{display:none}
+.sub-btn{padding:7px 14px;font-size:12px;font-weight:600;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;color:var(--sub);cursor:pointer;white-space:nowrap;transition:all .2s}
+.sub-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.sub-panel{display:none;padding:16px}
+.sub-panel.active{display:block}
+
+/* ── 카드 ── */
+.card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:14px}
+.card-title{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+
+/* ── 버튼 ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:#142f26}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:#2d7a56}
+.btn-outline{background:#fff;color:var(--primary);border:1.5px solid var(--primary)}
+.btn-outline:hover{background:var(--light)}
+.btn-sm{padding:6px 12px;font-size:12px;border-radius:6px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* ── 인풋 ── */
+input[type=text],textarea,select{width:100%;padding:9px 12px;border:1.5px solid var(--gray2);border-radius:8px;font-family:inherit;font-size:13px;outline:none;transition:border .2s}
+input[type=text]:focus,textarea:focus,select:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:80px}
+.field-label{font-size:12px;font-weight:600;color:var(--sub);margin-bottom:4px;display:block}
+.field{margin-bottom:12px}
+
+/* ── 체크리스트 ── */
+.checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray2)}
+.checklist-item:last-child{border-bottom:none}
+.checklist-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
+.checklist-item label{font-size:13px;cursor:pointer;line-height:1.4}
+.checklist-item.done label{text-decoration:line-through;opacity:.5}
+.progress-bar-wrap{background:var(--gray2);border-radius:10px;height:8px;margin:14px 0 6px;overflow:hidden}
+.progress-bar{height:100%;background:var(--accent);border-radius:10px;transition:width .4s ease}
+.progress-label{font-size:12px;color:var(--sub);text-align:right}
+
+/* ── 날씨 카드 ── */
+.weather-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.weather-card{background:#fff;border:2px solid var(--gray2);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:all .2s}
+.weather-card:hover{border-color:var(--mid)}
+.weather-card.selected{border-color:var(--primary);background:var(--light)}
+.weather-card .icon{font-size:28px;display:block;margin-bottom:4px}
+.weather-card .label{font-size:12px;font-weight:600;color:var(--sub)}
+.weather-result{display:none;margin-top:14px}
+.weather-result.show{display:block}
+
+/* ── MBTI 스텝 ── */
+.mbti-step{display:none}
+.mbti-step.active{display:block}
+.step-header{font-size:11px;font-weight:700;color:var(--sub);letter-spacing:1px;margin-bottom:8px}
+.q-text{font-size:15px;font-weight:600;color:var(--text);margin-bottom:16px;line-height:1.5}
+.choice-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-btn{padding:13px;border:2px solid var(--gray2);border-radius:10px;background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
+.choice-btn:hover{border-color:var(--accent);color:var(--accent)}
+.choice-btn.selected{border-color:var(--primary);background:var(--light);color:var(--primary)}
+.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+.step-dots{display:flex;gap:5px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gray2);transition:background .2s}
+.dot.active{background:var(--primary)}
+.mbti-result{display:none;text-align:center;padding:20px 0}
+.mbti-result .type-code{font-size:52px;font-weight:900;color:var(--primary);letter-height:1}
+.mbti-result .type-name{font-size:16px;font-weight:700;margin:6px 0 14px}
+.result-card{background:var(--light);border-radius:12px;padding:14px;text-align:left;margin-bottom:12px}
+.result-card .rc-label{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-bottom:4px}
+.result-card .rc-text{font-size:13px;color:var(--text);line-height:1.5}
+
+/* ── 신앙 유형 ── */
+.faith-q{margin-bottom:14px}
+.faith-q-text{font-size:13px;font-weight:600;margin-bottom:8px}
+.faith-btns{display:flex;gap:6px;flex-wrap:wrap}
+.faith-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;font-size:12px;cursor:pointer;transition:all .2s}
+.faith-btn.selected{background:var(--primary);color:#fff;border-color:var(--primary)}
+.faith-bar-wrap{margin-bottom:10px}
+.faith-bar-label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;margin-bottom:4px}
+.faith-bar-bg{background:var(--gray2);border-radius:6px;height:10px;overflow:hidden}
+.faith-bar-fill{height:100%;border-radius:6px;background:var(--accent);transition:width .5s ease}
+
+/* ── 질문 뱅크 ── */
+.cat-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.cat-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--sub)}
+.cat-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.q-card{background:var(--primary);border-radius:16px;padding:28px 20px;text-align:center;min-height:140px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;opacity:1;transition:opacity .2s}
+.q-card.fade{opacity:0}
+.q-card-text{font-size:18px;font-weight:700;color:#fff;line-height:1.5}
+
+/* ── Worship ── */
+.mode-btns{display:flex;gap:8px;flex-wrap:wrap;padding:14px 16px}
+.mode-btn{padding:8px 16px;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--sub)}
+.mode-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.worship-panel{display:none;padding:0 16px 16px}
+.worship-panel.active{display:block}
+.topic-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.topic-tag{padding:7px 14px;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.topic-tag.active{background:var(--secondary);color:#fff;border-color:var(--secondary)}
+.song-list{display:none}
+.song-list.active{display:block}
+.song-card{background:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.song-info{flex:1}
+.song-title{font-size:14px;font-weight:700;color:var(--text)}
+.song-meta{font-size:11px;color:var(--sub);margin-top:2px}
+.song-badge{padding:3px 8px;border-radius:10px;font-size:10px;font-weight:700;background:var(--light);color:var(--accent)}
+.key-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.key-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.key-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.mood-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.mood-btn{flex:1;min-width:100px;padding:16px;border-radius:12px;border:2px solid var(--gray2);background:#fff;text-align:center;cursor:pointer;transition:all .2s}
+.mood-btn.active{border-color:var(--primary);background:var(--light)}
+.mood-btn .m-icon{font-size:24px;display:block;margin-bottom:4px}
+.mood-btn .m-label{font-size:12px;font-weight:700;color:var(--primary)}
+.mood-btn .m-bpm{font-size:11px;color:var(--sub)}
+
+/* 찬양 팁 패널 */
+.tip-panel{background:var(--primary);color:#fff;border-radius:14px;padding:16px;margin:16px}
+.tip-panel-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:0}
+.tip-panel-header h3{font-size:14px;font-weight:700}
+.tip-panel-body{display:none;margin-top:12px}
+.tip-panel-body.open{display:block}
+.tip-section{margin-bottom:12px}
+.tip-section h4{font-size:12px;font-weight:700;opacity:.8;margin-bottom:4px}
+.tip-section p{font-size:13px;opacity:.9;line-height:1.6}
+
+/* 침묵 타이머 */
+.silence-timer{text-align:center;padding:16px}
+.timer-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
+.t-btn{padding:8px 18px;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.t-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.svg-ring{display:block;margin:0 auto 12px}
+.ring-time{font-size:36px;font-weight:900;color:var(--primary);text-align:center}
+.ring-label{font-size:13px;color:var(--sub);text-align:center;margin-top:4px}
+
+/* ── Word 타이머 ── */
+.word-timer-wrap{text-align:center}
+.phase-display{border-radius:14px;padding:24px;margin-bottom:16px;transition:background .5s}
+.phase-name{font-size:13px;font-weight:700;color:#fff;opacity:.85;margin-bottom:6px}
+.phase-time{font-size:56px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+.phase-tip{font-size:12px;color:#fff;opacity:.8;margin-top:10px;line-height:1.5}
+.total-progress{background:rgba(255,255,255,.3);border-radius:10px;height:6px;margin:0 20px 16px;overflow:hidden}
+.total-progress-fill{height:100%;background:#fff;border-radius:10px;transition:width .5s}
+.phase-indicators{display:flex;gap:6px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.phase-dot{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;background:var(--gray2);color:var(--sub);cursor:pointer;transition:all .2s}
+.phase-dot.active{background:var(--primary);color:#fff}
+.phase-dot.done{background:var(--accent);color:#fff}
+.timer-ctrl{display:flex;gap:10px;justify-content:center}
+
+/* 인도팁 카드 */
+.tip-card{background:#fff;border-radius:10px;padding:13px 14px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:8px;display:flex;gap:12px}
+.tip-situation{font-size:12px;font-weight:700;color:var(--accent);min-width:70px}
+.tip-action{font-size:13px;color:var(--text);line-height:1.5}
+
+/* ── Works ── */
+.decision-input-row{display:flex;gap:8px;margin-bottom:14px}
+.decision-input-row input{flex:1}
+.decision-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:14px}
+.decision-card{border-radius:12px;padding:14px;color:#fff;position:relative}
+.decision-card .d-name{font-size:11px;font-weight:700;opacity:.85;margin-bottom:4px}
+.decision-card .d-text{font-size:13px;font-weight:600;line-height:1.4}
+.decision-card .d-del{position:absolute;top:8px;right:8px;font-size:14px;cursor:pointer;opacity:.7}
+.d-colors{background:var(--secondary)}
+.d-colors:nth-child(2n){background:var(--accent)}
+.d-colors:nth-child(3n){background:#52B788}
+.d-colors:nth-child(4n){background:#1B4332}
+
+/* VIP */
+.vip-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:200;align-items:center;justify-content:center;padding:20px}
+.vip-modal.open{display:flex}
+.vip-modal-box{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:400px;max-height:90vh;overflow-y:auto}
+.vip-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.vip-card{background:#fff;border-radius:12px;border:1.5px solid var(--gray2);padding:14px;position:relative}
+.vip-card-name{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:2px}
+.vip-card-rel{font-size:11px;color:var(--sub);margin-bottom:6px}
+.vip-card-note{font-size:12px;color:var(--text);line-height:1.4;margin-bottom:10px}
+.vip-card-footer{display:flex;align-items:center;justify-content:space-between}
+.vip-count{font-size:11px;color:var(--sub)}
+.vip-del{font-size:13px;cursor:pointer;color:var(--sub);opacity:.7}
+
+/* 웰컴사랑방 */
+.ws-tabs{display:flex;gap:8px;margin-bottom:14px}
+.ws-tab{padding:7px 16px;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.ws-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.ws-panel{display:none}
+.ws-panel.active{display:block}
+.ws-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.ws-card{background:#fff;border-radius:12px;border:1.5px solid var(--gray2);padding:14px;text-align:center}
+.ws-card .ws-icon{font-size:24px;display:block;margin-bottom:6px}
+.ws-card .ws-name{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:3px}
+.ws-card .ws-desc{font-size:11px;color:var(--sub);line-height:1.4;margin-bottom:8px}
+.ws-card .ws-link{display:block;font-size:11px;font-weight:700;color:var(--accent);text-decoration:none}
+
+/* 스탬프 */
+.stamp-name-row{display:flex;gap:8px;margin-bottom:16px}
+.stamp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.stamp-cell{aspect-ratio:1;border-radius:50%;border:2px solid var(--gray2);display:flex;align-items:center;justify-content:center;font-size:20px;background:#fff;position:relative}
+.stamp-cell.filled{background:var(--light);border-color:var(--accent);color:var(--primary)}
+.stamp-cell .s-date{position:absolute;bottom:-18px;font-size:9px;color:var(--sub);white-space:nowrap}
+.badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.badge-item{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;background:#fff;border:1.5px solid var(--gray2);font-size:12px;font-weight:600}
+.badge-item.earned{background:var(--light);border-color:var(--accent);color:var(--primary)}
+
+/* 파송 기도문 */
+.prayer-result{background:var(--light);border-radius:12px;padding:16px;font-size:14px;line-height:1.9;color:var(--text);white-space:pre-line;display:none;margin-top:14px}
+
+/* 유틸 */
+.section-title{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:10px;padding-bottom:6px;border-bottom:1.5px solid var(--gray2)}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:var(--light);color:var(--accent);margin-right:4px}
+.empty-state{text-align:center;padding:28px;color:var(--sub);font-size:13px}
+.bible-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.bible-link{padding:6px 12px;border-radius:8px;background:var(--primary);color:#fff;font-size:12px;font-weight:600;text-decoration:none}
+.prev-decisions{display:none;margin-top:14px}
+.prev-decisions.show{display:block}
+
+@media(max-width:768px){
+  .choice-btns{grid-template-columns:1fr}
+  .weather-grid{grid-template-columns:repeat(3,1fr)}
+  .decision-cards{grid-template-columns:repeat(2,1fr)}
+  .ws-cards{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="logo">수영로교회</div>
+    <h1>사랑방 4W 온라인 키트</h1>
+  </div>
+  <a class="back-btn" href="index.html">← 목록</a>
+</header>
+
+<div class="main-tabs">
+  <div class="main-tab active" onclick="switchMain(0)">🏠 Welcome</div>
+  <div class="main-tab" onclick="switchMain(1)">🎵 Worship</div>
+  <div class="main-tab" onclick="switchMain(2)">📖 Word</div>
+  <div class="main-tab" onclick="switchMain(3)">🌱 Works</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     TAB 1: WELCOME
+════════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-0">
+  <div class="sub-tabs">
+    <button class="sub-btn active" onclick="switchSub('w',0)">✅ 환대 체크</button>
+    <button class="sub-btn" onclick="switchSub('w',1)">☀️ 마음 날씨</button>
+    <button class="sub-btn" onclick="switchSub('w',2)">🧠 유형 검사</button>
+    <button class="sub-btn" onclick="switchSub('w',3)">🎲 질문 뱅크</button>
+  </div>
+
+  <!-- A: 환대 체크리스트 -->
+  <div class="sub-panel active" id="w-0">
+    <div class="card">
+      <div class="card-title">🏠 오늘 모임 환대 체크리스트</div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="check-bar" style="width:0%"></div></div>
+      <div class="progress-label"><span id="check-count">0</span>/10 완료</div>
+      <div id="check-done-msg" style="display:none;margin-top:8px;padding:10px;background:var(--light);border-radius:8px;font-size:13px;font-weight:700;color:var(--primary);text-align:center">오늘 모임 준비 완료! 🎉</div>
+      <div id="checklist" style="margin-top:12px">
+        <div class="checklist-item"><input type="checkbox" id="c0" onchange="updateCheck()"><label for="c0">모임 30분 전 도착 — 공간 정돈 완료</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c1" onchange="updateCheck()"><label for="c1">간식 준비 (음료 포함, 알레르기 고려)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c2" onchange="updateCheck()"><label for="c2">조명 조절 (너무 밝지 않게, 따뜻한 분위기)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c3" onchange="updateCheck()"><label for="c3">배경 찬양 틀기 (모임 시작 전까지)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c4" onchange="updateCheck()"><label for="c4">자리 배치 — 원형/ㄷ자 (사각 테이블 X)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c5" onchange="updateCheck()"><label for="c5">첫 방문자 이름 미리 파악 → 이름 불러 환영</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c6" onchange="updateCheck()"><label for="c6">단톡방 전날 안내 발송 완료</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c7" onchange="updateCheck()"><label for="c7">기도제목 노트 또는 나눔지 준비</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c8" onchange="updateCheck()"><label for="c8">처음 온 분 옆에 앉을 사람 미리 지정</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c9" onchange="updateCheck()"><label for="c9">모임 후 귀가 안전 확인 (야간 모임 시)</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: 마음 날씨 -->
+  <div class="sub-panel" id="w-1">
+    <div class="card">
+      <div class="card-title">☀️ 오늘 내 마음 날씨는?</div>
+      <div class="weather-grid">
+        <div class="weather-card" onclick="selectWeather(this,'☀️','맑음')"><span class="icon">☀️</span><span class="label">맑음</span></div>
+        <div class="weather-card" onclick="selectWeather(this,'⛅','구름조금')"><span class="icon">⛅</span><span class="label">구름조금</span></div>
+        <div class="weather-card" onclick="selectWeather(this,'🌧','비')"><span class="icon">🌧</span><span class="label">비</span></div>
+        <div class="weather-card" onclick="selectWeather(this,'⛈','폭풍')"><span class="icon">⛈</span><span class="label">폭풍</span></div>
+        <div class="weather-card" onclick="selectWeather(this,'🌫','안개')"><span class="icon">🌫</span><span class="label">안개</span></div>
+        <div class="weather-card" onclick="selectWeather(this,'🌈','비 갠 후')"><span class="icon">🌈</span><span class="label">비 갠 후</span></div>
+      </div>
+      <div class="weather-result" id="weather-result">
+        <p style="font-size:13px;color:var(--sub);margin-bottom:6px">왜냐하면...</p>
+        <input type="text" id="weather-reason" placeholder="한 줄로 나눠주세요"/>
+        <div class="btn-row"><button class="btn btn-primary btn-sm" onclick="copyWeather()">📋 나눔 텍스트 복사</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- C: 유형 검사 -->
+  <div class="sub-panel" id="w-2">
+    <div class="card" style="margin-bottom:10px">
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <button class="faith-btn" id="mbti-tab-btn" onclick="switchTypeTab('mbti')" style="flex:1;padding:9px;border-radius:8px;font-size:13px;font-weight:700">🧠 MBTI 간이검사</button>
+        <button class="faith-btn" id="faith-tab-btn" onclick="switchTypeTab('faith')" style="flex:1;padding:9px;border-radius:8px;font-size:13px;font-weight:700">✝️ 신앙 유형 검사</button>
+      </div>
+
+      <!-- MBTI -->
+      <div id="mbti-section">
+        <div id="mbti-steps">
+          <!-- 12 steps generated by JS -->
+        </div>
+        <div class="mbti-result" id="mbti-result">
+          <div class="type-code" id="res-code">ENFP</div>
+          <div class="type-name" id="res-name"></div>
+          <div class="result-card"><div class="rc-label">소그룹 강점</div><div class="rc-text" id="res-strength"></div></div>
+          <div class="result-card" style="background:#fff3cd"><div class="rc-label" style="color:#b87c00">성장 팁</div><div class="rc-text" id="res-tip"></div></div>
+          <div class="btn-row" style="justify-content:center">
+            <button class="btn btn-primary" onclick="copyMbti()">📋 결과 복사</button>
+            <button class="btn btn-outline" onclick="resetMbti()">↺ 다시 검사</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 신앙유형 -->
+      <div id="faith-section" style="display:none">
+        <p style="font-size:12px;color:var(--sub);margin-bottom:14px">각 문항에 해당하는 정도를 선택해주세요.</p>
+        <div id="faith-questions"></div>
+        <button class="btn btn-primary" style="width:100%" onclick="calcFaith()">✝️ 신앙 유형 결과 보기</button>
+        <div id="faith-result" style="display:none;margin-top:14px">
+          <div class="section-title">내 신앙 유형 분포</div>
+          <div id="faith-bars"></div>
+          <div id="faith-top-card" class="card" style="background:var(--light);margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D: 질문 뱅크 -->
+  <div class="sub-panel" id="w-3">
+    <div class="card">
+      <div class="card-title">🎲 아이스브레이킹 질문 뱅크</div>
+      <div class="cat-filters" id="cat-filters">
+        <button class="cat-btn active" onclick="filterQ('전체',this)">전체</button>
+        <button class="cat-btn" onclick="filterQ('신앙',this)">✝️ 신앙</button>
+        <button class="cat-btn" onclick="filterQ('관계',this)">🤝 관계</button>
+        <button class="cat-btn" onclick="filterQ('자기발견',this)">🌱 자기발견</button>
+        <button class="cat-btn" onclick="filterQ('가벼운',this)">😄 가벼운</button>
+        <button class="cat-btn" onclick="filterQ('말씀',this)">📖 말씀</button>
+      </div>
+      <div class="q-card" id="q-card"><div class="q-card-text" id="q-text">버튼을 눌러 질문을 뽑아보세요!</div></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="randomQ()">🎲 랜덤 뽑기</button>
+        <button class="btn btn-outline" onclick="nextQ()">다음 질문 →</button>
+        <button class="btn btn-accent btn-sm" onclick="copyQ()">📋 복사</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /panel-0 -->
+
+
+<!-- ═══════════════════════════════════════
+     TAB 2: WORSHIP
+════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-1">
+  <div class="mode-btns">
+    <button class="mode-btn active" onclick="switchWMode(0)">🎵 주제로 찾기</button>
+    <button class="mode-btn" onclick="switchWMode(1)">🎸 키로 찾기</button>
+    <button class="mode-btn" onclick="switchWMode(2)">🌊 분위기로 찾기</button>
+    <button class="mode-btn" onclick="switchWMode(3)">🔕 침묵 타이머</button>
+  </div>
+
+  <!-- 주제 -->
+  <div class="worship-panel active" id="wm-0">
+    <div class="topic-tags" id="topic-tags">
+      <button class="topic-tag active" onclick="selectTopic('감사',this)">🙏 감사</button>
+      <button class="topic-tag" onclick="selectTopic('회개',this)">😢 회개</button>
+      <button class="topic-tag" onclick="selectTopic('예배',this)">✨ 예배</button>
+      <button class="topic-tag" onclick="selectTopic('위로',this)">💙 위로</button>
+      <button class="topic-tag" onclick="selectTopic('전도',this)">🌍 전도</button>
+      <button class="topic-tag" onclick="selectTopic('사랑',this)">❤️ 사랑</button>
+      <button class="topic-tag" onclick="selectTopic('가정',this)">🏠 가정</button>
+      <button class="topic-tag" onclick="selectTopic('치유',this)">🌿 치유</button>
+      <button class="topic-tag" onclick="selectTopic('소망',this)">🌅 소망</button>
+      <button class="topic-tag" onclick="selectTopic('결단',this)">🔥 결단</button>
+    </div>
+    <div id="topic-songs"></div>
+    <div class="card">
+      <div class="card-title">💡 찬양 인도 팁</div>
+      <div class="tip-section"><div class="rc-label" style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:3px">아카펠라 인도</div><p style="font-size:13px;line-height:1.6;color:var(--text)">"음 맞추기 → 첫 음 허밍 → 다같이" 3단계로 시작하세요. 멘트: <em>"오늘은 악기 없이 우리 목소리로만 드려볼게요."</em></p></div>
+      <div class="tip-section" style="margin-top:10px"><div class="rc-label" style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:3px">분위기 전환</div><p style="font-size:13px;line-height:1.6;color:var(--text)">빠른 찬양 → 느린 경배: 곡 끝 "아멘" 후 5초 침묵 → 허밍으로 시작</p></div>
+      <div class="tip-section" style="margin-top:10px"><div class="rc-label" style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:3px">기도 전환 멘트</div><p style="font-size:13px;line-height:1.6;color:var(--text)">"방금 부른 찬양이 우리의 기도가 되길 원해요. 잠깐 눈을 감고 그 가사를 마음으로 하나님께 드려봐요."</p></div>
+    </div>
+  </div>
+
+  <!-- 키 -->
+  <div class="worship-panel" id="wm-1">
+    <div class="key-btns" id="key-btns">
+      <button class="key-btn active" onclick="selectKey('C',this)">C</button>
+      <button class="key-btn" onclick="selectKey('D',this)">D</button>
+      <button class="key-btn" onclick="selectKey('E',this)">E</button>
+      <button class="key-btn" onclick="selectKey('F',this)">F</button>
+      <button class="key-btn" onclick="selectKey('G',this)">G</button>
+      <button class="key-btn" onclick="selectKey('A',this)">A</button>
+      <button class="key-btn" onclick="selectKey('Bb',this)">B♭</button>
+    </div>
+    <div id="key-songs"></div>
+  </div>
+
+  <!-- 분위기 -->
+  <div class="worship-panel" id="wm-2">
+    <div class="mood-btns">
+      <div class="mood-btn" onclick="selectMood('slow',this)"><span class="m-icon">🕯</span><span class="m-label">조용한 경배</span><span class="m-bpm">~60 BPM</span></div>
+      <div class="mood-btn active" onclick="selectMood('mid',this)"><span class="m-icon">🌿</span><span class="m-label">보통 찬양</span><span class="m-bpm">61~90 BPM</span></div>
+      <div class="mood-btn" onclick="selectMood('fast',this)"><span class="m-icon">🔥</span><span class="m-label">활기찬 찬양</span><span class="m-bpm">90+ BPM</span></div>
+    </div>
+    <div id="mood-songs"></div>
+  </div>
+
+  <!-- 침묵 타이머 -->
+  <div class="worship-panel" id="wm-3">
+    <div class="card">
+      <div class="card-title">🔕 침묵 기도 타이머</div>
+      <div class="silence-timer">
+        <div class="timer-btns">
+          <button class="t-btn active" onclick="setSilence(60,this)">60초</button>
+          <button class="t-btn" onclick="setSilence(90,this)">90초</button>
+          <button class="t-btn" onclick="setSilence(120,this)">120초</button>
+        </div>
+        <svg class="svg-ring" width="140" height="140" viewBox="0 0 140 140">
+          <circle cx="70" cy="70" r="60" fill="none" stroke="var(--gray2)" stroke-width="10"/>
+          <circle id="silence-ring" cx="70" cy="70" r="60" fill="none" stroke="var(--accent)" stroke-width="10"
+            stroke-dasharray="376.99" stroke-dashoffset="0" stroke-linecap="round"
+            transform="rotate(-90 70 70)" style="transition:stroke-dashoffset .5s linear"/>
+        </svg>
+        <div class="ring-time" id="silence-time">1:00</div>
+        <div class="ring-label" id="silence-label">마음을 고요히 하나님 앞에 내어드리세요</div>
+        <div class="btn-row" style="justify-content:center;margin-top:14px">
+          <button class="btn btn-primary" onclick="startSilence()" id="silence-start-btn">▶ 시작</button>
+          <button class="btn btn-outline" onclick="resetSilence()">↺ 초기화</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /panel-1 -->
+
+
+<!-- ═══════════════════════════════════════
+     TAB 3: WORD
+════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-2">
+  <div class="sub-tabs">
+    <button class="sub-btn active" onclick="switchSub('wrd',0)">⏱ 50분 타이머</button>
+    <button class="sub-btn" onclick="switchSub('wrd',1)">💡 인도 팁</button>
+    <button class="sub-btn" onclick="switchSub('wrd',2)">📝 결단 카드</button>
+  </div>
+
+  <!-- 타이머 -->
+  <div class="sub-panel active" id="wrd-0">
+    <div class="word-timer-wrap">
+      <div class="total-progress" style="margin:14px 16px 10px">
+        <div class="total-progress-fill" id="total-prog" style="width:0%"></div>
+      </div>
+      <div id="phase-display" class="phase-display" style="background:var(--mid);margin:0 16px 14px;padding:20px">
+        <div class="phase-name" id="phase-name">도입 질문</div>
+        <div class="phase-time" id="phase-time">05:00</div>
+        <div class="phase-tip" id="phase-tip">Q1 도입 질문 — 정답 없는 삶 나눔으로 시작. 목자가 먼저 짧게 시범 나눔.</div>
+      </div>
+      <div class="phase-indicators" id="phase-dots"></div>
+      <div class="timer-ctrl">
+        <button class="btn btn-outline" onclick="prevPhase()">◀ 이전</button>
+        <button class="btn btn-primary" id="timer-play-btn" onclick="toggleTimer()">▶ 시작</button>
+        <button class="btn btn-outline" onclick="nextPhase()">다음 ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인도팁 -->
+  <div class="sub-panel" id="wrd-1">
+    <div class="card">
+      <div class="card-title">💡 상황별 인도 가이드</div>
+      <div class="tip-card"><div class="tip-situation">😶 침묵</div><div class="tip-action">15초 침묵 허용 → "○○님, 먼저 나눠주실 수 있어요?" 자연스럽게 지명</div></div>
+      <div class="tip-card"><div class="tip-situation">🗣 독점</div><div class="tip-action">"고마워요. 다른 분들은요?" 자연스럽게 전환</div></div>
+      <div class="tip-card"><div class="tip-situation">💔 예민한 주제</div><div class="tip-action">"오늘 이 나눔은 여기까지 하고, 개인적으로 이야기 나눠요"</div></div>
+      <div class="tip-card"><div class="tip-situation">⚡ 신학 논쟁</div><div class="tip-action">"다양한 시각이 있네요. 오늘은 삶 적용 중심으로 가요"</div></div>
+      <div class="tip-card"><div class="tip-situation">⏰ 시간 초과</div><div class="tip-action">"마무리 기도로 넘어갈게요. 못 나눈 분은 기도 제목으로"</div></div>
+      <div class="tip-card"><div class="tip-situation">🪑 결석자</div><div class="tip-action">"오늘 못 온 ○○님을 위해 짧게 기도하고 시작해요"</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📖 성경 앱 바로가기</div>
+      <div class="bible-links">
+        <a class="bible-link" href="https://www.bible.com/ko" target="_blank">YouVersion</a>
+        <a class="bible-link" href="https://www.godpia.com/bible/" target="_blank">갓피아</a>
+        <a class="bible-link" href="https://www.bskorea.or.kr/bible/korbibCon.php" target="_blank">대한성서공회</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결단 카드 -->
+  <div class="sub-panel" id="wrd-2">
+    <div class="card">
+      <div class="card-title">📝 이번 주 결단 카드</div>
+      <div class="field"><label class="field-label">📖 이번 주 본문</label><input type="text" id="dc-verse" placeholder="예: 마태복음 5:3-12"/></div>
+      <div class="field"><label class="field-label">✊ 이번 주 결단</label><textarea id="dc-decision" placeholder="이번 주 내 삶에 적용할 한 가지를 구체적으로 적어주세요."></textarea></div>
+      <div class="field"><label class="field-label">🙏 기도 제목</label><textarea id="dc-prayer" placeholder="이번 주 기도 제목을 적어주세요."></textarea></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveDecisionCard()">💾 결단 저장</button>
+        <button class="btn btn-outline" onclick="copyDecisionCard()">📋 복사</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📅 지난 결단 돌아보기</div>
+      <div id="past-decisions"></div>
+    </div>
+  </div>
+</div><!-- /panel-2 -->
+
+
+<!-- ═══════════════════════════════════════
+     TAB 4: WORKS
+════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-3">
+  <div class="sub-tabs">
+    <button class="sub-btn active" onclick="switchSub('wk',0)">📝 결단 공유</button>
+    <button class="sub-btn" onclick="switchSub('wk',1)">🙏 VIP 기도</button>
+    <button class="sub-btn" onclick="switchSub('wk',2)">⛪ 웰컴사랑방</button>
+    <button class="sub-btn" onclick="switchSub('wk',3)">🎫 출석 스탬프</button>
+    <button class="sub-btn" onclick="switchSub('wk',4)">✉️ 파송 기도문</button>
+  </div>
+
+  <!-- 결단 공유 -->
+  <div class="sub-panel active" id="wk-0">
+    <div class="card">
+      <div class="card-title">📝 이번 주 결단 나눔</div>
+      <p style="font-size:12px;color:var(--sub);margin-bottom:12px">이번 주, 말씀을 붙들고 어떻게 살겠습니까? 한 문장으로 적어주세요.</p>
+      <div class="decision-input-row">
+        <input type="text" id="d-name" placeholder="이름" style="max-width:90px"/>
+        <input type="text" id="d-text" placeholder="이번 주 결단을 한 문장으로" onkeydown="if(event.key==='Enter')addDecision()"/>
+        <button class="btn btn-primary btn-sm" onclick="addDecision()">추가</button>
+      </div>
+      <div class="decision-cards" id="decision-cards"></div>
+      <div class="btn-row">
+        <button class="btn btn-outline btn-sm" onclick="window.print()">📋 인쇄</button>
+        <button class="btn btn-outline btn-sm" onclick="togglePrevD()">지난 주 결단 ▼</button>
+      </div>
+      <div class="prev-decisions" id="prev-decisions"></div>
+    </div>
+  </div>
+
+  <!-- VIP 기도 -->
+  <div class="sub-panel" id="wk-1">
+    <div class="card">
+      <div class="card-title">🙏 VIP 기도 카드</div>
+      <button class="btn btn-primary btn-sm" onclick="openVipModal()" style="margin-bottom:14px">+ VIP 추가</button>
+      <div class="vip-cards-grid" id="vip-cards"></div>
+    </div>
+  </div>
+
+  <!-- 웰컴사랑방 -->
+  <div class="sub-panel" id="wk-2">
+    <div class="card">
+      <div class="card-title">⛪ 웰컴사랑방 — 교회 안의 열방</div>
+      <div class="ws-tabs">
+        <button class="ws-tab active" onclick="switchWS(0,this)">🌍 언어권 사역 (13)</button>
+        <button class="ws-tab" onclick="switchWS(1,this)">🤝 이웃 사역 (8)</button>
+      </div>
+      <div class="ws-panel active" id="ws-0">
+        <div class="ws-cards" id="lang-cards"></div>
+      </div>
+      <div class="ws-panel" id="ws-1">
+        <div class="ws-cards" id="neighbor-cards"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 스탬프 -->
+  <div class="sub-panel" id="wk-3">
+    <div class="card">
+      <div class="card-title">🎫 출석 스탬프</div>
+      <div class="stamp-name-row">
+        <input type="text" id="stamp-name" placeholder="이름 입력"/>
+        <button class="btn btn-accent btn-sm" onclick="saveStampName()">저장</button>
+      </div>
+      <div class="stamp-grid" id="stamp-grid"></div>
+      <div class="badge-row" id="badge-row"></div>
+      <button class="btn btn-primary" style="width:100%" onclick="addStamp()">✝ 오늘 출석 도장 찍기</button>
+    </div>
+  </div>
+
+  <!-- 파송 기도문 -->
+  <div class="sub-panel" id="wk-4">
+    <div class="card">
+      <div class="card-title">✉️ 파송 기도문 생성기</div>
+      <div class="field"><label class="field-label">사랑방 이름</label><input type="text" id="p-room" placeholder="예: 비추미마을 사랑방"/></div>
+      <div class="field"><label class="field-label">이번 주 본문</label><input type="text" id="p-verse" placeholder="예: 요한복음 15:5"/></div>
+      <div class="field"><label class="field-label">핵심 결단</label><input type="text" id="p-decision" placeholder="예: 날마다 포도나무에 붙어 살기로"/></div>
+      <div class="field"><label class="field-label">기도 제목 1</label><input type="text" id="p-prayer1" placeholder="예: 지체의 취업"/></div>
+      <div class="field"><label class="field-label">기도 제목 2</label><input type="text" id="p-prayer2" placeholder="예: 자녀의 건강"/></div>
+      <div class="field"><label class="field-label">VIP 이름</label><input type="text" id="p-vip" placeholder="예: 김철수 씨"/></div>
+      <div class="field"><label class="field-label">참석자 이름들 (쉼표 구분)</label><input type="text" id="p-members" placeholder="예: 홍길동, 이순신, 유관순"/></div>
+      <button class="btn btn-primary" style="width:100%" onclick="genPrayer()">✉️ 기도문 생성</button>
+      <div class="prayer-result" id="prayer-result"></div>
+      <div class="btn-row" id="prayer-btns" style="display:none">
+        <button class="btn btn-accent btn-sm" onclick="copyPrayer()">📋 복사</button>
+        <button class="btn btn-outline btn-sm" onclick="window.print()">🖨 인쇄</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /panel-3 -->
+
+<!-- VIP 모달 -->
+<div class="vip-modal" id="vip-modal">
+  <div class="vip-modal-box">
+    <h3 style="font-size:15px;font-weight:700;color:var(--primary);margin-bottom:14px">🙏 VIP 추가</h3>
+    <div class="field"><label class="field-label">이름</label><input type="text" id="vip-name-in" placeholder="전도 대상자 이름"/></div>
+    <div class="field"><label class="field-label">관계</label>
+      <select id="vip-rel-in">
+        <option>가족</option><option>친구</option><option>직장동료</option><option>이웃</option><option>기타</option>
+      </select>
+    </div>
+    <div class="field"><label class="field-label">기도 제목</label><textarea id="vip-note-in" placeholder="이 분을 위한 기도 제목을 적어주세요."></textarea></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addVip()">추가</button>
+      <button class="btn btn-outline" onclick="closeVipModal()">취소</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 데이터 ──────────────────────────────────────────────
+const MBTI_QS = [
+  { axis:'EI', q:'새로운 사람들을 만나면?', a:'에너지가 생긴다', b:'피로해진다' },
+  { axis:'EI', q:'혼자 있는 시간이?', a:'지루하다', b:'회복된다' },
+  { axis:'EI', q:'모임에서 나는?', a:'먼저 말을 건다', b:'말 걸어오길 기다린다' },
+  { axis:'SN', q:'성경 본문을 읽을 때?', a:'실제 상황과 세부사항에 집중', b:'전체 의미와 상징에 집중' },
+  { axis:'SN', q:'미래 계획은?', a:'구체적이고 현실적으로', b:'가능성을 열어두고 유연하게' },
+  { axis:'SN', q:'문제를 풀 때?', a:'검증된 방법을 따른다', b:'새로운 방식을 시도한다' },
+  { axis:'TF', q:'친구가 실수했을 때?', a:'원인과 해결책을 먼저 말한다', b:'감정을 먼저 공감한다' },
+  { axis:'TF', q:'결정할 때 더 중요한 건?', a:'논리적 타당성', b:'사람들에게 미치는 영향' },
+  { axis:'TF', q:'기도할 때 주로?', a:'하나님의 뜻과 계획을 구한다', b:'마음속 감정을 쏟아낸다' },
+  { axis:'JP', q:'사랑방 모임 전날 나는?', a:'준비가 다 되어 있다', b:'당일에 준비한다' },
+  { axis:'JP', q:'계획이 바뀌면?', a:'불편하다', b:'오히려 재미있다' },
+  { axis:'JP', q:'할 일 목록은?', a:'항상 만들어 체크한다', b:'머릿속에만 있다' },
+];
+const MBTI_RESULTS = {
+  ISTJ:{name:'청렴결백한 논리주의자',strength:'사랑방 안정적 진행·규칙 준수',tip:'감정 나눔에 더 집중해보세요'},
+  ISFJ:{name:'용감한 수호자',strength:'구성원 하나하나 세심히 기억',tip:'자신의 필요도 나눠주세요'},
+  INFJ:{name:'선의의 옹호자',strength:'깊은 통찰로 나눔을 풍성하게',tip:'직관을 신뢰하되 현실도 놓치지 마세요'},
+  INTJ:{name:'용의주도한 전략가',strength:'큰 그림 보기·사역 기획',tip:'관계의 온기를 더해주세요'},
+  ISTP:{name:'만능 재주꾼',strength:'실용적 문제 해결',tip:'감정 표현을 조금 더 시도해보세요'},
+  ISFP:{name:'호기심 많은 예술가',strength:'따뜻한 환대·아름다운 공간 만들기',tip:'자신의 생각도 적극 나눠주세요'},
+  INFP:{name:'열정적인 중재자',strength:'깊은 공감·가치 중심 나눔',tip:'실천 계획을 구체적으로 세워보세요'},
+  INTP:{name:'논리적인 사색가',strength:'말씀의 깊은 의미 탐구',tip:'나눔의 마음을 표현해보세요'},
+  ESTP:{name:'모험을 즐기는 사업가',strength:'활기찬 분위기·즉흥적 아이스브레이킹',tip:'경청의 시간도 소중히 여겨주세요'},
+  ESFP:{name:'자유로운 영혼의 연예인',strength:'환대·분위기 메이커',tip:'말씀 묵상 시간을 꼭 확보하세요'},
+  ENFP:{name:'재기발랄한 활동가',strength:'전도·VIP 초대에 최강',tip:'마무리까지 집중해주세요'},
+  ENTP:{name:'뜨거운 논쟁을 즐기는 변론가',strength:'신선한 시각·질문으로 나눔 활성화',tip:'합의와 결단으로 마무리해주세요'},
+  ESTJ:{name:'엄격한 관리자',strength:'4W 순서 철저히 진행',tip:'유연성과 은혜의 여백을 남겨주세요'},
+  ESFJ:{name:'사교적인 외교관',strength:'공동체 돌봄·분위기 조화',tip:'자신의 진솔한 나눔도 해주세요'},
+  ENFJ:{name:'정의로운 사회운동가',strength:'탁월한 공동체 인도·비전 제시',tip:'번아웃 주의, 자신도 돌보세요'},
+  ENTJ:{name:'대담한 통솔자',strength:'사역 비전 제시·목표 달성',tip:'구성원 감정에 더 귀 기울여주세요'},
+};
+const FAITH_QS = [
+  {type:'관상형',q:'나는 혼자 조용히 기도할 때 하나님이 가장 가깝게 느껴진다'},
+  {type:'관상형',q:'자연 속에서 하나님의 임재를 강하게 느낀다'},
+  {type:'활동형',q:'누군가를 섬길 때 예배드리는 느낌이 든다'},
+  {type:'활동형',q:'말보다 행동으로 신앙을 표현하는 게 더 자연스럽다'},
+  {type:'지성형',q:'새로운 성경 진리를 발견할 때 가장 신이 난다'},
+  {type:'지성형',q:'신앙서적 읽기를 즐긴다'},
+  {type:'공동체형',q:'함께 모여 나눌 때 하나님을 가장 선명하게 경험한다'},
+  {type:'공동체형',q:'다른 사람의 신앙 이야기가 내 믿음을 자라게 한다'},
+];
+const FAITH_DESC = {
+  관상형:{icon:'🕯',sub:'기도의 사람',desc:'고요한 묵상 속에서 하나님을 만납니다. 조용한 기도와 자연 속 묵상이 영적 에너지의 원천입니다.'},
+  활동형:{icon:'🤲',sub:'섬김의 사람',desc:'몸으로 드리는 예배가 믿음의 언어입니다. 섬기고 행동할 때 하나님이 살아계심을 가장 강하게 느낍니다.'},
+  지성형:{icon:'📖',sub:'말씀의 사람',desc:'진리 탐구와 성경 연구가 신앙의 기쁨입니다. 말씀의 깊이를 파헤칠 때 하나님과 가장 가까워집니다.'},
+  공동체형:{icon:'🤝',sub:'관계의 사람',desc:'함께 나눔 속에서 하나님을 만납니다. 공동체의 이야기 안에서 하나님의 음성을 듣습니다.'},
+};
+const WORSHIP_DATA = {
+  감사:[{title:'감사해',artist:'예수전도단',genre:'경배',key:'C',bpm:80},{title:'주 이름 찬양',artist:'할렐루야코리아',genre:'찬양',key:'C',bpm:85},{title:'나의 모든 삶의 순간',artist:'어노인팅',genre:'경배',key:'D',bpm:55}],
+  회개:[{title:'용서하소서',artist:'예수전도단',genre:'회개',key:'A',bpm:58},{title:'나 주의 도움 받고자',artist:'어노인팅',genre:'경배',key:'A',bpm:62},{title:'주의 피로 물들여진',artist:'전통찬송',genre:'경건',key:'F',bpm:70}],
+  예배:[{title:'예배합니다',artist:'예수전도단',genre:'경배',key:'D',bpm:52},{title:'온 맘 다해',artist:'어노인팅',genre:'찬양',key:'C',bpm:75},{title:'하나님은 우리의 피난처',artist:'마커스워십',genre:'경배',key:'C',bpm:78}],
+  위로:[{title:'주 나의 모든 것',artist:'예수전도단',genre:'경배',key:'F',bpm:50},{title:'두려운 마음 가라앉혀',artist:'어노인팅',genre:'경건',key:'G',bpm:48},{title:'주님 손 잡고',artist:'마커스워십',genre:'위로',key:'A',bpm:60}],
+  전도:[{title:'나 같은 죄인 살리신',artist:'전통찬송',genre:'복음',key:'F',bpm:72},{title:'아무것도 두려워 말라',artist:'예수전도단',genre:'선포',key:'E',bpm:112},{title:'세상을 이기는 힘',artist:'어노인팅',genre:'찬양',key:'G',bpm:100}],
+  사랑:[{title:'사랑합니다 나의 예수님',artist:'예수전도단',genre:'경배',key:'D',bpm:76},{title:'주의 사랑이 내 안에',artist:'마커스워십',genre:'경배',key:'G',bpm:82},{title:'당신은 사랑받기 위해',artist:'전통CCM',genre:'찬양',key:'C',bpm:80}],
+  가정:[{title:'주 날 인도하시는',artist:'어노인팅',genre:'경건',key:'A',bpm:65},{title:'이 집에서',artist:'예수전도단',genre:'가정',key:'F',bpm:70},{title:'하나님의 가족',artist:'마커스워십',genre:'공동체',key:'F',bpm:74}],
+  치유:[{title:'치료자 되신 주',artist:'어노인팅',genre:'경배',key:'F',bpm:55},{title:'주님 품에',artist:'예수전도단',genre:'위로',key:'E',bpm:45},{title:'회복하여 주소서',artist:'마커스워십',genre:'간구',key:'E',bpm:58}],
+  소망:[{title:'다시 일어나',artist:'마커스워십',genre:'선포',key:'D',bpm:108},{title:'내 삶의 이유',artist:'예수전도단',genre:'찬양',key:'E',bpm:72},{title:'주님과 함께라면',artist:'어노인팅',genre:'소망',key:'G',bpm:78}],
+  결단:[{title:'주님 뜻대로 살기로',artist:'전통찬송',genre:'결단',key:'Bb',bpm:96},{title:'내 모든 삶을 드리리',artist:'어노인팅',genre:'헌신',key:'E',bpm:68},{title:'여기에 서서',artist:'마커스워십',genre:'결단',key:'G',bpm:80}],
+};
+const PHASES=[
+  {name:'도입 질문',duration:5,color:'#74C69D',tip:'Q1 도입 질문 — 정답 없는 삶 나눔으로 시작. 목자가 먼저 짧게 시범 나눔.'},
+  {name:'본문 읽기',duration:5,color:'#40916C',tip:'한 명씩 돌아가며 소리 내어 읽기. 읽기만 해도 말씀이 마음에 들어옵니다.'},
+  {name:'관찰 나눔',duration:15,color:'#2D6A4F',tip:'Q2·Q3 — "본문에서 그대로 찾아봐요." 침묵 시 "한 단어라도 좋아요"로 유도.'},
+  {name:'해석 나눔',duration:15,color:'#1B4332',tip:'Q4 — "왜 이런 말씀을 하셨을까요?" 틀린 답 없음을 명시하세요.'},
+  {name:'적용 나눔',duration:8,color:'#52B788',tip:'Q5 — "이번 주 딱 한 가지, 작아도 됩니다." 구체화 유도: 언제, 어떻게?'},
+  {name:'마무리',duration:2,color:'#B7E4C7',tip:'결단 카드 작성. 다음 주 나눔 예고. 목자가 마지막 결단 나눔.'},
+];
+const QUESTIONS=[
+  {cat:'신앙',q:'이번 주 하나님이 가장 생생하게 느껴졌던 순간은?'},
+  {cat:'신앙',q:'요즘 하나님과의 관계를 한 단어로 표현한다면?'},
+  {cat:'신앙',q:'최근 기도 응답을 경험한 적 있다면?'},
+  {cat:'신앙',q:'신앙생활하면서 가장 감사한 사람은?'},
+  {cat:'신앙',q:'처음 하나님을 만났을 때 기억나는 장면이 있나요?'},
+  {cat:'신앙',q:'내 삶에서 하나님이 가장 많이 변화시킨 영역은?'},
+  {cat:'신앙',q:'요즘 묵상하는 말씀이 있다면?'},
+  {cat:'신앙',q:'나에게 신앙적으로 가장 어려운 계절은 언제였나요?'},
+  {cat:'관계',q:'이 사랑방에서 내가 바라는 것 한 가지는?'},
+  {cat:'관계',q:'공동체 안에서 내가 가장 잘 할 수 있는 역할은?'},
+  {cat:'관계',q:'나를 가장 잘 아는 사람은 누구이고, 왜 그 사람인가요?'},
+  {cat:'관계',q:'누군가에게 받은 가장 작지만 큰 위로는?'},
+  {cat:'관계',q:'함께하고 싶은 버킷리스트가 있다면?'},
+  {cat:'관계',q:'이 사랑방에서 처음 만났을 때 첫인상은?'},
+  {cat:'자기발견',q:'나를 색깔로 표현하면?'},
+  {cat:'자기발견',q:'내 인생 모토(좌우명)는?'},
+  {cat:'자기발견',q:'최근 가장 많이 웃은 순간은?'},
+  {cat:'자기발견',q:'올해 내가 도전하고 싶은 것 한 가지는?'},
+  {cat:'자기발견',q:'어릴 때 꿈과 지금 내 삶은 얼마나 닮아 있나요?'},
+  {cat:'자기발견',q:'지금 나에게 가장 필요한 것은?'},
+  {cat:'가벼운',q:'오늘 아침 먹은 것과 지금 내 마음 상태의 공통점은?'},
+  {cat:'가벼운',q:'나를 동물로 표현하면? 이유는?'},
+  {cat:'가벼운',q:'무인도에 가져갈 물건 3가지는?'},
+  {cat:'가벼운',q:'최근 본 영화/드라마 중 가장 인상 깊은 장면은?'},
+  {cat:'가벼운',q:'나의 숨겨진 특기나 취미는?'},
+  {cat:'가벼운',q:'지금 당장 어디든 갈 수 있다면 어디로 가고 싶나요?'},
+  {cat:'가벼운',q:'어린 시절 별명이 있었나요?'},
+  {cat:'가벼운',q:'내가 잘 못 버리는 물건은?'},
+  {cat:'말씀',q:'내 인생 성경구절이 있다면?'},
+  {cat:'말씀',q:'최근 읽은 성경에서 걸린 단어 하나는?'},
+  {cat:'말씀',q:'나를 성경 인물에 비유하면?'},
+  {cat:'말씀',q:'하나님께 가장 솔직하게 했던 기도는?'},
+  {cat:'말씀',q:'내가 천국에서 가장 먼저 하고 싶은 것은?'},
+  {cat:'말씀',q:'예수님과 하루를 보낸다면 어디서 무엇을 하고 싶나요?'},
+  {cat:'말씀',q:'이 세상에서 가장 닮고 싶은 신앙인은?'},
+];
+const LANG_MISSIONS=[
+  {flag:'🇺🇸',name:'영어예배부',desc:'영어권 외국인·교포 대상 예배'},
+  {flag:'🇻🇳',name:'베트남어 사랑방',desc:'베트남 국적 거주자'},
+  {flag:'🇨🇳',name:'중국어 사랑방',desc:'중국·대만 국적자'},
+  {flag:'🇯🇵',name:'일본어 사랑방',desc:'일본 국적·일본어권'},
+  {flag:'🇷🇺',name:'러시아어 사랑방',desc:'러시아·중앙아시아'},
+  {flag:'🇵🇭',name:'타갈로그 사랑방',desc:'필리핀 국적자'},
+  {flag:'🇮🇩',name:'인도네시아어 사랑방',desc:'인도네시아 국적자'},
+  {flag:'🇳🇵',name:'네팔어 사랑방',desc:'네팔 국적자'},
+  {flag:'🇲🇲',name:'미얀마어 사랑방',desc:'미얀마 국적자'},
+  {flag:'🇲🇳',name:'몽골어 사랑방',desc:'몽골 국적자'},
+  {flag:'🇪🇸',name:'스페인어 사랑방',desc:'스페인어권'},
+  {flag:'🇰🇭',name:'캄보디아어 사랑방',desc:'캄보디아 국적자'},
+  {flag:'🇺🇿',name:'우즈베키스탄어 사랑방',desc:'중앙아시아 국적자'},
+];
+const NEIGHBOR_MISSIONS=[
+  {icon:'💚',name:'사랑부',desc:'발달장애인과 비장애인 통합 사랑방'},
+  {icon:'👴',name:'어르신섬김부',desc:'독거·거동불편 어르신 정기 심방'},
+  {icon:'🌏',name:'다문화가정부',desc:'국제결혼 가정 신앙 양육'},
+  {icon:'🏗️',name:'이주노동자섬김부',desc:'외국인 이주노동자 지원 + 복음'},
+  {icon:'🇰🇷',name:'탈북민섬김부',desc:'탈북 정착민 남한 정착 + 신앙 연결'},
+  {icon:'👷',name:'외국인노동자부',desc:'외국인 근로자 권익 보호 + 복음'},
+  {icon:'🧒',name:'청소년돌봄부',desc:'방과후 돌봄, 상담, 신앙 멘토링'},
+  {icon:'🎓',name:'경계선청소년부',desc:'학교 밖 청소년 검정고시·진로 지원'},
+];
+
+// ── 탭 전환 ──────────────────────────────────────────
+function switchMain(i){
+  document.querySelectorAll('.main-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.tab-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+function switchSub(ns,i){
+  document.querySelectorAll('#panel-'+{w:0,wrd:2,wk:3}[ns]+' .sub-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  document.querySelectorAll('[id^="'+ns+'-"]').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+
+// ── 환대 체크리스트 ──────────────────────────────────
+function updateCheck(){
+  const boxes=document.querySelectorAll('#checklist input[type=checkbox]');
+  let done=0;
+  boxes.forEach((b,i)=>{
+    done+=b.checked?1:0;
+    b.closest('.checklist-item').classList.toggle('done',b.checked);
+  });
+  const pct=done/10*100;
+  document.getElementById('check-bar').style.width=pct+'%';
+  document.getElementById('check-count').textContent=done;
+  document.getElementById('check-done-msg').style.display=done===10?'block':'none';
+}
+
+// ── 날씨 ───────────────────────────────────────────────
+let selectedWeather='';
+function selectWeather(el,icon,label){
+  document.querySelectorAll('.weather-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedWeather=icon+' '+label;
+  document.getElementById('weather-result').classList.add('show');
+}
+function copyWeather(){
+  const reason=document.getElementById('weather-reason').value;
+  const txt='오늘 내 마음 날씨는 '+selectedWeather+'입니다. 왜냐하면 '+reason;
+  navigator.clipboard.writeText(txt).then(()=>alert('복사됐어요!'));
+}
+
+// ── MBTI ───────────────────────────────────────────────
+let mbtiAnswers=new Array(12).fill(null), mbtiStep=0;
+(function buildMbti(){
+  const wrap=document.getElementById('mbti-steps');
+  let html='';
+  MBTI_QS.forEach((q,i)=>{
+    const axes=['EI','EI','EI','SN','SN','SN','TF','TF','TF','JP','JP','JP'];
+    const labels=['에너지','에너지','에너지','인식','인식','인식','판단','판단','판단','생활','생활','생활'];
+    html+=`<div class="mbti-step${i===0?' active':''}" id="ms-${i}">
+      <div class="step-header">${labels[i]} 축 (${Math.floor(i/3)*3+1}-${Math.floor(i/3)*3+3}번 중 ${i%3+1}번)</div>
+      <div class="q-text">${q.q}</div>
+      <div class="choice-btns">
+        <div class="choice-btn" onclick="mbtiChoose(${i},'a',this)">A) ${q.a}</div>
+        <div class="choice-btn" onclick="mbtiChoose(${i},'b',this)">B) ${q.b}</div>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn-outline btn-sm" onclick="mbtiGo(${i-1})" ${i===0?'style="visibility:hidden"':''}>◀ 이전</button>
+        <div class="step-dots">${MBTI_QS.map((_,j)=>`<div class="dot${j===i?' active':''}" id="dot-${j}"></div>`).join('')}</div>
+        <button class="btn btn-primary btn-sm" onclick="mbtiGo(${i+1})" id="mn-${i}" ${i<11?'':'onclick="calcMbti()"'}>${i===11?'결과 보기':'다음 ▶'}</button>
+      </div>
+    </div>`;
+  });
+  wrap.innerHTML=html;
+})();
+function mbtiChoose(i,ch,el){
+  mbtiAnswers[i]=ch;
+  el.closest('.choice-btns').querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function mbtiGo(next){
+  if(next===12){calcMbti();return;}
+  if(next<0||next>11)return;
+  document.querySelectorAll('.mbti-step').forEach((s,j)=>s.classList.toggle('active',j===next));
+  document.querySelectorAll('.dot').forEach((d,j)=>{d.classList.toggle('active',j===next);});
+  mbtiStep=next;
+}
+function calcMbti(){
+  const ei=mbtiAnswers.slice(0,3).filter(a=>a==='b').length;
+  const sn=mbtiAnswers.slice(3,6).filter(a=>a==='b').length;
+  const tf=mbtiAnswers.slice(6,9).filter(a=>a==='b').length;
+  const jp=mbtiAnswers.slice(9,12).filter(a=>a==='b').length;
+  const type=(ei>=2?'I':'E')+(sn>=2?'N':'S')+(tf>=2?'F':'T')+(jp>=2?'P':'J');
+  const r=MBTI_RESULTS[type]||{name:'분석중',strength:'독특한 조합입니다',tip:'다시 시도해보세요'};
+  document.getElementById('res-code').textContent=type;
+  document.getElementById('res-name').textContent=r.name;
+  document.getElementById('res-strength').textContent=r.strength;
+  document.getElementById('res-tip').textContent=r.tip;
+  document.getElementById('mbti-steps').style.display='none';
+  document.getElementById('mbti-result').style.display='block';
+}
+function copyMbti(){
+  const type=document.getElementById('res-code').textContent;
+  const name=document.getElementById('res-name').textContent;
+  const str=document.getElementById('res-strength').textContent;
+  const tip=document.getElementById('res-tip').textContent;
+  navigator.clipboard.writeText(`나의 MBTI 유형: ${type} (${name})\n소그룹 강점: ${str}\n성장 팁: ${tip}`).then(()=>alert('복사됐어요!'));
+}
+function resetMbti(){
+  mbtiAnswers=new Array(12).fill(null);
+  mbtiStep=0;
+  document.getElementById('mbti-steps').style.display='block';
+  document.getElementById('mbti-result').style.display='none';
+  document.querySelectorAll('.mbti-step').forEach((s,j)=>s.classList.toggle('active',j===0));
+  document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===0));
+  document.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('selected'));
+}
+function switchTypeTab(t){
+  document.getElementById('mbti-section').style.display=t==='mbti'?'block':'none';
+  document.getElementById('faith-section').style.display=t==='faith'?'block':'none';
+  document.getElementById('mbti-tab-btn').classList.toggle('selected',t==='mbti');
+  document.getElementById('faith-tab-btn').classList.toggle('selected',t==='faith');
+}
+
+// ── 신앙유형 ────────────────────────────────────────────
+(function buildFaith(){
+  const wrap=document.getElementById('faith-questions');
+  let html='';
+  FAITH_QS.forEach((fq,i)=>{
+    html+=`<div class="faith-q">
+      <div class="faith-q-text">${i+1}. ${fq.q}</div>
+      <div class="faith-btns">
+        <button class="faith-btn" onclick="setFaith(${i},1,this)">전혀 아님</button>
+        <button class="faith-btn" onclick="setFaith(${i},2,this)">약간</button>
+        <button class="faith-btn" onclick="setFaith(${i},3,this)">보통</button>
+        <button class="faith-btn" onclick="setFaith(${i},4,this)">매우 그렇다</button>
+      </div>
+    </div>`;
+  });
+  wrap.innerHTML=html;
+})();
+let faithScores=new Array(8).fill(0);
+function setFaith(i,v,el){
+  faithScores[i]=v;
+  el.closest('.faith-btns').querySelectorAll('.faith-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function calcFaith(){
+  const types=['관상형','활동형','지성형','공동체형'];
+  const scores={관상형:faithScores[0]+faithScores[1],활동형:faithScores[2]+faithScores[3],지성형:faithScores[4]+faithScores[5],공동체형:faithScores[6]+faithScores[7]};
+  const max=Math.max(...Object.values(scores));
+  const top=types.find(t=>scores[t]===max);
+  let barsHtml='';
+  types.forEach(t=>{
+    const pct=Math.round(scores[t]/8*100);
+    barsHtml+=`<div class="faith-bar-wrap"><div class="faith-bar-label"><span>${FAITH_DESC[t].icon} ${t}</span><span>${pct}%</span></div><div class="faith-bar-bg"><div class="faith-bar-fill" style="width:${pct}%"></div></div></div>`;
+  });
+  document.getElementById('faith-bars').innerHTML=barsHtml;
+  const d=FAITH_DESC[top];
+  document.getElementById('faith-top-card').innerHTML=`<div style="font-size:32px;margin-bottom:8px">${d.icon}</div><div style="font-size:16px;font-weight:800;color:var(--primary);margin-bottom:4px">${top} — ${d.sub}</div><div style="font-size:13px;color:var(--text);line-height:1.6">${d.desc}</div>`;
+  document.getElementById('faith-result').style.display='block';
+}
+
+// ── 질문 뱅크 ──────────────────────────────────────────
+let qCat='전체', qIdx=0, filteredQ=[];
+function filterQ(cat,el){
+  qCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  filteredQ=cat==='전체'?QUESTIONS:QUESTIONS.filter(q=>q.cat===cat);
+  qIdx=0;
+  showQ();
+}
+function showQ(){
+  if(!filteredQ.length){document.getElementById('q-text').textContent='해당 카테고리 질문이 없어요.';return;}
+  const card=document.getElementById('q-card');
+  card.classList.add('fade');
+  setTimeout(()=>{document.getElementById('q-text').textContent=filteredQ[qIdx].q;card.classList.remove('fade');},150);
+}
+function randomQ(){filteredQ=qCat==='전체'?QUESTIONS:QUESTIONS.filter(q=>q.cat===qCat);qIdx=Math.floor(Math.random()*filteredQ.length);showQ();}
+function nextQ(){if(!filteredQ.length)return;qIdx=(qIdx+1)%filteredQ.length;showQ();}
+function copyQ(){navigator.clipboard.writeText(filteredQ[qIdx]?.q||'').then(()=>alert('복사됐어요!'));}
+// 초기화
+filteredQ=[...QUESTIONS]; showQ();
+
+// ── Worship ─────────────────────────────────────────────
+function switchWMode(i){
+  document.querySelectorAll('.mode-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
+  document.querySelectorAll('.worship-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+function songCard(s){return`<div class="song-card"><div class="song-info"><div class="song-title">${s.title}</div><div class="song-meta">${s.artist} · Key ${s.key} · ${s.bpm} BPM</div></div><span class="song-badge">${s.genre}</span></div>`;}
+function selectTopic(t,el){
+  document.querySelectorAll('.topic-tag').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('topic-songs').innerHTML=`<div class="card"><div class="card-title">🎵 ${t} 찬양 콘티</div>${(WORSHIP_DATA[t]||[]).map(songCard).join('')}</div>`;
+}
+selectTopic('감사',document.querySelector('.topic-tag'));
+
+function selectKey(k,el){
+  document.querySelectorAll('.key-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const songs=Object.values(WORSHIP_DATA).flat().filter(s=>s.key===k);
+  document.getElementById('key-songs').innerHTML=`<div class="card"><div class="card-title">🎸 Key ${k} 찬양</div>${songs.map(songCard).join('')}</div>`;
+}
+selectKey('C',document.querySelector('.key-btn'));
+
+function selectMood(m,el){
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const all=Object.values(WORSHIP_DATA).flat();
+  const songs=m==='slow'?all.filter(s=>s.bpm<=60):m==='mid'?all.filter(s=>s.bpm>60&&s.bpm<=90):all.filter(s=>s.bpm>90);
+  const label=m==='slow'?'🕯 조용한 경배':m==='mid'?'🌿 보통 찬양':'🔥 활기찬 찬양';
+  document.getElementById('mood-songs').innerHTML=`<div class="card"><div class="card-title">${label}</div>${songs.map(songCard).join('')}</div>`;
+}
+selectMood('mid',document.querySelector('.mood-btn.active'));
+
+// 침묵 타이머
+let silenceDur=60, silenceLeft=60, silenceInt=null, silenceRunning=false;
+function setSilence(s,el){
+  silenceDur=s; resetSilence();
+  document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
+function updateSilenceUI(){
+  const m=Math.floor(silenceLeft/60), s=silenceLeft%60;
+  document.getElementById('silence-time').textContent=m+':'+(s<10?'0':'')+s;
+  const circ=376.99;
+  document.getElementById('silence-ring').style.strokeDashoffset=circ*(1-silenceLeft/silenceDur);
+}
+function startSilence(){
+  if(silenceRunning){clearInterval(silenceInt);silenceRunning=false;document.getElementById('silence-start-btn').textContent='▶ 재개';return;}
+  silenceRunning=true;document.getElementById('silence-start-btn').textContent='⏸ 일시정지';
+  silenceInt=setInterval(()=>{
+    silenceLeft--;updateSilenceUI();
+    if(silenceLeft<=0){clearInterval(silenceInt);silenceRunning=false;document.getElementById('silence-start-btn').textContent='▶ 시작';beep();}
+  },1000);
+}
+function resetSilence(){clearInterval(silenceInt);silenceRunning=false;silenceLeft=silenceDur;updateSilenceUI();document.getElementById('silence-start-btn').textContent='▶ 시작';}
+function beep(){try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=440;g.gain.setValueAtTime(0.3,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.8);o.start();o.stop(ctx.currentTime+0.8);}catch(e){}}
+updateSilenceUI();
+
+// ── Word 타이머 ─────────────────────────────────────────
+let phaseIdx=0, phaseLeft=0, phaseInt=null, phaseRunning=false;
+const TOTAL_SEC=PHASES.reduce((a,p)=>a+p.duration*60,0);
+let totalElapsed=0;
+function buildPhaseDots(){
+  document.getElementById('phase-dots').innerHTML=PHASES.map((p,i)=>`<div class="phase-dot${i===0?' active':''}" id="pd-${i}" onclick="jumpPhase(${i})">${p.name}<br><small>${p.duration}분</small></div>`).join('');
+}
+buildPhaseDots();
+function setPhase(i){
+  phaseIdx=i; phaseLeft=PHASES[i].duration*60;
+  document.getElementById('phase-name').textContent=PHASES[i].name;
+  document.getElementById('phase-display').style.background=PHASES[i].color;
+  document.getElementById('phase-tip').textContent=PHASES[i].tip;
+  updatePhaseUI();
+  document.querySelectorAll('.phase-dot').forEach((d,j)=>{d.classList.toggle('active',j===i);d.classList.toggle('done',j<i);});
+}
+function updatePhaseUI(){
+  const m=Math.floor(phaseLeft/60), s=phaseLeft%60;
+  document.getElementById('phase-time').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  const pct=totalElapsed/TOTAL_SEC*100;
+  document.getElementById('total-prog').style.width=Math.min(pct,100)+'%';
+}
+function toggleTimer(){
+  if(phaseRunning){clearInterval(phaseInt);phaseRunning=false;document.getElementById('timer-play-btn').textContent='▶ 재개';return;}
+  phaseRunning=true;document.getElementById('timer-play-btn').textContent='⏸ 일시정지';
+  phaseInt=setInterval(()=>{
+    phaseLeft--;totalElapsed++;updatePhaseUI();
+    if(phaseLeft<=0){
+      if(phaseIdx<PHASES.length-1){beep();setPhase(phaseIdx+1);}
+      else{clearInterval(phaseInt);phaseRunning=false;document.getElementById('timer-play-btn').textContent='✅ 완료';beep();}
+    }
+  },1000);
+}
+function prevPhase(){clearInterval(phaseInt);phaseRunning=false;document.getElementById('timer-play-btn').textContent='▶ 시작';if(phaseIdx>0){totalElapsed-=PHASES[phaseIdx].duration*60-phaseLeft;setPhase(phaseIdx-1);}}
+function nextPhase(){clearInterval(phaseInt);phaseRunning=false;document.getElementById('timer-play-btn').textContent='▶ 시작';totalElapsed+=phaseLeft;if(phaseIdx<PHASES.length-1)setPhase(phaseIdx+1);}
+function jumpPhase(i){clearInterval(phaseInt);phaseRunning=false;document.getElementById('timer-play-btn').textContent='▶ 시작';totalElapsed=PHASES.slice(0,i).reduce((a,p)=>a+p.duration*60,0);setPhase(i);}
+setPhase(0);
+
+// ── 결단 카드(Word) ─────────────────────────────────────
+function saveDecisionCard(){
+  const v=document.getElementById('dc-verse').value;
+  const d=document.getElementById('dc-decision').value;
+  const p=document.getElementById('dc-prayer').value;
+  if(!d){alert('결단을 입력해주세요.');return;}
+  const list=JSON.parse(localStorage.getItem('sarangbang_word_decisions')||'[]');
+  list.unshift({date:new Date().toISOString().slice(0,10),verse:v,decision:d,prayer:p});
+  localStorage.setItem('sarangbang_word_decisions',JSON.stringify(list.slice(0,16)));
+  alert('저장됐어요!');renderPastDecisions();
+}
+function copyDecisionCard(){
+  const v=document.getElementById('dc-verse').value;
+  const d=document.getElementById('dc-decision').value;
+  const p=document.getElementById('dc-prayer').value;
+  navigator.clipboard.writeText(`[이번 주 결단]\n본문: ${v}\n결단: ${d}\n기도: ${p}`).then(()=>alert('복사됐어요!'));
+}
+function renderPastDecisions(){
+  const list=JSON.parse(localStorage.getItem('sarangbang_word_decisions')||'[]');
+  if(!list.length){document.getElementById('past-decisions').innerHTML='<div class="empty-state">저장된 결단이 없어요.</div>';return;}
+  document.getElementById('past-decisions').innerHTML=list.map(i=>`<div class="card" style="background:var(--light);margin-bottom:8px"><div style="font-size:11px;color:var(--sub);margin-bottom:4px">${i.date}</div><div style="font-size:13px;font-weight:700;color:var(--primary);margin-bottom:4px">📖 ${i.verse||'(본문 없음)'}</div><div style="font-size:13px;margin-bottom:4px">✊ ${i.decision}</div><div style="font-size:12px;color:var(--sub)">🙏 ${i.prayer||''}</div></div>`).join('');
+}
+renderPastDecisions();
+
+// ── Works: 결단 공유 ───────────────────────────────────
+const D_COLORS=['#2D6A4F','#40916C','#52B788','#1B4332','#74C69D'];
+function loadDecisions(){
+  const list=JSON.parse(localStorage.getItem('sarangbang_decisions')||'[]');
+  const today=new Date().toISOString().slice(0,10);
+  const todayList=list.filter(d=>d.date===today);
+  document.getElementById('decision-cards').innerHTML=todayList.map((d,i)=>`<div class="decision-card" style="background:${D_COLORS[i%D_COLORS.length]}"><span class="d-del" onclick="delDecision('${d.id}')">✕</span><div class="d-name">${d.name}</div><div class="d-text">${d.text}</div></div>`).join('')||'<div class="empty-state" style="grid-column:1/-1">아직 결단이 없어요. 추가해보세요!</div>';
+  const prev=list.filter(d=>d.date!==today);
+  document.getElementById('prev-decisions').innerHTML=prev.slice(0,10).map(d=>`<div style="font-size:12px;padding:6px 0;border-bottom:1px solid var(--gray2);color:var(--text)"><span style="color:var(--sub);margin-right:6px">${d.date} ${d.name}</span>${d.text}</div>`).join('');
+}
+function addDecision(){
+  const name=document.getElementById('d-name').value.trim();
+  const text=document.getElementById('d-text').value.trim();
+  if(!text)return;
+  const list=JSON.parse(localStorage.getItem('sarangbang_decisions')||'[]');
+  list.unshift({id:Date.now()+'',date:new Date().toISOString().slice(0,10),name:name||'익명',text});
+  localStorage.setItem('sarangbang_decisions',JSON.stringify(list.slice(0,60)));
+  document.getElementById('d-name').value='';document.getElementById('d-text').value='';
+  loadDecisions();
+}
+function delDecision(id){
+  const list=JSON.parse(localStorage.getItem('sarangbang_decisions')||'[]').filter(d=>d.id!==id);
+  localStorage.setItem('sarangbang_decisions',JSON.stringify(list));loadDecisions();
+}
+let prevDOpen=false;
+function togglePrevD(){prevDOpen=!prevDOpen;document.getElementById('prev-decisions').classList.toggle('show',prevDOpen);}
+loadDecisions();
+
+// ── Works: VIP ─────────────────────────────────────────
+function loadVips(){
+  const list=JSON.parse(localStorage.getItem('sarangbang_vip')||'[]');
+  document.getElementById('vip-cards').innerHTML=list.length?list.map((v,i)=>`<div class="vip-card"><div class="vip-card-name">${v.name}</div><div class="vip-card-rel">${v.relation}</div><div class="vip-card-note">${v.note||''}</div><div class="vip-card-footer"><span class="vip-count">🙏 총 ${v.prayers||0}회 기도</span><span class="vip-del" onclick="delVip(${i})">🗑</span></div><button class="btn btn-accent btn-sm" style="width:100%;margin-top:8px" onclick="prayVip(${i})">기도했어요 🙏</button></div>`).join(''):'<div class="empty-state">VIP를 추가해주세요.</div>';
+}
+function openVipModal(){document.getElementById('vip-modal').classList.add('open');}
+function closeVipModal(){document.getElementById('vip-modal').classList.remove('open');}
+function addVip(){
+  const name=document.getElementById('vip-name-in').value.trim();
+  if(!name)return;
+  const list=JSON.parse(localStorage.getItem('sarangbang_vip')||'[]');
+  list.push({name,relation:document.getElementById('vip-rel-in').value,note:document.getElementById('vip-note-in').value,prayers:0,date:new Date().toISOString().slice(0,10)});
+  localStorage.setItem('sarangbang_vip',JSON.stringify(list));
+  document.getElementById('vip-name-in').value='';document.getElementById('vip-note-in').value='';
+  closeVipModal();loadVips();
+}
+function prayVip(i){const list=JSON.parse(localStorage.getItem('sarangbang_vip')||'[]');list[i].prayers=(list[i].prayers||0)+1;localStorage.setItem('sarangbang_vip',JSON.stringify(list));loadVips();}
+function delVip(i){const list=JSON.parse(localStorage.getItem('sarangbang_vip')||'[]');list.splice(i,1);localStorage.setItem('sarangbang_vip',JSON.stringify(list));loadVips();}
+loadVips();
+
+// ── Works: 웰컴사랑방 ──────────────────────────────────
+document.getElementById('lang-cards').innerHTML=LANG_MISSIONS.map(m=>`<div class="ws-card"><span class="ws-icon">${m.flag}</span><div class="ws-name">${m.name}</div><div class="ws-desc">${m.desc}</div><a class="ws-link" href="tel:051-780-0114">연결 문의 →</a></div>`).join('');
+document.getElementById('neighbor-cards').innerHTML=NEIGHBOR_MISSIONS.map(m=>`<div class="ws-card"><span class="ws-icon">${m.icon}</span><div class="ws-name">${m.name}</div><div class="ws-desc">${m.desc}</div><a class="ws-link" href="tel:051-780-0114">연결 문의 →</a></div>`).join('');
+function switchWS(i,el){
+  document.querySelectorAll('.ws-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.ws-panel').forEach((p,j)=>p.classList.toggle('active',j===i));
+}
+
+// ── Works: 스탬프 ─────────────────────────────────────
+function renderStamps(){
+  const data=JSON.parse(localStorage.getItem('sarangbang_stamps')||'{"name":"","stamps":[]}');
+  document.getElementById('stamp-name').value=data.name||'';
+  const grid=document.getElementById('stamp-grid');
+  grid.innerHTML=Array.from({length:12},(_,i)=>{
+    const s=data.stamps[i];
+    return`<div class="stamp-cell${s?' filled':''}"><span>${s?'✝':'○'}</span>${s?`<span class="s-date">${s.slice(5)}</span>`:''}</div>`;
+  }).join('');
+  const cnt=data.stamps.length;
+  document.getElementById('badge-row').innerHTML=[
+    {n:4,e:'🌱',l:'씨앗 뱃지'},
+    {n:8,e:'🌿',l:'새싹 뱃지'},
+    {n:12,e:'🍎',l:'열매 뱃지'},
+  ].map(b=>`<div class="badge-item${cnt>=b.n?' earned':''}">${b.e} ${b.l} ${cnt>=b.n?'✓':b.n+'주'}</div>`).join('');
+}
+function saveStampName(){const data=JSON.parse(localStorage.getItem('sarangbang_stamps')||'{"name":"","stamps":[]}');data.name=document.getElementById('stamp-name').value;localStorage.setItem('sarangbang_stamps',JSON.stringify(data));alert('이름 저장됐어요!');}
+function addStamp(){
+  const data=JSON.parse(localStorage.getItem('sarangbang_stamps')||'{"name":"","stamps":[]}');
+  const today=new Date().toISOString().slice(0,10);
+  if(data.stamps.includes(today)){alert('오늘 이미 도장을 찍었어요!');return;}
+  if(data.stamps.length>=12){alert('12주 완료! 🍎 열매 뱃지 획득!');return;}
+  data.stamps.push(today);
+  localStorage.setItem('sarangbang_stamps',JSON.stringify(data));
+  renderStamps();
+}
+renderStamps();
+
+// ── Works: 파송기도문 ──────────────────────────────────
+function genPrayer(){
+  const room=document.getElementById('p-room').value||'_____';
+  const verse=document.getElementById('p-verse').value||'_____';
+  const dec=document.getElementById('p-decision').value||'_____';
+  const p1=document.getElementById('p-prayer1').value||'_____';
+  const p2=document.getElementById('p-prayer2').value||'_____';
+  const vip=document.getElementById('p-vip').value||'_____';
+  const members=document.getElementById('p-members').value||'_____';
+  const txt=`사랑하는 하나님 아버지,\n오늘 이 ${room} 사랑방을 허락하심에 감사드립니다.\n${verse}의 말씀처럼, 우리가 ${dec}하며 살아가게 하옵소서.\n${p1}을 위해 기도합니다.\n${p2}을 위해 기도합니다.\n특별히 우리의 VIP ${vip}에게 이번 한 주 복음의 문이 열리게 하옵소서.\n이 모임을 마치고 각자의 자리로 돌아가는 ${members}에게\n주님의 평강이 함께하시길 예수님의 이름으로 기도합니다. 아멘.`;
+  const el=document.getElementById('prayer-result');
+  el.textContent=txt;el.style.display='block';
+  document.getElementById('prayer-btns').style.display='flex';
+}
+function copyPrayer(){navigator.clipboard.writeText(document.getElementById('prayer-result').textContent).then(()=>alert('복사됐어요!'));}
+</script>
+</body>
+</html>
