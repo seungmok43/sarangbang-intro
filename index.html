@@ -7,20 +7,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Noto Sans KR',sans-serif;background:#f4f8f5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
-  .hero{text-align:center;margin-bottom:48px}
-  .hero-badge{display:inline-block;background:#1B4332;color:#fff;font-size:12px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:16px}
-  .hero h1{font-size:32px;font-weight:900;color:#1B4332;line-height:1.3;margin-bottom:10px}
-  .hero p{color:#555;font-size:15px}
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;width:100%}
-  .card{background:#fff;border-radius:16px;padding:28px 24px;text-decoration:none;color:inherit;border:2px solid transparent;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.07)}
-  .card:hover{border-color:#40916C;transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,67,50,.12)}
-  .card-icon{font-size:32px;margin-bottom:14px}
-  .card-title{font-size:16px;font-weight:700;color:#1B4332;margin-bottom:6px}
-  .card-desc{font-size:13px;color:#666;line-height:1.6}
-  .card-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;color:#40916C;background:#D8F3DC;padding:3px 10px;border-radius:10px}
-  footer{margin-top:48px;font-size:12px;color:#aaa;text-align:center}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:#f4f8f5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
+.hero{text-align:center;margin-bottom:48px}
+.hero-badge{display:inline-block;background:#1B4332;color:#fff;font-size:12px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-size:32px;font-weight:900;color:#1B4332;line-height:1.3;margin-bottom:10px}
+.hero p{color:#555;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:860px;width:100%}
+.card{background:#fff;border-radius:16px;padding:28px 24px;text-decoration:none;color:inherit;border:2px solid transparent;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.card:hover{border-color:#40916C;transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,67,50,.12)}
+.card-icon{font-size:32px;margin-bottom:14px}
+.card-title{font-size:16px;font-weight:700;color:#1B4332;margin-bottom:6px}
+.card-desc{font-size:13px;color:#666;line-height:1.6}
+.card-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;color:#40916C;background:#D8F3DC;padding:3px 10px;border-radius:10px}
+footer{margin-top:48px;font-size:12px;color:#aaa;text-align:center}
 </style>
 </head>
 <body>
@@ -30,35 +30,23 @@
   <p>외부 교회 사역자를 위한 안내 자료 모음입니다.</p>
 </div>
 <div class="cards">
-  <a class="card" href="수영로교회_사랑방영역_보고서.html">
+  <a class="card" href="report.html">
     <div class="card-icon">📋</div>
     <div class="card-title">사랑방 영역 보고서</div>
     <div class="card-desc">조직 구조, 교육 체계, 웰컴데이, 마을목자 7대 과업 등 전체 사역을 상세히 소개합니다.</div>
     <span class="card-tag">상세 보고서</span>
   </a>
-  <a class="card" href="사랑방_도입_템플릿키트.html">
+  <a class="card" href="kit.html">
     <div class="card-icon">🛠️</div>
     <div class="card-title">도입 템플릿 키트</div>
-    <div class="card-desc">타 교회에서 사랑방 시스템을 도입할 때 바로 쓸 수 있는 서약서·체크리스트·심방가이드 등 12종.</div>
+    <div class="card-desc">사랑방 시스템 도입 시 바로 쓸 수 있는 서약서·체크리스트·심방가이드 등 12종.</div>
     <span class="card-tag">실용 도구 12종</span>
   </a>
-  <a class="card" href="소그룹_건강진단_체크리스트.html">
+  <a class="card" href="diagnosis.html">
     <div class="card-icon">❤️‍🔥</div>
     <div class="card-title">소그룹 건강진단</div>
     <div class="card-desc">우리 소그룹의 현재 상태를 진단하고 개선 방향을 찾는 체크리스트입니다.</div>
     <span class="card-tag">자가 진단</span>
-  </a>
-  <a class="card" href="사랑방영역_핸드아웃.html">
-    <div class="card-icon">📄</div>
-    <div class="card-title">핸드아웃 (A4 세로)</div>
-    <div class="card-desc">발표·미팅 배포용 1페이지 요약 자료입니다. (인쇄 최적화)</div>
-    <span class="card-tag">인쇄용</span>
-  </a>
-  <a class="card" href="사랑방영역_핸드아웃_가로.html">
-    <div class="card-icon">📐</div>
-    <div class="card-title">핸드아웃 (A4 가로)</div>
-    <div class="card-desc">3단 가로 레이아웃의 발표용 요약 자료입니다. (인쇄 최적화)</div>
-    <span class="card-tag">인쇄용</span>
   </a>
 </div>
 <footer>수영로교회 사랑방 영역 · 문의: 교구 사무실</footer>

@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수영로교회 사랑방 영역 전체 구조</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --primary: #1B4332;
+      --secondary: #2D6A4F;
+      --accent: #40916C;
+      --light: #D8F3DC;
+      --lightest: #F0FBF4;
+      --bg: #F8F9FA;
+      --white: #FFFFFF;
+      --text: #212529;
+      --text-muted: #6C757D;
+      --border: #DEE2E6;
+      --shadow: 0 4px 20px rgba(27,67,50,0.10);
+      --shadow-lg: 0 8px 40px rgba(27,67,50,0.15);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(27,67,50,0.97);
+      backdrop-filter: blur(10px);
+      height: 56px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+    .nav-brand {
+      font-size: 13px;
+      color: var(--light);
+      font-weight: 700;
+      white-space: nowrap;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    nav a {
+      font-size: 12px;
+      color: rgba(216,243,220,0.75);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--light);
+    }
+
+    /* ===== PAGE WRAP ===== */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 72px 0 60px;
+    }
+    section:nth-child(even) {
+      background: var(--white);
+    }
+    section:nth-child(odd) {
+      background: var(--bg);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #1B4332 0%, #0F2E22 100%);
+      padding: 100px 0 80px;
+      margin-top: 56px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(64,145,108,0.15);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(64,145,108,0.10);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-church {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--light);
+      opacity: 0.8;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(216,243,220,0.85);
+      margin-bottom: 32px;
+    }
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      padding: 10px 24px;
+      font-size: 14px;
+      color: rgba(216,243,220,0.9);
+    }
+    .hero-meta .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(216,243,220,0.5);
+      display: inline-block;
+    }
+
+    /* ===== SECTION HEADERS ===== */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+    }
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .divider {
+      width: 48px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--light));
+      border-radius: 2px;
+      margin-bottom: 40px;
+    }
+
+    /* ===== CARD BASE ===== */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    /* ===== DATA CARDS ===== */
+    .data-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .data-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      padding: 32px 28px 28px;
+    }
+    .data-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--light));
+    }
+    .data-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .data-num-green {
+      color: var(--primary);
+      font-size: 52px;
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+    }
+    .data-num-red {
+      color: #DC2626;
+      font-size: 32px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      line-height: 1;
+      padding-bottom: 4px;
+    }
+    .data-vs {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: 4px 0;
+      letter-spacing: 1px;
+    }
+    .data-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+    .data-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .data-badge {
+      display: inline-block;
+      background: var(--lightest);
+      border: 1px solid var(--light);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    .source-box {
+      background: var(--lightest);
+      border: 1px solid var(--light);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== IDENTITY CARDS ===== */
+    .identity-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .identity-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .identity-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .identity-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .identity-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      padding-right: 28px;
+    }
+    .identity-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 14px;
+      color: var(--accent);
+      transition: transform 0.3s;
+      user-select: none;
+    }
+    .identity-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .identity-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding-top: 8px;
+    }
+
+    /* ===== QUOTE BLOCK ===== */
+    .quote-block {
+      background: linear-gradient(135deg, var(--lightest), var(--white));
+      border: 1px solid var(--light);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+    .quote-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .quote-source {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== VISION BAND ===== */
+    .vision-band {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      text-align: center;
+      color: var(--white);
+      margin-top: 32px;
+    }
+    .vision-band p {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    /* ===== LEADERSHIP ===== */
+    .leadership-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      align-items: center;
+    }
+    .leadership-level {
+      width: 100%;
+      max-width: 700px;
+    }
+    .leadership-arrow {
+      text-align: center;
+      color: var(--accent);
+      font-size: 20px;
+      padding: 6px 0;
+      width: 100%;
+      max-width: 700px;
+    }
+    .l-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .l-card-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--light);
+      background: var(--primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .l-card-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .l-card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== 4W BUTTONS ===== */
+    .w-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .w-btn {
+      padding: 16px 12px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--white);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .w-btn:hover {
+      border-color: var(--accent);
+      background: var(--lightest);
+    }
+    .w-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    .w-btn-en {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .w-btn.active .w-btn-en {
+      color: var(--light);
+    }
+    .w-btn-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .w-btn.active .w-btn-title {
+      color: white;
+    }
+    .w-panel {
+      display: none;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+    .w-panel.active {
+      display: block;
+    }
+    .w-panel-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .w-panel-desc {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .w-panel-items {
+      list-style: none;
+    }
+    .w-panel-items li {
+      padding: 6px 0;
+      font-size: 14px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .w-panel-items li::before {
+      content: '▸';
+      color: var(--accent);
+      margin-right: 8px;
+    }
+
+    /* ===== TIME TABLE ===== */
+    .time-table-wrap {
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .time-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .time-table thead {
+      background: var(--primary);
+    }
+    .time-table thead th {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: left;
+    }
+    .time-table tbody tr {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .time-table tbody tr:hover {
+      background: var(--lightest);
+    }
+    .time-table tbody td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--text);
+      vertical-align: top;
+    }
+    .time-table tbody td:first-child {
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .time-table tbody td:nth-child(2) {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* ===== QUESTION CARDS ===== */
+    .q-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .q-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .q-card:hover {
+      box-shadow: var(--shadow);
+    }
+    .q-card:nth-child(1) { border-left: 4px solid var(--primary); }
+    .q-card:nth-child(2) { border-left: 4px solid var(--secondary); }
+    .q-card:nth-child(3) { border-left: 4px solid var(--accent); }
+    .q-card:nth-child(4) { border-left: 4px solid #52B788; }
+    .q-card-header {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .q-card-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--light);
+      line-height: 1;
+      min-width: 48px;
+    }
+    .q-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      flex: 1;
+    }
+    .q-card-toggle {
+      margin-left: auto;
+      font-size: 14px;
+      color: var(--accent);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .q-card-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .q-card-body {
+      padding: 0 24px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ===== NEW FAMILY STEPS ===== */
+    .nf-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .nf-step {
+      display: flex;
+      gap: 20px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .nf-step-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      min-width: 60px;
+      text-align: center;
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .nf-step-body {
+      flex: 1;
+    }
+    .nf-step-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .nf-step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+    .nf-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .nf-badge {
+      background: var(--lightest);
+      border: 1px solid var(--light);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    .nf-highlight {
+      margin-top: 12px;
+      padding: 14px 18px;
+      background: #FFFBEB;
+      border: 1px solid #F59E0B;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #92400E;
+    }
+    .nf-roles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .nf-role-card {
+      padding: 20px 22px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .nf-role-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .nf-role-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== IOMSEUM ACCORDION ===== */
+    .planned-banner {
+      background: #FFFBEB;
+      border: 2px solid #F59E0B;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .planned-banner-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .planned-banner-text {
+      font-size: 14px;
+      color: #92400E;
+      line-height: 1.8;
+    }
+    .planned-banner-text strong {
+      color: #78350F;
+    }
+    .overview-para {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+    .accordion-trigger {
+      width: 100%;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      transition: all 0.2s;
+      font-family: 'Noto Sans KR', sans-serif;
+      text-align: left;
+    }
+    .accordion-trigger:hover {
+      background: var(--lightest);
+    }
+    .accordion-trigger .acc-icon {
+      transition: transform 0.3s;
+      font-size: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+    .accordion-trigger.open .acc-icon {
+      transform: rotate(180deg);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 0 0 var(--radius) var(--radius);
+      margin-top: -8px;
+      margin-bottom: 8px;
+    }
+    .accordion-content.open {
+      max-height: 2000px;
+    }
+    .accordion-inner {
+      padding: 24px;
+    }
+
+    /* Pillar structures inside accordion */
+    .pillar-roof {
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 20px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .pillar-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .pillar-col {
+      padding: 24px;
+      background: var(--white);
+    }
+    .pillar-col:first-child {
+      border-right: 1px solid var(--border);
+    }
+    .pillar-col-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .pillar-col-sub {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .pillar-col-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .pillar-col-list li {
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pillar-col-list li::before {
+      content: '▸';
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    /* Timeline 6w */
+    .timeline-6w {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .tl-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .tl-week {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--primary);
+      border-radius: 6px;
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+    .tl-content {
+      font-size: 14px;
+      color: var(--text);
+    }
+    .tl-content strong {
+      color: var(--primary);
+    }
+
+    /* Type cards */
+    .type-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .type-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+    }
+    .type-card-badge {
+      display: inline-block;
+      background: var(--lightest);
+      border: 1px solid var(--light);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .type-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .type-card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ===== RR TABLE ===== */
+    .rr-table-wrap {
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .rr-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .rr-table thead {
+      background: var(--primary);
+    }
+    .rr-table thead th {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: left;
+    }
+    .rr-table tbody tr {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .rr-table tbody tr:hover {
+      background: var(--lightest);
+    }
+    .rr-table tbody td {
+      padding: 16px 20px;
+      font-size: 14px;
+      color: var(--text);
+      vertical-align: top;
+    }
+    .rr-table tbody td:first-child {
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 200px;
+    }
+    .badge-wip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FCD34D;
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    /* ===== COACHING HERO ===== */
+    .coaching-hero {
+      background: linear-gradient(135deg, #1B4332 0%, #0F2E22 100%);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 32px;
+      color: var(--white);
+    }
+    .coaching-hero-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .coaching-hero-sub {
+      font-size: 14px;
+      color: rgba(216,243,220,0.75);
+      margin-bottom: 24px;
+    }
+    .coaching-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-mini {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+    .coaching-mini-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .coaching-mini-label {
+      font-size: 12px;
+      color: rgba(216,243,220,0.8);
+      margin-top: 4px;
+    }
+    .coaching-goals {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .coaching-goal-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      padding: 16px 24px;
+      flex: 1;
+      min-width: 160px;
+    }
+    .coaching-goal-label {
+      font-size: 12px;
+      color: rgba(216,243,220,0.7);
+      margin-bottom: 4px;
+    }
+    .coaching-goal-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .coaching-goal-note {
+      font-size: 11px;
+      color: rgba(216,243,220,0.6);
+      margin-top: 2px;
+    }
+    .renewal-box {
+      margin-top: 20px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      color: var(--white);
+    }
+    .renewal-box h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--light);
+      margin-bottom: 8px;
+    }
+    .renewal-box p {
+      font-size: 13px;
+      color: rgba(216,243,220,0.8);
+    }
+
+    /* ===== CONF CARDS ACCORDION ===== */
+    .conf-card-acc {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .conf-card-acc::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+    }
+    .conf-card-header {
+      padding: 24px 24px 24px 32px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      cursor: pointer;
+      gap: 16px;
+    }
+    .conf-card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .conf-card-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .conf-card-date {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .conf-toggle {
+      font-size: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .conf-card-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .conf-card-body.open {
+      max-height: 800px;
+    }
+    .conf-card-inner {
+      padding: 0 24px 24px 32px;
+    }
+    .conf-timetable {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .conf-timetable tbody tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .conf-timetable tbody td {
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .conf-timetable tbody td:first-child {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      width: 110px;
+    }
+    .conf-curriculum {
+      list-style: none;
+    }
+    .conf-curriculum li {
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+    }
+    .conf-curriculum li .lesson-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 28px;
+    }
+
+    /* ===== WELCOME TABLE ===== */
+    .welcome-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      transition: all 0.2s;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .welcome-toggle-btn:hover {
+      background: var(--secondary);
+    }
+    .welcome-extra {
+      display: none;
+    }
+    /* 웰컴데이 글자 타일 */
+    .welcome-tiles {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .w-tile {
+      flex: 1;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 10px;
+      padding: 14px 8px 12px;
+      text-align: center;
+      cursor: default;
+    }
+    .w-tile:nth-child(even) { background: var(--secondary); }
+    .w-tile-letter {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1;
+      color: #fff;
+    }
+    .w-tile-stage {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--light);
+      margin-top: 5px;
+      line-height: 1.3;
+    }
+    .w-tile-brief {
+      font-size: 9px;
+      color: rgba(216,243,220,0.75);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .welcome-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: var(--lightest);
+      border: 1px solid var(--light);
+      border-radius: 20px;
+      transition: all 0.2s;
+    }
+    .welcome-link:hover {
+      background: var(--light);
+    }
+
+    /* ===== WELCOME SARANG ===== */
+    .ws-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+    .ws-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+    }
+    .ws-card-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .ws-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .ws-card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .notion-info-box {
+      background: var(--lightest);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ===== STAT CARDS ===== */
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      padding: 24px 20px 20px;
+      position: relative;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .stat-card-blue::before {
+      background: linear-gradient(90deg, #2563EB, #60A5FA);
+    }
+    .stat-date {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .stat-card-blue .stat-date {
+      color: #2563EB;
+    }
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .stat-card-blue .stat-num {
+      color: #2563EB;
+    }
+    .stat-unit {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* New family table */
+    .new-family-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+    .new-family-table thead {
+      background: var(--primary);
+    }
+    .new-family-table thead th {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: left;
+    }
+    .new-family-table tbody tr {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .new-family-table tbody tr:hover {
+      background: var(--lightest);
+    }
+    .new-family-table tbody td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .new-family-table tbody td:first-child {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .coaching-stat-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    /* ===== SUBSECTION TITLE ===== */
+    .subsection-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 16px;
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .subsection-title::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ===== PERIOD BADGE ===== */
+    .period-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--lightest), var(--white));
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .data-cards-grid { grid-template-columns: 1fr; }
+      .identity-cards-grid { grid-template-columns: 1fr; }
+      .q-card-grid { grid-template-columns: 1fr; }
+      .type-cards { grid-template-columns: 1fr; }
+      .coaching-stats-grid { grid-template-columns: 1fr; }
+      .ws-cards { grid-template-columns: 1fr; }
+      .stat-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .nf-roles { grid-template-columns: 1fr; }
+      .pillar-cols { grid-template-columns: 1fr; }
+      .pillar-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+      .w-buttons { grid-template-columns: repeat(2, 1fr); }
+      .coaching-goals { flex-direction: column; }
+      .coaching-stat-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 0 16px; }
+      section { padding: 48px 0 40px; }
+      .hero { padding: 72px 0 60px; }
+      .hero-meta { flex-wrap: wrap; gap: 8px; }
+      .stat-cards-grid { grid-template-columns: 1fr 1fr; }
+      .w-buttons { grid-template-columns: 1fr 1fr; }
+      .coaching-hero { padding: 24px; }
+      .vision-band { padding: 24px; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      nav { display: none; }
+      .hero { margin-top: 0; }
+      * { background: white !important; color: black !important; }
+      .accordion-content { max-height: none !important; overflow: visible !important; }
+      .identity-content { max-height: none !important; overflow: visible !important; }
+      .w-panel { display: block !important; }
+      .conf-card-body { max-height: none !important; overflow: visible !important; }
+      .q-card-content { max-height: none !important; overflow: visible !important; }
+      .welcome-extra { display: table-row !important; }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary);
+      color: rgba(216,243,220,0.75);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    footer strong {
+      color: var(--light);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">수영로교회</span>
+    <a href="#why">소그룹 데이터</a>
+    <a href="#identity">사랑방</a>
+    <a href="#leadership">리더십</a>
+    <a href="#4w">4W 운영</a>
+    <a href="#journey">정착</a>
+    <a href="#eum-seum">이음세움</a>
+    <a href="#rr">R&amp;R</a>
+    <a href="#coaching">목자교육</a>
+    <a href="#welcome">웰컴데이</a>
+    <a href="#welcome-sarang">웰컴사랑방</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-church">수영로교회 · 사랑방 영역</p>
+    <h1 class="hero-title">사랑방 영역<br>전체 구조</h1>
+    <p class="hero-sub">소그룹 사역의 철학 · 시스템 · 운영 안내</p>
+    <div class="hero-meta">
+      <span>이승목 목사</span>
+      <span class="dot"></span>
+      <span>사랑방 영역 총괄</span>
+      <span class="dot"></span>
+      <span>2026.06</span>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1 — 왜 소그룹인가? -->
+<section id="why">
+  <div class="page-wrap">
+    <p class="section-label">소그룹의 근거</p>
+    <h2 class="section-title">왜 소그룹인가?</h2>
+    <p class="section-desc">데이터가 말하는 소그룹의 중요성</p>
+    <div class="divider"></div>
+
+    <div class="data-cards-grid">
+      <!-- Card 1 -->
+      <div class="data-card" style="background: linear-gradient(135deg, #F0FBF4 60%, #FEF2F2 100%);">
+        <div class="data-num-green">76%</div>
+        <div class="data-vs">VS</div>
+        <div class="data-num-red">29%</div>
+        <div class="data-label">소그룹이 활발한 교회</div>
+        <p class="data-sub">부흥하는 교회의 76%가 소그룹 활발<br>vs 죽어가는 교회 29%</p>
+        <span class="data-badge">부흥교회 기준</span>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="data-card">
+        <div class="data-num" style="font-size:38px;">🤝</div>
+        <div class="data-label">평신도 간의 돌봄</div>
+        <p class="data-sub">목회자 1인이 감당할 수 없는 돌봄의 공백을 소그룹이 메운다. 평신도가 평신도를 돌볼 때 교회가 살아난다.</p>
+        <span class="data-badge">소그룹 핵심 기능</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="data-card">
+        <div class="data-num">70%</div>
+        <div class="data-label">평신도 리더십의 중요성</div>
+        <p class="data-sub">목회자 70%가 돌봄사역을 위한 평신도 리더 훈련이 필요하다고 응답 — 사랑목자·마을목자가 그 답</p>
+        <span class="data-badge">목회자 설문</span>
+      </div>
+    </div>
+
+    <div class="source-box">
+      <strong>출처:</strong> 한국교회 소그룹 실태 조사 (목회데이터연구소, 2023) / 코로나 이후 교회 성장 패턴 연구 (교회성장연구소)
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 — 사랑방이란? -->
+<section id="identity">
+  <div class="page-wrap">
+    <p class="section-label">정체성</p>
+    <h2 class="section-title">사랑방이란?</h2>
+    <p class="section-desc">사랑방의 본질과 지향점</p>
+    <div class="divider"></div>
+
+    <div class="quote-block">
+      <p class="quote-text">"사랑방은 목회, 제자훈련, 사역이 통합된 작은 교회입니다.<br>부산의 성시화를 위해 불신자들에게 열려있는 공동체를 지향합니다."</p>
+      <p class="quote-source">— 수영로교회 사랑방 정체성 선언</p>
+    </div>
+
+    <div class="identity-cards-grid">
+      <div class="identity-card">
+        <span class="identity-toggle">▼</span>
+        <div class="identity-icon">⛪</div>
+        <div class="identity-title">셀로서의 '사랑'</div>
+        <div class="identity-content">
+          <p class="identity-desc">목회(예배·심방·상담) + 제자훈련(보고·배움·교육) + 사역(전도·선교)이 통합된 작은 교회. 사랑방 하나가 그 자체로 완전한 교회의 기능을 수행합니다.</p>
+        </div>
+      </div>
+
+      <div class="identity-card">
+        <span class="identity-toggle">▼</span>
+        <div class="identity-icon">🚪</div>
+        <div class="identity-title">불신자에게 열린 공동체</div>
+        <div class="identity-content">
+          <p class="identity-desc">"사랑"은 부산의 성시화를 위해 불신자들에게 열려있는 공동체를 지향하는 열린 모임. 교회 밖의 사람들도 자연스럽게 들어올 수 있는 환대의 공간입니다.</p>
+        </div>
+      </div>
+
+      <div class="identity-card">
+        <span class="identity-toggle">▼</span>
+        <div class="identity-icon">🌱</div>
+        <div class="identity-title">제자훈련이 일어나는 소그룹</div>
+        <div class="identity-content">
+          <p class="identity-desc">삶의 공동체로서 구성원들이 서로에게서 섬김과 사랑을 본받으며 그리스도의 제자로 자람. 매 모임이 제자됨의 현장입니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vision-band">
+      <p>🏠 사랑방 = 목회 + 제자훈련 + 사역이 통합된 살아있는 소공동체</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — 리더십 구조 -->
+<section id="leadership">
+  <div class="page-wrap">
+    <p class="section-label">조직 구조</p>
+    <h2 class="section-title">리더십 구조</h2>
+    <p class="section-desc">5단계 목양 체계</p>
+    <div class="divider"></div>
+
+    <div class="leadership-flow">
+      <div class="leadership-level">
+        <div class="l-card">
+          <div class="l-card-num">1</div>
+          <div>
+            <div class="l-card-title">담임목사</div>
+            <div class="l-card-desc">전체 비전 제시 및 영적 최고 지도자</div>
+          </div>
+        </div>
+      </div>
+      <div class="leadership-arrow">↓</div>
+      <div class="leadership-level">
+        <div class="l-card">
+          <div class="l-card-num">2</div>
+          <div>
+            <div class="l-card-title">교구장</div>
+            <div class="l-card-desc">교구 전체 사역 총괄 및 마을목자 코칭</div>
+          </div>
+        </div>
+      </div>
+      <div class="leadership-arrow">↓</div>
+      <div class="leadership-level">
+        <div class="l-card">
+          <div class="l-card-num">3</div>
+          <div>
+            <div class="l-card-title">마을목자</div>
+            <div class="l-card-desc">여러 사랑방을 묶은 마을 단위 리더십 / 사랑목자 코칭 및 지원</div>
+          </div>
+        </div>
+      </div>
+      <div class="leadership-arrow">↓</div>
+      <div class="leadership-level">
+        <div class="l-card">
+          <div class="l-card-num">4</div>
+          <div>
+            <div class="l-card-title">사랑목자</div>
+            <div class="l-card-desc">사랑방 인도 및 구성원 케어 / 평신도 사역자</div>
+          </div>
+        </div>
+      </div>
+      <div class="leadership-arrow">↓</div>
+      <div class="leadership-level">
+        <div class="l-card">
+          <div class="l-card-num">5</div>
+          <div>
+            <div class="l-card-title">사랑방원</div>
+            <div class="l-card-desc">사랑방 구성원 / VIP 초청 및 공동체 참여</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 마을목자 상세 -->
+    <h3 class="subsection-title" style="margin-top:32px;">마을목자 — 역할과 과업</h3>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:20px;">마을목자는 4–7개 사랑방을 묶은 마을 단위 평신도 리더입니다. 교구사역자의 협력자로서 사랑방 목자들을 직접 코칭하고 돌봅니다.</p>
+
+    <!-- 정체성 4역할 -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px;">
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-size:22px;margin-bottom:6px;">👥</div>
+        <div style="font-weight:700;color:var(--primary);margin-bottom:4px;">목자</div>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;">사랑방 목자들을 돌보는 목자 — 돌봄·격려·동행 중심</div>
+      </div>
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-size:22px;margin-bottom:6px;">👀</div>
+        <div style="font-weight:700;color:var(--primary);margin-bottom:4px;">감독</div>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;">4–7개 사랑방을 돌아보는 현장 코칭·탐방·점검</div>
+      </div>
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-size:22px;margin-bottom:6px;">🧩</div>
+        <div style="font-weight:700;color:var(--primary);margin-bottom:4px;">상담자</div>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;">사랑방 문제 해결 조력자 — 중재·조언·프로세스 제안</div>
+      </div>
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:16px;">
+        <div style="font-size:22px;margin-bottom:6px;">🤝</div>
+        <div style="font-weight:700;color:var(--primary);margin-bottom:4px;">협동사역자</div>
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.7;">교구 교역자의 목회철학을 최전선에서 돕는 연결·조직·훈련</div>
+      </div>
+    </div>
+
+    <!-- 조직 규모 테이블 -->
+    <h4 style="font-size:14px;font-weight:700;color:var(--primary);margin:0 0 10px;">조직 규모 & 커버리지</h4>
+    <table class="conf-timetable" style="margin-bottom:24px;">
+      <thead><tr style="background:var(--surface-alt);">
+        <th style="text-align:left;padding:8px 12px;font-size:13px;">역할</th>
+        <th style="text-align:left;padding:8px 12px;font-size:13px;">호칭</th>
+        <th style="text-align:center;padding:8px 12px;font-size:13px;">담당 단위</th>
+        <th style="text-align:center;padding:8px 12px;font-size:13px;">담당 성도</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:8px 12px;font-size:13px;">교구사역자 (교역자)</td><td style="padding:8px 12px;font-size:13px;">교구사역자</td><td style="padding:8px 12px;font-size:13px;text-align:center;">교구 70–100개</td><td style="padding:8px 12px;font-size:13px;text-align:center;">800–1,100명</td></tr>
+        <tr style="background:var(--light);"><td style="padding:8px 12px;font-size:13px;font-weight:600;color:var(--primary);">마을사역자 (평신도)</td><td style="padding:8px 12px;font-size:13px;font-weight:600;color:var(--primary);">마을목자</td><td style="padding:8px 12px;font-size:13px;text-align:center;font-weight:600;">마을 4–7개</td><td style="padding:8px 12px;font-size:13px;text-align:center;font-weight:600;">40–80명</td></tr>
+        <tr><td style="padding:8px 12px;font-size:13px;">사랑방사역자</td><td style="padding:8px 12px;font-size:13px;">사랑목자</td><td style="padding:8px 12px;font-size:13px;text-align:center;">사랑방 1개</td><td style="padding:8px 12px;font-size:13px;text-align:center;">12명 이내</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 7대 과업 -->
+    <h4 style="font-size:14px;font-weight:700;color:var(--primary);margin:0 0 12px;">마을목자 7대 과업</h4>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);">
+        <span style="font-weight:700;color:var(--primary);">① 돌봄</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">사랑목자 개인·사역 돌봄 → 견고히 세움</span>
+      </div>
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);">
+        <span style="font-weight:700;color:var(--primary);">② 전도·배가</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">격려 + 마을 단위 전략 지원</span>
+      </div>
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);">
+        <span style="font-weight:700;color:var(--primary);">③ 새가족 정착</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">마을 지역 새가족 효과적 정착 지원</span>
+      </div>
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);">
+        <span style="font-weight:700;color:var(--primary);">④ 문제 신속 대응</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">사랑목자→마을목자→교구사역자 보고 라인</span>
+      </div>
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);">
+        <span style="font-weight:700;color:var(--primary);">⑤ 마을 연합</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">마을 공동체성 강화 (분기 연합모임 등)</span>
+      </div>
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);">
+        <span style="font-weight:700;color:var(--primary);">⑥ 행정 수행</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">보고서·출석·정착·배가 현황 정기 제출</span>
+      </div>
+      <div style="background:var(--surface-alt);border-radius:8px;padding:12px 14px;border-left:3px solid var(--primary);grid-column:1/-1;">
+        <span style="font-weight:700;color:var(--primary);">⑦ 이단 경계</span>
+        <span style="font-size:13px;color:var(--text-muted);margin-left:6px;">이상 징후 즉시 교구 교역자 공유 (비밀모임·금품요구·교리 왜곡)</span>
+      </div>
+    </div>
+
+    <!-- 자격 요건 -->
+    <div style="margin-top:20px;background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:10px;padding:18px 20px;color:#fff;">
+      <div style="font-size:13px;font-weight:700;color:var(--light);letter-spacing:1px;margin-bottom:10px;">임명 자격</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">소명 확신</span>
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">목자 경력 2년+</span>
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">전도·배가·파송 경험</span>
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">인턴훈련 이수</span>
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">제자반+사역자반</span>
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">담임목사 임명</span>
+        <span style="background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 12px;font-size:12px;">정년 만 70세</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 — 4W 운영 방식 -->
+<section id="4w">
+  <div class="page-wrap">
+    <p class="section-label">모임 운영</p>
+    <h2 class="section-title">4W 운영 방식</h2>
+    <p class="section-desc">환영·찬양·말씀·사역이 균형잡힌 1시간 30분 모임</p>
+    <div class="divider"></div>
+
+    <!-- Part A: Interactive W buttons -->
+    <div class="w-buttons">
+      <button class="w-btn active" onclick="activateWPanel(0)">
+        <div class="w-btn-en">Welcome</div>
+        <div class="w-btn-title">환영</div>
+      </button>
+      <button class="w-btn" onclick="activateWPanel(1)">
+        <div class="w-btn-en">Worship</div>
+        <div class="w-btn-title">찬양</div>
+      </button>
+      <button class="w-btn" onclick="activateWPanel(2)">
+        <div class="w-btn-en">Word</div>
+        <div class="w-btn-title">말씀</div>
+      </button>
+      <button class="w-btn" onclick="activateWPanel(3)">
+        <div class="w-btn-en">Work</div>
+        <div class="w-btn-title">사역과 기도</div>
+      </button>
+    </div>
+
+    <div class="w-panel active" id="wp-0">
+      <div class="w-panel-title">환영 Welcome</div>
+      <div class="w-panel-desc">분위기를 열어 서로를 알아가는 시간</div>
+      <ul class="w-panel-items">
+        <li>인사 나누기</li>
+        <li>사랑방 서약</li>
+        <li>아이스브레이크</li>
+      </ul>
+      <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,0.15);border-radius:8px;border-left:3px solid rgba(255,255,255,0.6);">
+        <span style="font-size:12px;font-weight:700;opacity:0.8;letter-spacing:0.5px;">🔗 WELCOME 사역 연결</span>
+        <p style="font-size:13px;margin-top:4px;opacity:0.9;line-height:1.7;">매년 3월 <strong>웰컴데이</strong>는 이 환영 정신을 교회 전체로 확장한 캠페인입니다. 사랑방 안의 환영 문화가 교회 밖 새가족을 향해 열리는 순간 → <a href="#welcome" style="color:#fff;text-decoration:underline;">웰컴데이 섹션 보기 ↓</a></p>
+      </div>
+    </div>
+
+    <div class="w-panel" id="wp-1">
+      <div class="w-panel-title">찬양 Worship</div>
+      <div class="w-panel-desc">성령의 임재를 구하며 함께 하나님께 나아가는 시간</div>
+      <ul class="w-panel-items">
+        <li>찬양 3~4곡</li>
+        <li>축복송</li>
+        <li>기도</li>
+      </ul>
+    </div>
+
+    <div class="w-panel" id="wp-2">
+      <div class="w-panel-title">말씀 Word</div>
+      <div class="w-panel-desc">독점 금지, 나눔 중심</div>
+      <ul class="w-panel-items">
+        <li>기도</li>
+        <li>성경 읽기</li>
+        <li>수영로신문으로 주일 설교 재나눔</li>
+        <li>4가지 질문법 활용</li>
+      </ul>
+    </div>
+
+    <div class="w-panel" id="wp-3">
+      <div class="w-panel-title">사역과 기도 Work</div>
+      <div class="w-panel-desc">1사랑 1사역의 실천</div>
+      <ul class="w-panel-items">
+        <li>VIP 필요 채우기</li>
+        <li>선교사 도전</li>
+        <li>기도목 나누기</li>
+        <li>헌금·주기도문</li>
+      </ul>
+      <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,0.15);border-radius:8px;border-left:3px solid rgba(255,255,255,0.6);">
+        <span style="font-size:12px;font-weight:700;opacity:0.8;letter-spacing:0.5px;">🔗 WORK 사역 연결</span>
+        <p style="font-size:13px;margin-top:4px;opacity:0.9;line-height:1.7;"><strong>웰컴사랑방</strong>은 이 사역 정신을 실천하는 캠페인 — 사랑방이 팀을 이뤄 교회 안 22개 사역지를 방문하는 '하나님 나라 패스포트' 여행 → <a href="#welcome-sarang" style="color:#fff;text-decoration:underline;">웰컴사랑방 섹션 보기 ↓</a></p>
+      </div>
+    </div>
+
+    <!-- Part B: 모임 세부 진행표 -->
+    <h3 class="subsection-title">모임 세부 진행표</h3>
+    <div class="time-table-wrap">
+      <table class="time-table">
+        <thead>
+          <tr>
+            <th>순서</th>
+            <th>시간</th>
+            <th>운영 포인트</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>환영 Welcome</td>
+            <td>10분</td>
+            <td>평가하지 말고 인정. 자연스럽게 대화. 아이스브레이크 활용</td>
+          </tr>
+          <tr>
+            <td>찬양 Worship</td>
+            <td>20분</td>
+            <td>미리 연습. 주제에 맞는 곡. 2~3곡 집중. 성령의 임재 구하기</td>
+          </tr>
+          <tr>
+            <td>말씀 Word</td>
+            <td>50분</td>
+            <td>주일 설교를 수영로신문으로 재나눔. 4가지 질문(도입/관찰/해석/적용) 활용. 독점 금지, 나눔 중심</td>
+          </tr>
+          <tr>
+            <td>사역과 기도 Work</td>
+            <td>10분</td>
+            <td>VIP를 정하고 관계 계획 세우기. 선교사/지체를 위해 기도</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Part C: 수영로신문 4가지 질문법 -->
+    <h3 class="subsection-title">수영로신문 4가지 질문법</h3>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px;">
+      <div style="background:var(--primary);color:#fff;border-radius:8px;padding:12px 10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;line-height:1;">1</div>
+        <div style="font-size:11px;font-weight:700;margin-top:4px;">도입 질문</div>
+        <div style="font-size:10px;color:var(--light);margin-top:4px;line-height:1.5;">아이스브레이크<br>분위기 열기</div>
+      </div>
+      <div style="background:var(--accent);color:#fff;border-radius:8px;padding:12px 10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;line-height:1;">2</div>
+        <div style="font-size:11px;font-weight:700;margin-top:4px;">관찰 질문</div>
+        <div style="font-size:10px;color:var(--light);margin-top:4px;line-height:1.5;">본문에서<br>무엇을 보는가</div>
+      </div>
+      <div style="background:var(--accent);color:#fff;border-radius:8px;padding:12px 10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;line-height:1;">3</div>
+        <div style="font-size:11px;font-weight:700;margin-top:4px;">관찰 질문</div>
+        <div style="font-size:10px;color:var(--light);margin-top:4px;line-height:1.5;">핵심 단어·<br>구절 파악</div>
+      </div>
+      <div style="background:var(--accent);color:#fff;border-radius:8px;padding:12px 10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;line-height:1;">4</div>
+        <div style="font-size:11px;font-weight:700;margin-top:4px;">해석 질문</div>
+        <div style="font-size:10px;color:var(--light);margin-top:4px;line-height:1.5;">하나님은 무엇을<br>말씀하시는가</div>
+      </div>
+      <div style="background:var(--primary);color:#fff;border-radius:8px;padding:12px 10px;text-align:center;">
+        <div style="font-size:20px;font-weight:900;line-height:1;">5</div>
+        <div style="font-size:11px;font-weight:700;margin-top:4px;">적용 질문</div>
+        <div style="font-size:10px;color:var(--light);margin-top:4px;line-height:1.5;">이번 주<br>한 가지 결단</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);margin-top:6px;">
+      <span style="background:var(--primary);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;">1번</span>도입
+      <span style="margin:0 4px;color:var(--border);">|</span>
+      <span style="background:var(--accent);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;">2–4번</span>관찰·해석
+      <span style="margin:0 4px;color:var(--border);">|</span>
+      <span style="background:var(--primary);color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;">5번</span>적용
+    </div>
+
+    <!-- 사랑방 나눔지 예시 -->
+    <h3 class="subsection-title" style="margin-top:32px;">사랑방 나눔지 — 실제 예시 (2026.06.12)</h3>
+    <p style="font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">수영로교회는 매주 주일 설교 본문을 기반으로 <strong>사랑방 나눔지</strong>를 제작·배포합니다. 목자코칭스쿨, 목자플러스와 연동되어 당주 말씀 나눔을 목자가 자신 있게 인도할 수 있도록 돕습니다.</p>
+
+    <div class="naumji-wrap" style="border:2px solid var(--border);border-radius:12px;overflow:hidden;">
+      <!-- 나눔지 헤더 -->
+      <div style="background:var(--primary);color:#fff;padding:14px 20px;">
+        <div style="font-size:11px;font-weight:600;color:var(--light);letter-spacing:1px;margin-bottom:4px;">26.06.12 사랑목자를 위한 나눔지 플러스</div>
+        <div style="font-size:18px;font-weight:700;">정상이 아닌 정상인</div>
+        <div style="font-size:13px;color:var(--mid);margin-top:2px;">마태복음 5:38–42</div>
+      </div>
+      <!-- 본문 -->
+      <div style="padding:18px 20px;background:#f8fff9;">
+        <div style="font-size:13px;color:var(--text-muted);line-height:1.9;border-left:3px solid var(--accent);padding-left:14px;margin-bottom:16px;font-style:italic;">
+          "또 눈은 눈으로, 이는 이로 갚으라 하였다는 것을 너희가 들었으나 나는 너희에게 이르노니 악한 자를 대적하지 말라 누구든지 네 오른편 뺨을 치거든 왼편도 돌려 대며…"
+          <span style="display:block;margin-top:6px;font-size:12px;color:var(--muted);">마태복음 5:38–39</span>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <div style="font-size:12px;font-weight:700;color:var(--primary);letter-spacing:0.5px;margin-bottom:8px;">📖 말씀 요약</div>
+          <ul style="font-size:13px;color:var(--text-muted);line-height:1.9;list-style:none;padding:0;">
+            <li>❍ 예수님은 보복의 길보다 자비의 길을 가르치셨습니다.</li>
+            <li>❍ 우리의 명예는 다른 사람이 정하는 것이 아니라 하나님 안에서 안전합니다.</li>
+            <li>❍ 세상과 다르게 사는 그리스도인의 삶이 빛이 되어 세상을 바꿉니다.</li>
+          </ul>
+        </div>
+
+        <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <div style="font-size:12px;font-weight:700;color:var(--primary);letter-spacing:0.5px;">💬 나눔 질문</div>
+            <button onclick="this.closest('.naumji-wrap').querySelector('.naumji-full').classList.toggle('open');this.textContent=this.textContent.includes('전체')? '접기 ▲' : '전체 보기 ▼';" style="font-size:11px;background:var(--primary);color:#fff;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;">전체 보기 ▼</button>
+          </div>
+          <div style="display:grid;gap:8px;">
+            <div style="padding:10px 12px;background:var(--light);border-radius:6px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--primary);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">Q1 도입</span>
+              <span style="font-size:13px;color:var(--text-muted);">예수님은 보복을 당했을 때 어떻게 살라고 가르치십니까?</span>
+            </div>
+            <div style="padding:10px 12px;background:var(--light);border-radius:6px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--accent);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">Q2 관찰</span>
+              <span style="font-size:13px;color:var(--text-muted);">본문에서 예수님이 금지하신 것과 명령하신 것은 각각 무엇입니까?</span>
+            </div>
+            <div style="padding:10px 12px;background:var(--light);border-radius:6px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--accent);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">Q3 관찰</span>
+              <span style="font-size:13px;color:var(--text-muted);">오 리를 가게 하는 자에게 십 리를 동행하고, 구하는 자에게 주라는 것은 어떤 삶의 태도입니까?</span>
+            </div>
+            <div style="padding:10px 12px;background:var(--light);border-radius:6px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--accent);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">Q4 해석</span>
+              <span style="font-size:13px;color:var(--text-muted);">성도가 모욕을 당해도 보복하지 않을 수 있는 이유는 무엇입니까?</span>
+            </div>
+            <div style="padding:10px 12px;background:var(--light);border-radius:6px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--primary);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">Q5 적용</span>
+              <span style="font-size:13px;color:var(--text-muted);">세상과 다른 그리스도인의 삶은 무엇을 드러냅니까? 이번 주 '정상이 아닌 정상인'으로 살 수 있는 구체적인 결단은 무엇입니까?</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 전체 펼치기 영역 -->
+        <div class="naumji-full" style="display:none;margin-top:12px;background:var(--surface-alt);border-radius:8px;padding:14px 16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:10px;">📖 말씀 요약 (전체)</div>
+          <ul style="font-size:13px;color:var(--text-muted);line-height:2;list-style:none;padding:0;margin:0 0 12px;">
+            <li>❍ 예수님은 보복의 길보다 자비의 길을 가르치셨습니다.</li>
+            <li>❍ 사람은 본능대로 살면 받은 만큼 되갚고 싶어 합니다.</li>
+            <li>❍ 예수님은 모욕을 당해도 보복하지 말고 다른 길을 택하라고 하셨습니다.</li>
+            <li>❍ 우리의 명예는 다른 사람이 정하는 것이 아니라 하나님 안에서 안전합니다.</li>
+            <li>❍ 그리스도인은 자기 권리만 주장하지 않고 사랑으로 반응해야 합니다.</li>
+            <li>❍ 세상은 손해 보지 않으려 하지만, 예수님은 더 베풀고 더 동행하라고 하셨습니다.</li>
+            <li>❍ 억지로 하는 것이 아니라 기쁨으로 섬기는 것이 복음의 삶입니다.</li>
+            <li>❍ 하나님은 인색하신 분이 아니시고, 우리에게 풍성히 주시는 분이십니다.</li>
+            <li>❍ 하나님의 사랑을 받은 사람은 관대하게 살게 됩니다.</li>
+            <li>❍ 세상과 다르게 사는 그리스도인의 삶이 빛이 되어 세상을 바꿉니다.</li>
+          </ul>
+          <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px;">💬 답변 요약</div>
+          <div style="display:grid;gap:6px;font-size:12px;color:var(--text-muted);">
+            <div><strong>Q1:</strong> 보복하지 말고, 오히려 사랑과 화해의 길로 가라고 하십니다.</div>
+            <div><strong>Q4:</strong> 우리의 명예는 그리스도 안에서 안전하고, 우리의 신분은 하나님이 결정해 주셨기 때문입니다.</div>
+            <div><strong>Q5:</strong> 세상과 다른 급진적인 사랑과 관대함을 통해, 그리스도가 누구이신지를 보여 줍니다.</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--surface-alt);padding:10px 20px;font-size:12px;color:var(--text-muted);">
+        ✏️ 나눔지는 매주 <strong>목자플러스(금요일 10시)</strong>에서 당주 말씀과 함께 제공 / <strong>시니어용·일반용</strong> 두 버전 제작
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 — 새가족 정착 전체 흐름 -->
+<section id="journey">
+  <div class="page-wrap">
+    <p class="section-label">정착 여정</p>
+    <h2 class="section-title">새가족 정착 전체 흐름</h2>
+    <p class="section-desc">등록부터 사랑방 연결까지 3단계 여정</p>
+    <div class="divider"></div>
+
+    <div class="nf-steps">
+      <div class="nf-step">
+        <div class="nf-step-num">01</div>
+        <div class="nf-step-body">
+          <div class="nf-step-title">새가족 등록 및 첫 만남</div>
+          <p class="nf-step-desc">등록 시 교구가 배정되며, 교역자가 직접 첫 인사</p>
+          <div class="nf-badges">
+            <span class="nf-badge">교회 첫 방문 및 등록</span>
+            <span class="nf-badge">교역자 첫 만남</span>
+            <span class="nf-badge">교구 배정</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="nf-step">
+        <div class="nf-step-num">02</div>
+        <div class="nf-step-body">
+          <div class="nf-step-title">새가족부 교육 (6주)</div>
+          <p class="nf-step-desc">6주 기초 과정을 통해 신앙의 기초를 다집니다</p>
+          <div class="nf-badges">
+            <span class="nf-badge">① 새가족팀 연락 진행</span>
+            <span class="nf-badge">② 등록 1주일 이내 교구 전도사 전화심방</span>
+          </div>
+          <div class="nf-highlight">
+            새가족팀이 교육 기간 내내 함께합니다
+          </div>
+        </div>
+      </div>
+
+      <div class="nf-step">
+        <div class="nf-step-num">03</div>
+        <div class="nf-step-body">
+          <div class="nf-step-title">사랑방 연결 (사랑목자와 함께)</div>
+          <p class="nf-step-desc">가장 적합한 사랑방 추천 및 사랑목자와 첫 만남</p>
+          <div class="nf-highlight" style="background:#F0FBF4;border-color:var(--accent);color:var(--secondary);">
+            💡 <strong>이음케어 프로그램 예정:</strong> 이 과정을 더욱 체계적으로 보완하기 위한 '이음케어 6주' 프로그램이 기획 중입니다. (향후 도입 예정)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nf-roles">
+      <div class="nf-role-card">
+        <div class="nf-role-title">새가족팀</div>
+        <div class="nf-role-desc">교육 기간 중 연락·심방·환대 담당</div>
+      </div>
+      <div class="nf-role-card">
+        <div class="nf-role-title">사랑목자</div>
+        <div class="nf-role-desc">사랑방 내 친밀한 케어</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 — 이음·세움 프로젝트 -->
+<section id="eum-seum">
+  <div class="page-wrap">
+    <p class="section-label">케어 시스템</p>
+    <h2 class="section-title">이음·세움 프로젝트</h2>
+    <p class="section-desc">누수 없는(Leak-proof) 케어 시스템</p>
+    <div class="divider"></div>
+
+    <div class="planned-banner">
+      <div class="planned-banner-icon">🗓️</div>
+      <div class="planned-banner-text">
+        <strong>예정 프로그램 안내</strong><br>
+        이음·세움 프로젝트는 현재 기획·설계 단계에 있는 예정 프로그램입니다. 도입 시 사랑방 케어 시스템이 한층 강화될 것입니다.
+      </div>
+    </div>
+
+    <div class="overview-para">
+      이음·세움 프로젝트는 누수 없는(Leak-proof) 케어 시스템입니다. <strong>이음</strong>은 새가족의 첫 6주 골든타임을 집중 케어하고, <strong>세움</strong>은 장기결석자를 다시 공동체로 연결합니다.
+    </div>
+
+    <button class="accordion-trigger" data-target="acc-pillars">
+      6.1 두 기둥 구조 — 자세히 보기
+      <span class="acc-icon">▼</span>
+    </button>
+    <div class="accordion-content" id="acc-pillars">
+      <div class="accordion-inner">
+        <div class="pillar-roof">이음·세움 프로젝트 — Leak-proof 케어 시스템</div>
+        <div class="pillar-cols">
+          <div class="pillar-col">
+            <div class="pillar-col-title">🌿 이음 (Connecting)</div>
+            <div class="pillar-col-sub">새가족 골든타임 6주 집중 케어</div>
+            <ul class="pillar-col-list">
+              <li>등록 후 6주 내 집중 케어</li>
+              <li>사랑방 첫 연결까지 동행</li>
+              <li>3트랙 맞춤형 접근</li>
+              <li>사랑목자와 인계 시스템</li>
+            </ul>
+          </div>
+          <div class="pillar-col">
+            <div class="pillar-col-title">🏗️ 세움 (Restoring)</div>
+            <div class="pillar-col-sub">장기결석자 재연결 프로그램</div>
+            <ul class="pillar-col-list">
+              <li>장기결석자 3유형 분류</li>
+              <li>VIP 선정 및 관계 회복</li>
+              <li>단계별 접근 전략</li>
+              <li>공동체 재연결까지 지속 케어</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="accordion-trigger" data-target="acc-timeline">
+      6.2 이음 프로젝트 — 6주 타임라인
+      <span class="acc-icon">▼</span>
+    </button>
+    <div class="accordion-content" id="acc-timeline">
+      <div class="accordion-inner">
+        <div class="timeline-6w">
+          <div class="tl-item">
+            <span class="tl-week">1주</span>
+            <div class="tl-content"><strong>첫 연락 및 환영</strong> — 등록 후 24시간 이내 첫 연락. 따뜻한 환영과 기도 문자 발송</div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-week">2주</span>
+            <div class="tl-content"><strong>니즈 파악</strong> — 삶의 상황과 신앙 배경 파악. 적합한 사랑방 탐색 시작</div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-week">3주</span>
+            <div class="tl-content"><strong>첫 만남 주선</strong> — 예비 사랑방 사랑목자와 커피챗 또는 첫 모임 동행</div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-week">4주</span>
+            <div class="tl-content"><strong>사랑방 참여</strong> — 첫 사랑방 모임 참여. 이음팀이 함께 동행</div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-week">5주</span>
+            <div class="tl-content"><strong>정착 확인</strong> — 사랑방 적응 여부 체크. 필요 시 대안 제시</div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-week">6주</span>
+            <div class="tl-content"><strong>인계 완료</strong> — 사랑목자에게 정식 인계. 이음팀 케어 종료 및 마무리 기도</div>
+          </div>
+        </div>
+        <div style="background:var(--lightest);border:1px solid var(--light);border-radius:var(--radius);padding:20px;">
+          <strong style="color:var(--primary);">3-Track 맞춤 시스템</strong>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;">
+            <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">Track A</div>
+              <div style="font-size:13px;color:var(--text-muted);">적극적 연결형 — 즉시 사랑방 참여 원하는 경우</div>
+            </div>
+            <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">Track B</div>
+              <div style="font-size:13px;color:var(--text-muted);">탐색형 — 먼저 교회에 익숙해지길 원하는 경우</div>
+            </div>
+            <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px;">Track C</div>
+              <div style="font-size:13px;color:var(--text-muted);">웰컴사랑방형 — 열린 소그룹으로 먼저 경험</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="accordion-trigger" data-target="acc-types">
+      6.3 세움 프로젝트 — 장기결석자 3유형
+      <span class="acc-icon">▼</span>
+    </button>
+    <div class="accordion-content" id="acc-types">
+      <div class="accordion-inner">
+        <div class="type-cards">
+          <div class="type-card">
+            <div class="type-card-badge">유형 1</div>
+            <div class="type-card-title">관계 단절형</div>
+            <p class="type-card-desc">사랑방 구성원과의 관계에서 상처나 갈등으로 이탈한 경우. 관계 회복과 안전한 재연결이 핵심.</p>
+          </div>
+          <div class="type-card">
+            <div class="type-card-badge">유형 2</div>
+            <div class="type-card-title">관심 상실형</div>
+            <p class="type-card-desc">신앙의 열기가 식거나 사랑방의 필요성을 느끼지 못하는 경우. 새로운 동기부여와 가치 재발견이 필요.</p>
+          </div>
+          <div class="type-card">
+            <div class="type-card-badge">유형 3</div>
+            <div class="type-card-title">상황 이탈형</div>
+            <p class="type-card-desc">이사, 직장 변화, 자녀 양육 등 삶의 환경 변화로 이탈. 상황에 맞는 유연한 재연결 방안 모색.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 — 역할과 책임 R&R -->
+<section id="rr">
+  <div class="page-wrap">
+    <p class="section-label">역할 분담</p>
+    <h2 class="section-title">역할과 책임 R&amp;R</h2>
+    <p class="section-desc">케어 시스템 내 각 역할의 명확한 분담</p>
+    <div class="divider"></div>
+
+    <div class="rr-table-wrap">
+      <table class="rr-table">
+        <thead>
+          <tr>
+            <th>역할</th>
+            <th>주요 책임</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>교역자</td>
+            <td>초기 정보 파악 및 팀에 전달 / 특이사항 발생 시 후속 조치 주도 / 지속적 지원 및 피드백 제공</td>
+          </tr>
+          <tr>
+            <td>새가족 정착팀<br>(이음 Project)</td>
+            <td>'첫 연결 담당': 새가족 초기 6주 집중 케어 / 사랑방으로 정보 인계 및 연결</td>
+          </tr>
+          <tr>
+            <td>장결자 세움팀<span class="badge-wip">준비중 🔧</span><br>(세움 Project)</td>
+            <td>장결자 분류 및 VIP 선정 / 관계 회복 중심 접근 후 재연결</td>
+          </tr>
+          <tr>
+            <td>사랑목자·사랑방</td>
+            <td>'정서적 연결'의 최종 현장 / 환대 및 관계 형성 주도 / 특히 24시간 내 후속 연락 — 정착의 핵심</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8 — 목자 리더십 강화 -->
+<section id="coaching">
+  <div class="page-wrap">
+    <p class="section-label">리더십 개발</p>
+    <h2 class="section-title">목자 리더십 강화</h2>
+    <p class="section-desc">체계적인 목자 훈련으로 사랑방 사역 역량 제고</p>
+    <div class="divider"></div>
+
+    <div class="coaching-hero">
+      <div class="coaching-hero-title">목자 현황 및 코칭 목표</div>
+      <div class="coaching-hero-sub">2026년 사랑방 영역 리더십 역량 강화 현황</div>
+
+      <div class="coaching-stats-grid">
+        <div class="stat-mini">
+          <div class="coaching-mini-num">2,300여명</div>
+          <div class="coaching-mini-label">사랑목자</div>
+        </div>
+        <div class="stat-mini">
+          <div class="coaching-mini-num">350여명</div>
+          <div class="coaching-mini-label">마을목자</div>
+        </div>
+        <div class="stat-mini">
+          <div class="coaching-mini-num">2,000여개</div>
+          <div class="coaching-mini-label">사랑방</div>
+        </div>
+      </div>
+
+      <div class="coaching-goals">
+        <div class="coaching-goal-item">
+          <div class="coaching-goal-label">2026년 코칭 목표</div>
+          <div class="coaching-goal-num">800명</div>
+          <div class="coaching-goal-note">연간 목자코칭 수료 목표</div>
+        </div>
+        <div class="coaching-goal-item">
+          <div class="coaching-goal-label">상반기 수료</div>
+          <div class="coaching-goal-num">300명</div>
+          <div class="coaching-goal-note">목표 대비 37.5%</div>
+        </div>
+        <div class="coaching-goal-item">
+          <div class="coaching-goal-label">2025년 수료 (비교)</div>
+          <div class="coaching-goal-num" style="font-size:22px;">197명</div>
+          <div class="coaching-goal-note">전년도 실적</div>
+        </div>
+      </div>
+
+      <div class="renewal-box">
+        <h4>3년 재수강 원칙</h4>
+        <p>사랑목자는 3년마다 목자코칭을 재수강합니다. 지속적인 역량 강화와 사역 갱신을 위한 제도적 장치입니다.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title">목자 역량강화 프로그램</h3>
+
+    <!-- Card 1: 목자컨퍼런스 -->
+    <div class="conf-card-acc">
+      <div class="conf-card-header">
+        <div>
+          <div class="conf-card-tag">Conference · 목자컨퍼런스 · 연 2회</div>
+          <div class="conf-card-title">목자컨퍼런스</div>
+          <div class="conf-card-date">2026년 주제: 목자불패 | 2026년 2월 6일 (금) | 은혜홀</div>
+        </div>
+        <span class="conf-toggle">▼</span>
+      </div>
+      <div class="conf-card-body">
+        <div class="conf-card-inner">
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.8;">담임목사 강의 및 Q&amp;A · 은퇴목자·근속목자 시상 · 전체 목자 대상 사역 결의의 시간</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: 목자코칭스쿨 -->
+    <div class="conf-card-acc">
+      <div class="conf-card-header">
+        <div>
+          <div class="conf-card-tag">Coaching School · 목자코칭스쿨 · 연 2회</div>
+          <div class="conf-card-title">목자코칭스쿨</div>
+          <div class="conf-card-date">담당: 김병호 목사 | 6강 과정 | 3년 재수강 원칙</div>
+        </div>
+        <span class="conf-toggle">▼</span>
+      </div>
+      <div class="conf-card-body">
+        <div class="conf-card-inner">
+          <ul class="conf-curriculum">
+            <li><span class="lesson-num">1강</span>왜 사랑방인가?</li>
+            <li><span class="lesson-num">2강</span>목자의 리더십</li>
+            <li><span class="lesson-num">3강</span>목자의 맘과 말</li>
+            <li><span class="lesson-num">4강</span>사랑방 운영과 인도법</li>
+            <li><span class="lesson-num">5강</span>사랑방의 가치체계 BEST 5</li>
+            <li><span class="lesson-num">6강</span>사랑방 분가전략 — 인큐베이팅 시스템</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: 목자플러스 -->
+    <div class="conf-card-acc">
+      <div class="conf-card-header">
+        <div>
+          <div class="conf-card-tag">Weekly Training · 목자플러스 · 매주 금요일</div>
+          <div class="conf-card-title">목자플러스</div>
+          <div class="conf-card-date">매주 금요일 10:00 | 담임목사 직접 교육 | 1시간</div>
+        </div>
+        <span class="conf-toggle">▼</span>
+      </div>
+      <div class="conf-card-body">
+        <div class="conf-card-inner">
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:12px;">담임목사가 직접 사랑방 목자들을 가르치는 매주 정례 교육 모임입니다. 목자컨퍼런스(연 2회)·코칭스쿨(연 2회)과 함께 수영로교회 목자 역량강화 3대 트랙을 이룹니다.</p>
+          <table class="conf-timetable">
+            <tbody>
+              <tr><td>일시</td><td>매주 금요일 오전 10:00 – 11:00</td></tr>
+              <tr><td>강사</td><td>담임목사 직접 진행</td></tr>
+              <tr><td>대상</td><td>사랑목자 · 마을목자 전체</td></tr>
+              <tr><td>성격</td><td>사랑방 나눔지 설명과 목자마인드 공유</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9 — 웰컴데이 -->
+<section id="welcome">
+  <div class="page-wrap">
+    <p class="section-label">환대 문화 캠페인</p>
+    <h2 class="section-title">웰컴데이</h2>
+    <p class="section-desc">교회가 기다리고 있음을 증명하는 7단계 목회적 시도</p>
+    <div class="divider"></div>
+
+    <div class="period-badge">📅 2026년 3월 8일 – 3월 31일</div>
+
+    <p style="font-size:15px;color:var(--text-muted);line-height:1.8;margin:16px 0 8px;">
+      웰컴데이는 "등록시키는 프로그램"이 아닙니다. 교회가 성도를 어떻게 기다리고 있는가에 대한 태도를 드러내는 목회적 시도입니다.
+    </p>
+
+    <div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;">
+      <div style="padding:8px 16px;background:#fff3cd;border:1px solid #ffc107;border-radius:20px;font-size:13px;color:#856404;">❌ 의무적 참여 요구 &nbsp;·&nbsp; ❌ 행정 중심 배정</div>
+      <div style="padding:8px 16px;background:var(--lightest);border:1px solid var(--light);border-radius:20px;font-size:13px;color:var(--secondary);">⭕ 공감 중심 &nbsp;·&nbsp; ⭕ 선택 존중 &nbsp;·&nbsp; ⭕ 안전한 공동체 경험</div>
+    </div>
+
+    <!-- 기본: WELCOME 7글자 타일 -->
+    <div class="welcome-tiles" id="welcome-compact">
+      <div class="w-tile">
+        <div class="w-tile-letter">W</div>
+        <div class="w-tile-stage">Who is Waiting?</div>
+        <div class="w-tile-brief">실태 파악</div>
+      </div>
+      <div class="w-tile">
+        <div class="w-tile-letter">E</div>
+        <div class="w-tile-stage">Empathy First</div>
+        <div class="w-tile-brief">공감 접근</div>
+      </div>
+      <div class="w-tile">
+        <div class="w-tile-letter">L</div>
+        <div class="w-tile-stage">Let Them Choose</div>
+        <div class="w-tile-brief">선택형 연결</div>
+      </div>
+      <div class="w-tile">
+        <div class="w-tile-letter">C</div>
+        <div class="w-tile-stage">Careful Connection</div>
+        <div class="w-tile-brief">안전한 연결</div>
+      </div>
+      <div class="w-tile">
+        <div class="w-tile-letter">O</div>
+        <div class="w-tile-stage">Ongoing Care</div>
+        <div class="w-tile-brief">4주 정착 케어</div>
+      </div>
+      <div class="w-tile">
+        <div class="w-tile-letter">M</div>
+        <div class="w-tile-stage">Measured Fruit</div>
+        <div class="w-tile-brief">열매 기록</div>
+      </div>
+      <div class="w-tile">
+        <div class="w-tile-letter">E</div>
+        <div class="w-tile-stage">Established Culture</div>
+        <div class="w-tile-brief">문화 정착</div>
+      </div>
+    </div>
+
+    <button class="welcome-toggle-btn" id="welcome-toggle-btn">전체 7단계 펼치기 ▼</button>
+
+    <!-- 펼치면 나오는 상세 테이블 -->
+    <div id="welcome-detail" style="display:none;">
+      <div class="time-table-wrap" style="margin-top:16px;">
+        <table class="time-table">
+          <thead>
+            <tr>
+              <th style="width:40px;">글자</th>
+              <th>단계명</th>
+              <th>핵심 행동</th>
+              <th>세부 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">W</td>
+              <td>Who is Waiting?</td>
+              <td>실태 파악</td>
+              <td>교구별 대기마을 인원·연령·출석 상태 파악. 미등록 유형: 처음 연결안됨 / 중단 경험 / 환경 문제 / 관계 상처 / 소속 부담 / 장기 미출석</td>
+            </tr>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">E</td>
+              <td>Empathy First</td>
+              <td>공감 접근</td>
+              <td>왜 안 했는지 묻지 않음 · 지금 상황 존중 · 과거 평가 금지. 핵심 문장: "지금이 아니어도 괜찮습니다. 다만, 자리는 준비되어 있습니다."</td>
+            </tr>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">L</td>
+              <td>Let Them Choose</td>
+              <td>선택형 연결</td>
+              <td>요일·시간·성별 조건에 맞는 사랑방을 목자가 직접 소개. 배정이 아닌 선택 — 본인이 고른다는 느낌이 정착률을 높임</td>
+            </tr>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">C</td>
+              <td>Careful Connection</td>
+              <td>안전한 연결</td>
+              <td>속도보다 안전 · 완벽함보다 수용력 · 배정보다 제안. 관찰자 참여 허용, 첫 만남은 '결정 없는 만남'</td>
+            </tr>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">O</td>
+              <td>Ongoing Care</td>
+              <td>4주 정착 케어</td>
+              <td>1주: 환영(추가 권면 없음) / 2주: 관찰(리더 피드백) / 3주: 선택 확인(계속/다른 사랑방/보류) / 4주: 정착 또는 보호 종료. "중단은 실패가 아니다. 관계는 열어둔 채 마무리한다."</td>
+            </tr>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">M</td>
+              <td>Measured Fruit</td>
+              <td>열매 기록</td>
+              <td>대기마을 초기→최종 인원 비교. 접촉 인원 / 신청자 수 / 사랑방 연결 인원 수치화. 목표 반응: "강요받지 않아 좋았다" / "교회가 기다리고 있다는 느낌" / "다시 안전해졌다"</td>
+            </tr>
+            <tr>
+              <td style="font-size:18px;font-weight:900;color:var(--primary);text-align:center;">E</td>
+              <td>Established Culture</td>
+              <td>문화 정착</td>
+              <td>연 1회 정례화 / 오픈 사랑방 상시 운영 / 환대 중심 리더 훈련</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote-text">"웰컴데이는 사람을 등록시킨 시간이 아니라, 교회가 기다리고 있음을 증명한 시간이었다."</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 10 — 웰컴사랑방 -->
+<section id="welcome-sarang">
+  <div class="page-wrap">
+    <p class="section-label">환대 사역 캠페인</p>
+    <h2 class="section-title">웰컴 사랑방</h2>
+    <p class="section-desc">1사랑방 1사역 운동의 연장. 모든 사랑방이 교회 내 22개 사역지를 직접 방문하는 여행 캠페인 (2026.3.8 ~ 5.31)</p>
+    <div class="divider"></div>
+
+    <div style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;gap:16px;">
+      <div style="font-size:40px;flex-shrink:0;">🛂</div>
+      <div>
+        <div style="font-size:18px;font-weight:800;letter-spacing:-0.3px;margin-bottom:4px;">하나님 나라 패스포트</div>
+        <div style="font-size:14px;color:var(--light);line-height:1.6;">참여 사랑방에 발급됩니다. 목자가 사랑방 식구들을 이끌고 22개 사역지 중 한 곳을 선택해 직접 방문하세요. <strong style="color:#fff;">(사전에 담당자 문의 필수)</strong></div>
+      </div>
+    </div>
+
+    <div class="ws-cards" style="grid-template-columns:1fr 1fr;">
+      <div class="ws-card" style="background:var(--primary);border-color:var(--primary);text-align:left;padding:28px;">
+        <div style="font-size:13px;font-weight:700;color:var(--light);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">교회 안의 열방 — 13개</div>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:13px;color:#D8F3DC;">영어 · 베트남어 · 러시아어 예배부</li>
+          <li style="font-size:13px;color:#D8F3DC;">캄보디아어 · 필리핀어 · 몽골어 예배부</li>
+          <li style="font-size:13px;color:#D8F3DC;">인도네시아어 · 미얀마어 · 중국어 예배부</li>
+          <li style="font-size:13px;color:#D8F3DC;">네팔어 · 일본어 · 우즈벡어 예배부</li>
+          <li style="font-size:13px;color:#D8F3DC;">국제어린이 주일학교</li>
+        </ul>
+      </div>
+      <div class="ws-card" style="background:var(--lightest);border-color:var(--light);text-align:left;padding:28px;">
+        <div style="font-size:13px;font-weight:700;color:var(--secondary);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">이웃과 나누는 사역 — 8개</div>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+          <li style="font-size:13px;color:var(--text);">사랑부 · 통일비전공동체</li>
+          <li style="font-size:13px;color:var(--text);">프렌즈 · 기대나무</li>
+          <li style="font-size:13px;color:var(--text);">보육원 · 요양원</li>
+          <li style="font-size:13px;color:var(--text);">농아부 · 세계선교기도회</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quote-block" style="font-style:italic;">
+      <p class="quote-text">"믿음은 눈으로 보며 손으로 나누는 중에 더욱 커짐을 알게 되는 귀한 시간이었습니다."</p>
+      <p class="quote-source">— 14교구 권정윤마을 은경사랑방, 농아부 예배 방문 후</p>
+    </div>
+
+    <div class="notion-info-box" style="margin-top:0;">
+      "사랑방의 무거운 짐을 잠시 내려놓고, 하나님 나라를 향한 시선을 회복하는 시간입니다."
+    </div>
+  </div>
+</section>
+
+
+<!-- VISION STATEMENT BOX -->
+<div style="max-width:1100px;margin:0 auto 40px;padding:0 24px;">
+  <div style="padding:36px 40px;background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);border-radius:var(--radius-lg);text-align:center;color:var(--white);">
+    <p style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--light);margin-bottom:12px;">Vision Statement</p>
+    <p style="font-size:22px;font-weight:800;line-height:1.6;">분가 → 일만 사랑방 → 50만 영혼 → 부산 복음화</p>
+    <p style="margin-top:16px;font-size:14px;color:rgba(216,243,220,0.8);line-height:1.8;">구조: 담임목사 → 교구장 → 마을목자 → 사랑목자 → 사랑방원<br>모임: 4W / 1시간 30분 / 수영로신문 활용<br>케어: 이음 + 세움 = Leak-proof 공동체</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p><strong>수영로교회 사랑방 영역</strong> | <strong>이승목 목사</strong> | <strong>2026</strong></p>
+    <p style="margin-top:8px;font-size:12px;">본 문서는 외부 팀 설명용으로 작성된 개요입니다.<br>세부 내용은 '사랑방백서', '이음·세움 프로젝트', '2026년 상반기 PPT'를 참조하십시오.</p>
+  </div>
+</footer>
+
+<script>
+// 1. Smooth scroll with 64px offset for fixed nav
+document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      var top = target.getBoundingClientRect().top + window.pageYOffset - 64;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  });
+});
+
+// 2. Identity card accordion (Section 2)
+document.querySelectorAll('.identity-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    var content = this.querySelector('.identity-content');
+    var icon = this.querySelector('.identity-toggle');
+    this.classList.toggle('open');
+    if (this.classList.contains('open')) {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      icon.textContent = '▲';
+    } else {
+      content.style.maxHeight = '0';
+      icon.textContent = '▼';
+    }
+  });
+});
+
+// 3. 4W interactive buttons
+function activateWPanel(idx) {
+  var wBtns = document.querySelectorAll('.w-btn');
+  var wPanels = document.querySelectorAll('.w-panel');
+  wBtns.forEach(function(b) { b.classList.remove('active'); });
+  wPanels.forEach(function(p) { p.classList.remove('active'); });
+  wBtns[idx].classList.add('active');
+  wPanels[idx].classList.add('active');
+}
+
+// 4. Question card accordion (Section 4)
+document.querySelectorAll('.q-card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    var content = this.querySelector('.q-card-content');
+    var toggle = this.querySelector('.q-card-toggle');
+    this.classList.toggle('open');
+    if (this.classList.contains('open')) {
+      content.style.maxHeight = content.scrollHeight + 'px';
+      toggle.textContent = '▲';
+    } else {
+      content.style.maxHeight = '0';
+      toggle.textContent = '▼';
+    }
+  });
+});
+
+// 5. General accordion triggers (Section 6, Section 8, Section 10)
+document.querySelectorAll('.accordion-trigger').forEach(function(trigger) {
+  trigger.addEventListener('click', function() {
+    var targetId = this.getAttribute('data-target');
+    var content = document.getElementById(targetId);
+    this.classList.toggle('open');
+    if (content) {
+      content.classList.toggle('open');
+    }
+  });
+});
+
+// 6. Conference card accordions (Section 8)
+document.querySelectorAll('.conf-card-header').forEach(function(header) {
+  header.addEventListener('click', function() {
+    var body = this.nextElementSibling;
+    var icon = this.querySelector('.conf-toggle');
+    body.classList.toggle('open');
+    if (body.classList.contains('open')) {
+      body.style.maxHeight = body.scrollHeight + 'px';
+      if (icon) icon.textContent = '▲';
+    } else {
+      body.style.maxHeight = '0';
+      if (icon) icon.textContent = '▼';
+    }
+  });
+});
+
+// 7. Welcome tiles ↔ detail table toggle
+var welcomeToggleBtn = document.getElementById('welcome-toggle-btn');
+if (welcomeToggleBtn) {
+  var compact = document.getElementById('welcome-compact');
+  var detail  = document.getElementById('welcome-detail');
+  var expanded = false;
+  welcomeToggleBtn.addEventListener('click', function() {
+    expanded = !expanded;
+    compact.style.display = expanded ? 'none' : 'flex';
+    detail.style.display  = expanded ? 'block' : 'none';
+    welcomeToggleBtn.textContent = expanded ? '접기 ▲' : '전체 7단계 펼치기 ▼';
+  });
+}
+</script>
+</body>
+</html>
