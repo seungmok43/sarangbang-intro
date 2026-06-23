@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>사랑방 교육 가이드 — 수영로교회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --primary:#1B4332;--secondary:#2D6A4F;--accent:#40916C;
+  --light:#D8F3DC;--mid:#74C69D;--white:#fff;
+  --gray:#f5f7f5;--gray2:#e8ede8;--text:#1a2e1a;--sub:#5a7a5a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--gray);color:var(--text);min-height:100vh}
+.site-header{background:var(--primary);color:#fff;padding:14px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.site-header .logo{font-size:11px;opacity:.7;letter-spacing:1px}
+.site-header h1{font-size:17px;font-weight:800}
+.back-btn{margin-left:auto;font-size:12px;color:#fff;opacity:.8;text-decoration:none;border:1px solid rgba(255,255,255,.3);padding:4px 10px;border-radius:20px}
+.main-tabs{display:flex;background:var(--secondary);overflow-x:auto;scrollbar-width:none}
+.main-tabs::-webkit-scrollbar{display:none}
+.main-tab{flex:none;padding:12px 14px;text-align:center;font-size:12px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.main-tab.active{color:#fff;border-bottom-color:var(--mid)}
+.tab-panel{display:none;padding:0 0 80px}
+.tab-panel.active{display:block}
+.section{padding:20px 16px 0}
+.section-title{font-size:18px;font-weight:800;color:var(--primary);margin-bottom:4px}
+.section-sub{font-size:13px;color:var(--sub);margin-bottom:20px}
+.card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:14px}
+.card-title{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card-body{font-size:13px;line-height:1.8;color:var(--text)}
+.card-body p{margin-bottom:8px}
+.highlight{background:var(--light);border-left:4px solid var(--accent);padding:12px 14px;border-radius:0 8px 8px 0;font-size:13px;line-height:1.7;margin-bottom:12px}
+.highlight strong{color:var(--primary)}
+.identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.id-card{border-radius:12px;padding:14px;border:2px solid var(--gray2);background:#fff}
+.id-card .id-icon{font-size:24px;margin-bottom:6px;display:block}
+.id-card .id-role{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:3px}
+.id-card .id-name{font-size:15px;font-weight:800;color:var(--primary);margin-bottom:4px}
+.id-card .id-desc{font-size:12px;color:var(--sub);line-height:1.5}
+.flow-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
+.flow-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:12px;font-weight:700}
+.flow-table td{padding:10px 12px;border-bottom:1px solid var(--gray2);vertical-align:top}
+.flow-table tr:last-child td{border-bottom:none}
+.flow-table .flow-w{color:var(--primary);font-weight:700;font-size:13px}
+.flow-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;background:var(--light);color:var(--accent);margin-top:4px}
+.reason-card{border-radius:12px;padding:16px;background:#fff;border:1.5px solid var(--gray2);margin-bottom:10px}
+.reason-card .r-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.reason-card .r-num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.reason-card .r-title{font-size:14px;font-weight:700;color:var(--primary)}
+.reason-card .r-body{font-size:13px;color:var(--text);line-height:1.7}
+.reason-card .r-verse{font-size:11px;font-weight:600;color:var(--accent);margin-top:6px}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px}
+.compare-table th{background:var(--secondary);color:#fff;padding:10px 12px;font-size:12px;font-weight:700}
+.compare-table td{padding:10px 12px;border-bottom:1px solid var(--gray2)}
+.compare-table .compare-sb{background:var(--light);font-weight:700;color:var(--primary)}
+.leadership-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.l-card{border-radius:12px;padding:14px;border:2px solid var(--gray2);background:#fff}
+.l-card .l-icon{font-size:20px;margin-bottom:6px;display:block}
+.l-card .l-label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:3px}
+.l-card .l-title{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.l-card .l-desc{font-size:12px;color:var(--sub);line-height:1.5}
+.weeks-accordion{margin-bottom:8px}
+.week-header{background:var(--primary);color:#fff;padding:12px 14px;border-radius:10px 10px 0 0;font-size:13px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.week-header.collapsed{border-radius:10px}
+.week-body{background:#fff;border:1.5px solid var(--gray2);border-top:none;border-radius:0 0 10px 10px;padding:14px;display:none}
+.week-body.open{display:block}
+.week-body p{font-size:13px;line-height:1.7;color:var(--text);margin-bottom:6px}
+.week-body ul{padding-left:18px;margin-top:4px}
+.week-body ul li{font-size:12px;line-height:1.7;color:var(--sub)}
+.checklist-edu{list-style:none;padding:0}
+.checklist-edu li{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--gray2);font-size:13px;line-height:1.5}
+.checklist-edu li:last-child{border-bottom:none}
+.checklist-edu li::before{content:"☐";color:var(--accent);font-size:16px;flex-shrink:0;margin-top:1px}
+.org-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}
+.org-table th{background:var(--secondary);color:#fff;padding:9px 10px;font-size:11px;font-weight:700;text-align:center}
+.org-table td{padding:9px 10px;border-bottom:1px solid var(--gray2);text-align:center;vertical-align:middle}
+.org-table .role-cell{font-weight:700;color:var(--primary);text-align:left;padding-left:12px}
+.steps-list{counter-reset:step;list-style:none;padding:0}
+.steps-list li{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray2);font-size:13px;line-height:1.6}
+.steps-list li:last-child{border-bottom:none}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.best-template{background:var(--light);border-radius:12px;padding:16px;margin-bottom:14px}
+.best-row{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start}
+.best-letter{font-size:24px;font-weight:900;color:var(--primary);width:28px;flex-shrink:0}
+.best-label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:2px}
+.best-desc{font-size:13px;color:var(--text);line-height:1.5}
+.duty-card{border-radius:12px;padding:14px;background:#fff;border:1.5px solid var(--gray2);margin-bottom:10px}
+.duty-card .d-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.duty-card .d-icon{font-size:24px}
+.duty-card .d-num{font-size:11px;font-weight:700;color:var(--accent)}
+.duty-card .d-title{font-size:14px;font-weight:700;color:var(--primary)}
+.duty-card .d-body{font-size:13px;color:var(--text);line-height:1.7}
+.verse-box{background:var(--primary);color:#fff;border-radius:12px;padding:16px;margin-bottom:14px;font-size:13px;line-height:1.7}
+.verse-box .v-ref{font-size:11px;font-weight:700;color:var(--mid);margin-bottom:4px}
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;background:var(--light);color:var(--accent);margin:2px}
+.mentor-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.mentor-step{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:#fff;border:1.5px solid var(--gray2)}
+.mentor-step .ms-num{font-size:12px;font-weight:800;color:var(--primary);min-width:24px}
+.mentor-step .ms-text{font-size:13px;color:var(--text);line-height:1.4}
+.prayer-points{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.pp-card{border-radius:10px;padding:12px;background:var(--primary);color:#fff;text-align:center}
+.pp-card .pp-num{font-size:20px;font-weight:900;margin-bottom:4px}
+.pp-card .pp-text{font-size:11px;line-height:1.4}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="logo">수영로교회</div>
+    <h1>사랑방 교육 가이드</h1>
+  </div>
+  <a class="back-btn" href="index.html">← 목록</a>
+</header>
+
+<div class="main-tabs">
+  <div class="main-tab active" onclick="switchTab(0)">🏠 사랑방이란?</div>
+  <div class="main-tab" onclick="switchTab(1)">❓ 왜 사랑방?</div>
+  <div class="main-tab" onclick="switchTab(2)">👤 목자 리더십</div>
+  <div class="main-tab" onclick="switchTab(3)">🔄 4W 진행</div>
+  <div class="main-tab" onclick="switchTab(4)">🌍 전도축제</div>
+  <div class="main-tab" onclick="switchTab(5)">🗺 마을목자</div>
+</div>
+
+<!-- ══════════════════════════
+     Tab 0: 사랑방이란?
+══════════════════════════ -->
+<div class="tab-panel active" id="tab-0">
+  <div class="section">
+    <div class="section-title">사랑방이란?</div>
+    <div class="section-sub">수영로교회 사랑방의 의미·정체성·구성을 이해합니다</div>
+
+    <div class="highlight">
+      <strong>한 줄 정의</strong><br>
+      사랑방 = 작은 교회(Small Church) — 예배🙏, 훈련📘, 사역🌍이 동시에 흐르는 최소 단위
+    </div>
+
+    <div class="card">
+      <div class="card-title">🪷 '사랑방'의 의미</div>
+      <div class="card-body">
+        <p>전통적으로 '사랑방(舍廊房)'은 손님을 환대하던 사랑채로, 사람들이 모여 정담을 나누고 삶을 나누는 방(공간)입니다.</p>
+        <p><strong>수영로교회 사랑방</strong>은 기존 성도와 손님(불신자·이웃)들이 모여 한 주에 한 번 그리스도의 사랑을 나누는 곳입니다.</p>
+      </div>
+      <div class="highlight" style="margin-top:10px;margin-bottom:0">
+        📖 성경 토대: 고전 13:13 사랑의 최우선성 · 행 2:42 말씀·교제·떡·기도 · 요 13:35 제자됨의 표지 · 히 10:24-25 격려와 모임
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🏛 사랑방의 세 가지 정체성</div>
+      <div class="identity-grid">
+        <div class="id-card">
+          <span class="id-icon">🏠</span>
+          <div class="id-role">첫 번째</div>
+          <div class="id-name">가정교회</div>
+          <div class="id-desc">수영로 복음화 비전(부산·민족·세계)을 실현하는 기초 단위. 모든 사역은 사랑방 단위로 움직인다.</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">🌏</span>
+          <div class="id-role">두 번째</div>
+          <div class="id-name">열린 공동체</div>
+          <div class="id-desc">부산 성시화를 위해 불신자에게 열린 구조로 설계됨. 음식·대화·사랑 실천·복음 전함.</div>
+        </div>
+        <div class="id-card" style="grid-column:span 2">
+          <span class="id-icon">📘</span>
+          <div class="id-role">세 번째</div>
+          <div class="id-name">제자훈련의 장</div>
+          <div class="id-desc">삶을 나누는 공동체로, 구성원 간 모범과 본보기를 통해 자연스러운 훈련이 발생합니다. 예수님이 제자들을 가르치신 방식처럼 리더의 본보기 → 구성원 훈련.</div>
+        </div>
+      </div>
+
+      <div class="card-title" style="margin-top:4px">✅ '작은 교회' 체크 5</div>
+      <ul class="checklist-edu">
+        <li>예배(말씀·기도)가 살아있다</li>
+        <li>제자훈련(적용·습관)이 일어난다</li>
+        <li>사역(전도·선교)이 실제로 굴러간다</li>
+        <li>VIP가 항상 염두에 있다</li>
+        <li>분가(배가) 로드맵이 있다</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">👨‍👩‍👧‍👦 사랑방의 구성과 역할</div>
+      <div class="card-body">
+        <p><strong>구성:</strong> 보통 4가정 정도 (출석 기준), 관계 중심 + 지역 중심의 혼합 구조</p>
+        <p><strong>모임 장소:</strong> 각 가정을 돌아가며 순회 (접근성·주차·아이 고려)</p>
+        <p><strong>이상적 규모:</strong> 8~12명 (데일 갤로웨이)</p>
+      </div>
+      <div class="card-title" style="margin-top:12px">🔧 역할별 도우미</div>
+      <div class="identity-grid">
+        <div class="id-card">
+          <span class="id-icon">🎵</span>
+          <div class="id-role">찬양 도우미</div>
+          <div class="id-name">찬양 선정·준비</div>
+          <div class="id-desc">반주자 섭외까지 확장 가능. 3~4곡 기도로 준비.</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">🙏</span>
+          <div class="id-role">기도 도우미</div>
+          <div class="id-name">개인·중보기도</div>
+          <div class="id-desc">선교사, 교구 목표, 지역 복음화 기도 인도.</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">📋</span>
+          <div class="id-role">행정 도우미</div>
+          <div class="id-name">헌금·기록·공지</div>
+          <div class="id-desc">출석·기념일·세례 등 축하. 교구 소식 공유.</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">🌏</span>
+          <div class="id-role">선교 도우미</div>
+          <div class="id-name">선교사 소식</div>
+          <div class="id-desc">연결된 선교사 소식 공유, 기도·후원 담당.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📆 정기 모임 운영 90분 흐름</div>
+      <table class="flow-table">
+        <thead><tr><th>Flow</th><th>내용</th><th>시간</th></tr></thead>
+        <tbody>
+          <tr><td class="flow-w">🏠 Welcome</td><td>환영·식사·아이스브레이크<br><span class="flow-tag">배경 찬양 · 다과 · 질문</span></td><td>약 10분</td></tr>
+          <tr><td class="flow-w">🎵 Worship</td><td>3~4곡, 감사·중보기도<br><span class="flow-tag">모임 전 곡 공유·악보·반주</span></td><td>약 20분</td></tr>
+          <tr><td class="flow-w">📖 Word</td><td>본문 2~3회 낭독, 나눔지 중심 적용 나눔<br><span class="flow-tag">자랑·무용담 지양 · 경청 70%</span></td><td>약 50분</td></tr>
+          <tr><td class="flow-w">🌱 Work</td><td>VIP·선교·교회비전·기념일·헌금·분가<br><span class="flow-tag">🪑 빈 의자를 위해 기도</span></td><td>약 15분</td></tr>
+        </tbody>
+      </table>
+      <div class="highlight" style="margin-bottom:0">Word는 설교가 아닌 <strong>삶의 적용 나눔 중심</strong>. Word 이후 반드시 결단의 시간과 중보기도로 마무리.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧭 심방 체계</div>
+      <table class="flow-table">
+        <thead><tr><th>종류</th><th>내용</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>📆 정기 심방</td><td>연 1회, 모든 가정 심방</td><td></td></tr>
+          <tr><td>📌 특별 심방</td><td>필요 시 신청 (사랑목자→마을목자→전도사→교구목사)</td><td>질서는 지혜롭게</td></tr>
+          <tr><td>🙏 목자 심방</td><td>목회적 돌봄을 위한 개별 가정 심방 및 기도</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     Tab 1: 왜 사랑방?
+══════════════════════════ -->
+<div class="tab-panel" id="tab-1">
+  <div class="section">
+    <div class="section-title">왜 사랑방인가?</div>
+    <div class="section-sub">사랑방이 필요한 6가지 이유와 유익</div>
+
+    <div class="highlight">
+      <strong>핵심 비교:</strong> 구역예배는 강사가 일방적으로 말씀 전하지만, 사랑방은 <strong>모든 사랑원이 은혜를 나눠 더욱 풍성한 공동체적 은혜</strong>를 경험합니다.
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚖️ 사랑방 vs 구역예배</div>
+      <table class="compare-table">
+        <thead><tr><th>구분</th><th>구역예배</th><th class="compare-sb">사랑방</th></tr></thead>
+        <tbody>
+          <tr><td>구조</td><td>강사가 일방적으로 말씀 전함</td><td class="compare-sb">모든 사랑원이 은혜를 나눔</td></tr>
+          <tr><td>참여</td><td>구역 식구는 수동적 은혜 받음</td><td class="compare-sb">사랑원 모두가 적극적으로 나눔</td></tr>
+          <tr><td>결과</td><td>하나의 은혜 경험</td><td class="compare-sb">공동체적이고 풍성한 은혜 경험</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="reason-card">
+      <div class="r-header"><span class="r-num">1</span><span class="r-title">🏫 하나님의 가족을 배우는 교실</span></div>
+      <div class="r-body">소그룹은 공동체 안에서 함께 어울리고 살아가는 법을 배우는 훈련장입니다. 이기심을 버리고 서로 돌아보며 사랑을 나누는 곳입니다.<br>진정한 교제란 예수님께 헌신하듯이 서로에게 헌신하는 것입니다.</div>
+      <div class="r-verse">📖 고전 12:26 "한 지체가 고통을 받으면 모든 지체도 함께 고통을 받고..." · 요일 3:16 "형제들을 위하여 목숨을 버리는 것이 마땅하니라"</div>
+    </div>
+
+    <div class="reason-card">
+      <div class="r-header"><span class="r-num">2</span><span class="r-title">💪 영적 근육을 발달시키는 운동장</span></div>
+      <div class="r-body">단순히 예배에만 참석하는 수동적 신앙으로는 성숙할 수 없습니다. 소그룹은 신앙의 훈련실 — 영적 근육을 규칙적으로 단련시킵니다. 신약성경에는 50번 이상 "서로"라는 명령이 등장합니다. 서로 사랑하고, 기도하고, 격려하며, 권면하고, 섬기고, 용납하고, 짐을 지며, 용서하는 관계.</div>
+      <div class="r-verse">📖 성장은 성경 + 믿음의 공동체 속에서 가능합니다</div>
+    </div>
+
+    <div class="reason-card">
+      <div class="r-header"><span class="r-num">3</span><span class="r-title">🪪 신자의 정체성을 확인</span></div>
+      <div class="r-body">소그룹은 예수님의 제자됨을 확인하는 자리입니다. 배경·인종·사회적 위치가 다른 사람들이 사랑으로 하나 될 때 세상의 증인이 됩니다.</div>
+      <div class="r-verse">📖 요 13:35 "서로 사랑하면... 내 제자인 줄 알리라" · 고전 12:27 "너희는 그리스도의 몸이요 지체의 각 부분이라"</div>
+    </div>
+
+    <div class="reason-card">
+      <div class="r-header"><span class="r-num">4</span><span class="r-title">🎯 사명을 이루는 최적의 방법</span></div>
+      <div class="r-body">예수님도 이 땅에 오셨을 때 소그룹(제자 공동체)을 세우셨습니다. 오늘날 교회는 예수님의 몸이며, 소그룹을 통해 세상을 사랑하고 복음을 전하는 사명을 감당합니다.</div>
+      <div class="r-verse">📖 엡 2:10 "하나님은 우리 각 사람을 선한 일을 위해 창조하셨으며, 그 일에 참여시키신다"</div>
+    </div>
+
+    <div class="reason-card">
+      <div class="r-header"><span class="r-num">5</span><span class="r-title">🛡️ 영적 후퇴를 막는 보호 장치</span></div>
+      <div class="r-body">누구도 유혹 앞에서 안전하지 않습니다. 하나님은 우리가 서로 권면하며 죄에 빠지지 않도록 책임을 지도록 하셨습니다. 고립된 성도는 사탄의 궤계에 쉽게 넘어갑니다.</div>
+      <div class="r-verse">📖 히 3:13 "매일 피차 권면하여 죄의 유혹으로 완고하게 되지 않도록 하라" · 약 5:19 "떠난 사람을 포기하지 말고 다시 돌아오게 하라"</div>
+    </div>
+
+    <div class="reason-card">
+      <div class="r-header"><span class="r-num">6</span><span class="r-title">🤝 예수 그리스도의 몸이 나를 필요로 함</span></div>
+      <div class="r-body">소그룹은 각자의 은사와 재능을 발견하고 사용하게 하는 자리입니다. 나의 경험과 은사는 다른 사람에게 유익이 됩니다.</div>
+      <div class="r-verse">📖 고전 12:7 "각 사람에게 성령을 나타내심은 유익하게 하려 하심이라"</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🎁 사랑방의 유익</div>
+      <div class="identity-grid">
+        <div class="id-card">
+          <span class="id-icon">💞</span>
+          <div class="id-name">사랑의 훈련장</div>
+          <div class="id-desc">하나님은 사랑하기 힘든 사람들을 통해 우리의 사랑의 지경을 넓히십니다. 소그룹은 사랑의 풀무입니다.</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">🌟</span>
+          <div class="id-name">축복의 자리</div>
+          <div class="id-desc">격려, 위로, 보호, 성장을 공급하는 공동체. 전 4:12 "세 겹 줄은 쉽게 끊어지지 않는다."</div>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top:4px;margin-bottom:0">
+        💡 삼손: 공동체 없이 홀로 싸우다 비참하게 죽음 → 다윗: 아둘람 굴 공동체와 함께하며 부요와 승리를 경험<br>
+        → <strong>관계가 훈련된 자는 세상 속에서도 복을 누립니다</strong>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🚫 사랑방이 아닌 것들</div>
+      <div class="card-body">
+        단순 사교 모임 · 폐쇄적인 파당 · 번식하지 못하는 정체된 모임 · 단순 성경공부 모임 · 교회와 연결되지 않은 철새 모임 · 치유·기도만을 목적으로 하는 모임 · 단순 업무·사역 그룹
+      </div>
+      <div class="highlight" style="margin-top:10px;margin-bottom:0">소그룹은 <strong>항상 지역교회에 연결</strong>되어야 하며, 전도와 제자 양육이 중심이 되어야 합니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     Tab 2: 목자 리더십
+══════════════════════════ -->
+<div class="tab-panel" id="tab-2">
+  <div class="section">
+    <div class="section-title">목자 리더십</div>
+    <div class="section-sub">건강한 목자가 건강한 사랑방을 만든다</div>
+
+    <div class="highlight">
+      <strong>핵심 원리:</strong> 소그룹은 리더의 그릇만큼 자랍니다.<br>
+      건강한 리더 = 건강한 소그룹 = 생명력 있는 공동체
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌱 건강한 목자가 하는 일</div>
+      <div class="leadership-grid">
+        <div class="l-card">
+          <span class="l-icon">🎓</span>
+          <div class="l-label">훈련</div>
+          <div class="l-title">리더십 개발</div>
+          <div class="l-desc">사랑방 목자의 다양한 지도력 개발 & 훈련을 돕는 것이 핵심입니다.</div>
+        </div>
+        <div class="l-card">
+          <span class="l-icon">🤍</span>
+          <div class="l-label">돌봄</div>
+          <div class="l-title">전반적 삶 돌봄</div>
+          <div class="l-desc">단순히 사역만이 아니라, 생활 전반까지 보살핍니다.</div>
+        </div>
+        <div class="l-card">
+          <span class="l-icon">🤝</span>
+          <div class="l-label">협력</div>
+          <div class="l-title">전략적 동역</div>
+          <div class="l-desc">목자와 함께 사랑방을 위한 구체적인 전략을 세웁니다.</div>
+        </div>
+        <div class="l-card">
+          <span class="l-icon">👂</span>
+          <div class="l-label">격려</div>
+          <div class="l-title">격려 & 경청</div>
+          <div class="l-desc">이야기를 잘 들어주고, 용기를 북돋웁니다.</div>
+        </div>
+        <div class="l-card">
+          <span class="l-icon">✝️</span>
+          <div class="l-label">영성</div>
+          <div class="l-title">하나님께 공급</div>
+          <div class="l-desc">인간적 리더십이 아닌, 영적 힘을 통해 건강한 공동체를 형성합니다.</div>
+        </div>
+        <div class="l-card">
+          <span class="l-icon">🚀</span>
+          <div class="l-label">도전</div>
+          <div class="l-title">도전 부여</div>
+          <div class="l-desc">목자가 성장할 수 있도록 계속 자극과 기회를 제공합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🏆 좋은 지도자의 특징</div>
+      <ul class="checklist-edu">
+        <li>필요할 때 적절하게 영향력을 발휘</li>
+        <li><strong>비난은 자신에게, 칭찬은 다른 사람에게 돌림</strong></li>
+        <li>자기 자신을 먼저 바로 세움</li>
+        <li>엇비슷한 해답이 아닌 <strong>최선의 해답</strong>을 찾음</li>
+        <li>바른 길을 알고, 직접 걷고, 다른 이에게 보여줌</li>
+        <li>지위보다 <strong>인격</strong>을 더 중시</li>
+        <li>여론을 따르기보다 바른 여론을 형성</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⏳ 파레토 원리 (20/80 법칙)</div>
+      <div class="card-body">
+        <p>가장 중요한 <strong>20%의 일에 집중</strong>하면, 80%의 성과를 얻게 됩니다.</p>
+        <div class="highlight" style="margin-top:8px;margin-bottom:0">
+          예시: 소그룹 교제 시간의 80%를 상위 20%의 핵심 멤버에게 투자하면 전체 그룹에 80%의 긍정적 영향을 미칩니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔑 리더십의 핵심 원리 10가지</div>
+      <div class="leadership-grid">
+        <div class="l-card"><span class="l-icon">💫</span><div class="l-title">영향력</div><div class="l-desc">사람들에게 변화를 일으키는 힘</div></div>
+        <div class="l-card"><span class="l-icon">📌</span><div class="l-title">우선순위</div><div class="l-desc">중요한 것을 먼저 다루는 습관</div></div>
+        <div class="l-card"><span class="l-icon">⚖️</span><div class="l-title">통전성</div><div class="l-desc">일관성과 신뢰 (Integrity)</div></div>
+        <div class="l-card"><span class="l-icon">🔄</span><div class="l-title">변화 추진</div><div class="l-desc">변화를 두려워하지 않고 시도</div></div>
+        <div class="l-card"><span class="l-icon">🧩</span><div class="l-title">문제 해결</div><div class="l-desc">문제를 회피하지 않고 적극 해결</div></div>
+        <div class="l-card"><span class="l-icon">🌤</span><div class="l-title">태도</div><div class="l-desc">리더의 태도가 공동체 분위기 결정</div></div>
+        <div class="l-card"><span class="l-icon">👥</span><div class="l-title">사람</div><div class="l-desc">리더십은 결국 사람을 세우는 것</div></div>
+        <div class="l-card"><span class="l-icon">🎯</span><div class="l-title">비전</div><div class="l-desc">방향성과 미래를 제시</div></div>
+        <div class="l-card"><span class="l-icon">🧘</span><div class="l-title">자기 훈련</div><div class="l-desc">스스로 절제하고 성장하려는 태도</div></div>
+        <div class="l-card"><span class="l-icon">🌱</span><div class="l-title">후진 양성</div><div class="l-desc">다음 세대를 준비시키는 사역</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚔️ 소그룹 내 갈등 해결</div>
+      <div class="card-title" style="font-size:13px;margin-bottom:8px;color:var(--sub)">갈등의 원인</div>
+      <div class="card-body">
+        <span class="pill">기질 차이</span>
+        <span class="pill">신앙 스타일 차이</span>
+        <span class="pill">비교의식</span>
+        <span class="pill">문화적 차이</span>
+        <span class="pill">미성숙한 인격</span>
+      </div>
+      <div class="card-title" style="font-size:13px;margin-top:12px;margin-bottom:8px;color:var(--sub)">갈등 극복 방법</div>
+      <ul class="checklist-edu">
+        <li>원인에 대한 이해와 수용</li>
+        <li>경청과 대화를 통한 해결</li>
+        <li>인격과 신앙 성숙을 향한 훈련</li>
+        <li>서로를 존중하고 격려하는 태도</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📌 리더에게 던지는 질문</div>
+      <div class="highlight">1. 나는 지금 <strong>어떤 리더</strong>인가? 다른 사람들에게 어떤 리더로 비춰지고 있는가?</div>
+      <div class="highlight" style="margin-bottom:0">2. 나는 앞으로 <strong>어떤 리더</strong>가 되고 싶은가?</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     Tab 3: 4W 진행
+══════════════════════════ -->
+<div class="tab-panel" id="tab-3">
+  <div class="section">
+    <div class="section-title">4W 진행</div>
+    <div class="section-sub">수영로교회 사랑방 운영의 실제</div>
+
+    <div class="card">
+      <div class="card-title">🙌 Welcome (환영) — 10분</div>
+      <div class="highlight">사랑방 식구간의 가벼운 인사 및 환영으로 마음의 문을 여는 시간</div>
+      <ul class="checklist-edu">
+        <li>먼저 도착한 사람이 <strong>허깅 + 축복의 말</strong>로 맞이</li>
+        <li>모임 장소에 미리 <strong>잔잔한 찬양 테이프</strong>로 분위기 조성</li>
+        <li>다과를 나누며 가볍게 대화 나눔. 아이스브레이크 활용.</li>
+        <li>새 가족이 왔을 경우 환영송·축복송을 불러줌<br><span style="font-size:12px;color:var(--accent)">"당신은 하나님의 언약안에" · "너는 시냇가에" · "당신은 사랑받기 위해 태어난 사람"</span></li>
+        <li>성김이는 대화가 자연스럽게 진행될 수 있도록 질문을 던짐<br><span style="font-size:12px;color:var(--sub)">예1: "한 주간 어떻게 지내셨나요? 은혜 받으신 것이 있다면?"<br>예2: "지난 한 주간 혹시 기도응답 받으신 것이 있으신가요?"</span></li>
+      </ul>
+      <div class="card-title" style="margin-top:12px;font-size:13px">📜 사랑방서약 (4가지 헌신)</div>
+      <div class="highlight">
+        첫째, 나는 당신을 무조건적으로 받아들이며 모든 비밀을 지킬 것입니다.<br>
+        둘째, 나는 사랑의 수고를 통해서 우리가 점점 더 그리스도를 닮아가리라고 믿습니다.<br>
+        셋째, 당신과 나는 육체의 행위를 미워하고 그것을 죽이며 성령님과 동행하기 위해 서로를 도와주어야 함을 인정합니다.<br>
+        넷째, 나는 당신을 변화시킬 능력은 없지만, 성령님이 그 능력을 당신에게 부어 주시는 통로가 되리라는 것을 압니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🎵 Worship (찬양) — 20분</div>
+      <div class="highlight">찬양을 통해 예수 그리스도의 임재를 경험하는 시간</div>
+      <div class="card-body"><p><strong>찬양도우미 준비:</strong> 적어도 전날 3~4곡을 기도로 준비하여 찬양을 인도합니다. 나눔지에 있는 곡이나 필요한 경우 직접 찬양 곡을 선곡할 수 있습니다.</p></div>
+      <div class="card-title" style="margin-top:12px;font-size:13px">🙌 7가지 찬양 인도법 (백서 수록)</div>
+      <div class="leadership-grid">
+        <div class="l-card"><span class="l-icon">🙌</span><div class="l-title">두 손 들고</div><div class="l-desc">두 손을 높이 들고 찬양</div></div>
+        <div class="l-card"><span class="l-icon">✋</span><div class="l-title">오른손만</div><div class="l-desc">오른손만 들고 찬양</div></div>
+        <div class="l-card"><span class="l-icon">👁️</span><div class="l-title">눈 감고</div><div class="l-desc">눈을 감고 집중하며</div></div>
+        <div class="l-card"><span class="l-icon">🎵</span><div class="l-title">허밍으로</div><div class="l-desc">콧노래로 부드럽게</div></div>
+        <div class="l-card"><span class="l-icon">❤️</span><div class="l-title">가슴에 손</div><div class="l-desc">가슴에 손을 얹고</div></div>
+        <div class="l-card"><span class="l-icon">🙆</span><div class="l-title">일어서서</div><div class="l-desc">일어서서 찬양</div></div>
+        <div class="l-card" style="grid-column:span 2"><span class="l-icon">🤝</span><div class="l-title">옆 분 손 잡고</div><div class="l-desc">옆 사람과 손을 잡으며 함께 찬양 (공동체성 강화)</div></div>
+      </div>
+      <div class="highlight" style="margin-bottom:0">찬양이 끝나면 → <strong>합심기도</strong>로 자연스럽게 전환<br><span style="font-size:12px">기도문: "말씀하시는 하나님! 아브라함과 모세에게 말씀하신 하나님, 저희들에게 말씀하여 주시옵소서..."</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📖 Word (말씀 나눔) — 50분</div>
+      <div class="highlight">주일 들은 설교 말씀을 다시 한번 묵상하고 적용하며 은혜를 나누는 시간</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span><div><strong>본문 읽기 (4번)</strong> — 돌아가며 읽기, 교독, 모두 함께, 각자 묵독 등 다양하게. 볼펜을 들고 마음에 닿는 말씀에 밑줄을 긋고 적기도 한다.</div></li>
+        <li><span class="step-num">2</span><div><strong>도입·관찰·해석·적용 질문 나눔</strong> — 나눔지의 질문을 따라 나누되, 본문과 주제에 벗어나지 않도록 한다. 한 사람에게 너무 많은 시간이 편중되지 않도록 조절.</div></li>
+        <li><span class="step-num">3</span><div><strong>결단과 상호책임</strong> — 각자 다짐을 나누고, "당신이 그 일을 할 수 있도록 제가 도와드리겠습니다"하며 두 분이 상호 책임을 지고 도와줄 것을 약속.</div></li>
+        <li><span class="step-num">4</span><div><strong>중보기도와 축복기도</strong> — 결단하고 고백한 성도들이 함께 손을 잡고 중보기도를 합니다.</div></li>
+      </ol>
+      <div class="highlight" style="margin-bottom:0">나눔의 분위기가 잘 안 잡힐 때는 성김이(이끔이)가 먼저 자신을 오픈하여 나눌 수 있는 분위기를 만들어 줍니다.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌱 Work (사역) — 15분</div>
+      <div class="highlight">예수 그리스도의 목적을 이루는 시간 — 사랑방의 본질 = 전도 & 선교</div>
+      <div class="card-title" style="font-size:13px;margin-bottom:8px">두 가지 베스트 나눔</div>
+      <div class="highlight">
+        <strong>나눔1.</strong> "나의 베스트는 누구이며, 지난 주 그들의 필요를 어떻게 섬겼습니까?"<br>
+        <strong>나눔2.</strong> "다음 주 이 모임에 초청하실 분은 누구이며, 사랑방원들이 어떻게 협력하여 도울 수 있습니까?"
+      </div>
+      <ul class="checklist-edu">
+        <li>🌏 선교사님을 위하여 기도하고, 이 지역 사단의 견고한 진이 무너지도록 중보기도</li>
+        <li>🪑 <strong>빈방석</strong>을 바라보며 아직 오지 않은 영혼을 위해 기도</li>
+        <li>🏛 교회의 비전 & 담임목사님을 위해 기도</li>
+        <li>🎂 사랑방원의 기념일 축복</li>
+        <li>💰 헌금 (매주 셋째 주는 선교헌금과 함께)</li>
+        <li>📅 분가 일정 확인 & 교회/교구 공지사항 전달</li>
+        <li>📝 사랑방 보고서 구체적으로 작성</li>
+      </ul>
+      <div class="highlight" style="margin-bottom:0">⏱ 소요 시간: <strong>1시간 30분 이내</strong> · 마무리: 주기도문</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💬 고민 나누기 질문</div>
+      <div class="highlight">건강한 사랑방을 위해 가장 먼저 갖춰야 할 자질은?</div>
+      <div class="highlight">목자가 된다면, 최우선적으로 필요한 사역 기술은?</div>
+      <div class="highlight">4W 점검: 우리 사랑방은 Welcome, Worship, Word, Work가 균형 있게 진행되고 있는가?</div>
+      <div class="highlight" style="margin-bottom:0">개인 신앙 점검: 현재 신앙 성숙을 위해 나는 무엇을 하고 있는가? 경건 생활은 어떻게 유지하고 있는가?</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     Tab 4: 전도축제
+══════════════════════════ -->
+<div class="tab-panel" id="tab-4">
+  <div class="section">
+    <div class="section-title">사랑방 전도 축제</div>
+    <div class="section-sub">소그룹이 팀 전도로 불신자를 초청하는 12주 시스템</div>
+
+    <div class="highlight">
+      <strong>정의:</strong> 소그룹(사랑방)이 팀 전도로 불신자(VIP/베스트)를 초청하여 복음을 전하고, 영접·정착·양육까지 시스템으로 이어가는 축제형 전도.<br>
+      <strong>핵심 준비:</strong> 전 과정의 출발점은 <strong>기도</strong>(개인/합심/집중기도)<br>
+      <strong>흐름:</strong> 사랑방 초청 → 복음 청취·영접 → 교회 예배 연결<br>
+      <strong>목표:</strong> 새가족이 성도 → 일꾼 → 전도자로 세워지는 선순환
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧭 베스트 인도 10단계</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span><div><strong>기도로 베스트/VIP 선정</strong> — "초대 가능 범위"에 있는 사람 중심 (지역·동선 고려)</div></li>
+        <li><span class="step-num">2</span><div><strong>매일 중보기도</strong> — 알람 설정·기도짝 운영·명단 노트화</div></li>
+        <li><span class="step-num">3</span><div><strong>필요 살핌·구체적 섬김</strong> — 축하/위로/도움/교제/동행 5영역 맞춤 섬김</div></li>
+        <li><span class="step-num">4</span><div><strong>개인 간증 소개</strong> — 짧고 또렷하게(3~5분), VIP 필요에 맞춤</div></li>
+        <li><span class="step-num">5</span><div><strong>복음 정확히 전하기</strong> — 핵심 구절 함께 읽기, 질문 받고 확인 기도</div></li>
+        <li><span class="step-num">6</span><div><strong>사랑방 초청(2주 축제)</strong> — 공간·간식·분위기·찬양·간증·초청장 준비</div></li>
+        <li><span class="step-num">7</span><div><strong>교회 초청</strong> — 예배 시간 선택(주일/수요/철야 등), 동행 원칙</div></li>
+        <li><span class="step-num">8</span><div><strong>회심 시 4주 정착 양육</strong> — 기초 양육·교제 연결·멘토 배정</div></li>
+        <li><span class="step-num">9</span><div><strong>지속 정착/양육</strong> — 사역 탐색·소그룹 정착 체크</div></li>
+        <li><span class="step-num">10</span><div><strong>새 전도자로 세우기</strong> — 간증 훈련·전도 파트너 매칭·다음 축제 스태프</div></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🗓 12주 운영표</div>
+      <div id="weeks-accordion">
+        <div class="weeks-accordion">
+          <div class="week-header" onclick="toggleWeek(this)">📅 1주차 — VIP 1차 작정 & 초청 계획 <span>▼</span></div>
+          <div class="week-body open">
+            <p><strong>흐름:</strong> 기도(5) → VIP 찾기(10) → VIP 작정(5) → 마무리(5)</p>
+            <p><strong>포인트:</strong> 기도: "전도의 문", "작정할 VIP" 지명기도(이름 호명). 즉시 떠오르는 10명 + 관계망 카테고리(가족/친구/직장/이웃/취미 등).</p>
+            <p>거리상 초대 어려운 이는 '기도대상자'로만 분류.</p>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 2주차 — VIP 기도 집중 & 간증문 작성 <span>▼</span></div>
+          <div class="week-body">
+            <p><strong>기도 5포인트:</strong> 1) VIP 이름 호명 2) 억압·어둠에서 자유 3) 환경 통해 필요 자각 4) 우리를 도구로 사용 5) 성령의 타이밍·말과 행동 인도</p>
+            <p><strong>간증문 3요소:</strong> (1) 문제와 고통 (2) 예수 통해 해결 과정 (3) 변화된 삶</p>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 3주차 — VIP 섬김 & 1차 초청 준비 <span>▼</span></div>
+          <div class="week-body">
+            <p><strong>섬김 카탈로그:</strong></p>
+            <ul>
+              <li>🎉 축하: 생일/승진/졸업/개업</li>
+              <li>🤍 위로: 사망/사고/질병/이혼</li>
+              <li>🧺 도움: 아기 돌봄/병간호/이사/청소</li>
+              <li>🍽 사랑: 식사 대접/꽃 나눔/영화</li>
+              <li>👂 동행: "함께 있어 주기" 자체가 도움</li>
+            </ul>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 4주차 — VIP 초청 : "당신은 행복하십니까?" <span>▼</span></div>
+          <div class="week-body">
+            <p><strong>메시지 흐름:</strong></p>
+            <ul>
+              <li>행복을 가로막는 근원: 하나님을 떠남 (창3:1-5, 롬3:23)</li>
+              <li>떠남의 결과: 죄·고통·불안 (요10:10, 마9:36)</li>
+              <li>해결: 예수 그리스도가 길 (요14:6), 영접의 결단 (요1:12)</li>
+            </ul>
+            <p>영접기도 인도 후 교회초청카드 작성 → 목회자 축복기도 연계</p>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 5~6주차 — 2차 작정 & 집중기도 <span>▼</span></div>
+          <div class="week-body">
+            <p>1차 명단 점검 + 새롭게 알게 된 VIP 추가. 찬양: "당신은 사랑받기 위해 태어난 사람"으로 마무리 기도.</p>
+            <p>2주차의 5포인트 기도를 집중·합심으로 재적용. 사랑방 차원 기도 타임테이블 확정(요일/시간/줌 or 대면).</p>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 7~8주차 — 2차 섬김·초청 : "구원자 예수를 아십니까?" <span>▼</span></div>
+          <div class="week-body">
+            <p>3주차 섬김 카테고리 재점검 → 이번 주 실행. 2차 초청은 관계가 깊어진 VIP 우선.</p>
+            <p><strong>8주차 메시지 흐름:</strong> 흔한 오해: 행위 구원 → 실제 상태: 죄로 죽은 영 → 복음: 예수의 성육신·십자가·대속 → 결단</p>
+            <p>구원받은 자의 특권: 자녀됨 · 기도응답 · 천사 도움 · 성령 동행</p>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 9~10주차 — 3차 작정 & 간증 리허설 <span>▼</span></div>
+          <div class="week-body">
+            <p>1·2차 미참석 VIP 다시 작정. 행복콘서트/교회 대상도 구분 기재. 찬양: "야곱의 축복"으로 마무리.</p>
+            <p>5포인트 기도 재집중 + 전원 참여 합심기도. 간증: 시간(3-5분), 구조, 성경구절 리허설.</p>
+          </div>
+        </div>
+        <div class="weeks-accordion">
+          <div class="week-header collapsed" onclick="toggleWeek(this)">📅 11~12주차 — 마지막 섬김·초청 : "교회는 당신을 행복하게 합니다" <span>▼</span></div>
+          <div class="week-body">
+            <p>사랑방 초청 대상 / 교회 초청 대상을 명단으로 분리 후 맞춤 섬김.</p>
+            <p><strong>12주차 메시지:</strong> 교회 정의: 그리스도의 몸, 신부, 천국의 모형 → 교회를 통한 축복: 문제 해결·안식·소망·치유 → 예수 영접 → 다음 스텝: 예배·양육·교제·전도·봉사</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧾 간증문 템플릿 — B·E·S·T</div>
+      <div class="best-template">
+        <div class="best-row"><span class="best-letter">B</span><div><div class="best-label">구원 전 (Before)</div><div class="best-desc">공감대 형성 (과거 죄는 묘사 최소화)</div></div></div>
+        <div class="best-row"><span class="best-letter">E</span><div><div class="best-label">이끈 사건 (Event)</div><div class="best-desc">한 가지 핵심 문제·사건과 일상 영향, 감정 공유</div></div></div>
+        <div class="best-row"><span class="best-letter">S</span><div><div class="best-label">구원의 날 (Salvation)</div><div class="best-desc">그리스도께 집중, 영접 과정·근거 구절·쉬운 언어</div></div></div>
+        <div class="best-row"><span class="best-letter">T</span><div><div class="best-label">오늘 (Today)</div><div class="best-desc">변화·확신·평안, 현재의 하나님의 일하심</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🙏 5대 기도 포인트</div>
+      <div class="prayer-points">
+        <div class="pp-card"><div class="pp-num">1</div><div class="pp-text">VIP 이름 호명</div></div>
+        <div class="pp-card"><div class="pp-num">2</div><div class="pp-text">억압에서 자유</div></div>
+        <div class="pp-card"><div class="pp-num">3</div><div class="pp-text">필요 자각 환경</div></div>
+        <div class="pp-card"><div class="pp-num">4</div><div class="pp-text">우리를 도구로</div></div>
+        <div class="pp-card" style="grid-column:span 2"><div class="pp-num">5</div><div class="pp-text">성령의 타이밍·말과 행동 인도</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     Tab 5: 마을목자
+══════════════════════════ -->
+<div class="tab-panel" id="tab-5">
+  <div class="section">
+    <div class="section-title">마을목자 가이드북</div>
+    <div class="section-sub">ver.01 — © 2025 seungmok lee</div>
+
+    <div class="verse-box">
+      <div class="v-ref">마을목자의 정의</div>
+      "마을목자는 사랑방 목자들을 돌보는 <strong>'목자'</strong>이자, 4–7개 사랑방을 돌아보는 <strong>'감독'</strong>, 문제 해결을 돕는 <strong>'상담자'</strong>, 마을사역을 책임지는 <strong>'협동사역자'</strong>입니다."
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧭 1) 마을목자의 정체성</div>
+      <div class="identity-grid">
+        <div class="id-card">
+          <span class="id-icon">👥</span>
+          <div class="id-role">목자</div>
+          <div class="id-name">돌봄·격려·동행</div>
+          <div class="id-desc">자신이 속한 마을의 사랑방 목자들을 돌보는 목자</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">👀</span>
+          <div class="id-role">감독</div>
+          <div class="id-name">현장 코칭·점검</div>
+          <div class="id-desc">4–7개의 사랑방을 돌아보는 자</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">🧩</span>
+          <div class="id-role">상담자</div>
+          <div class="id-name">중재·조언</div>
+          <div class="id-desc">사랑방 문제 해결에 도움을 주는 자</div>
+        </div>
+        <div class="id-card">
+          <span class="id-icon">🤝</span>
+          <div class="id-role">협동사역자</div>
+          <div class="id-name">연결·조직·훈련</div>
+          <div class="id-desc">교구 교역자의 목회철학을 최전선에서 돕는 자</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🗺 2) 조직 규모 & 커버리지</div>
+      <table class="org-table">
+        <thead><tr><th>직분</th><th>호칭</th><th>담당 단위수</th><th>담당 성도수</th></tr></thead>
+        <tbody>
+          <tr><td class="role-cell">교구사역자(교역자)</td><td>교구사역자</td><td>70–100</td><td>800–1100명</td></tr>
+          <tr><td class="role-cell" style="color:var(--accent)">마을사역자(평신도)</td><td style="font-weight:700;color:var(--accent)">마을목자</td><td style="font-weight:700">4–7</td><td style="font-weight:700">40–80명</td></tr>
+          <tr><td class="role-cell">사랑방사역자</td><td>사랑목자</td><td>1</td><td>12명 이내</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📅 3) 마을목자 필수 참석</div>
+      <table class="flow-table">
+        <thead><tr><th>명칭</th><th>일시</th><th>역할</th></tr></thead>
+        <tbody>
+          <tr><td>화요전도대</td><td>화요일 10시</td><td>참석 및 마을 식구 참석 독려</td></tr>
+          <tr><td>목요 남성 성경모임</td><td>목요일 5:30</td><td>참석 및 마을 남자 성도 독려</td></tr>
+          <tr><td>금요 목자 플러스</td><td>금요일 10시</td><td>참석 및 마을 사랑목자 참여 독려</td></tr>
+          <tr><td>금요 교구 모임</td><td>금요일 11시</td><td>참석 및 마을 식구 참석 독려</td></tr>
+          <tr><td>금요 철야</td><td>금요일 20:50</td><td>참석 및 교회/교구/마을을 위한 기도</td></tr>
+          <tr><td>주일 교역자 인사</td><td>주일</td><td>마을 식구 교역자 연결</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🎯 4) 마을목자 7대 과업</div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🫶</span><div><div class="d-num">과업 1</div><div class="d-title">사랑목자 돌봄(Care)</div></div></div>
+        <div class="d-body">목자들의 개인적 삶과 사역적 필요를 돌봄으로써 견고히 세웁니다. 1:1 면담(기도제목·가정·직장·건강) → 사역 스트레스 파악 → 맞춤 격려·연결.</div>
+      </div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🚀</span><div><div class="d-num">과업 2</div><div class="d-title">전도·배가 격려 + 전략 지원</div></div></div>
+        <div class="d-body">격려와 도전뿐 아니라 전략적·실제적 도움(마을 단위 전도전략). VIP 리스트·접촉계획 점검 → 예비목자 1–2명 지정·동행 멘토링 → 배가 목표·시기 확정.</div>
+      </div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🏡</span><div><div class="d-num">과업 3</div><div class="d-title">지역/마을 새가족 정착</div></div></div>
+        <div class="d-body">새가족이 교회와 사랑방에 효과적으로 정착하도록 돕습니다.</div>
+      </div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🧯</span><div><div class="d-num">과업 4</div><div class="d-title">마을 문제 신속 대응</div></div></div>
+        <div class="d-body">사랑방·사랑목자 문제에 신속 대처. 보고 라인: 사랑목자→마을목자→교구사역자. 사실 파악–공감–대안 1·2·3 제시–교구 사역자 협의–후속 점검.</div>
+      </div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🧩</span><div><div class="d-num">과업 5</div><div class="d-title">마을 연합 형성</div></div></div>
+        <div class="d-body">마을의 연합과 공동체성 강화. 분기 연합모임 (말씀·간증·기도·사역박람회) 개최.</div>
+      </div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🗂️</span><div><div class="d-num">과업 6</div><div class="d-title">행정 수행</div></div></div>
+        <div class="d-body">보고서·출석·정착·배가 현황의 정기 제출. 교구 교역자의 다양한 요청에 즉각적으로 반응.</div>
+      </div>
+      <div class="duty-card">
+        <div class="d-header"><span class="d-icon">🚫</span><div><div class="d-num">과업 7</div><div class="d-title">이단 경계</div></div></div>
+        <div class="d-body">이단 접근에 단호히 대처하고 교역자 보고. 이상 징후 체크(비밀모임·금품요구·교리 왜곡·성경공부 이상) → 즉시 교구 교역자에게 공유.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🎓 5) 자격 & 임명</div>
+      <div class="card-body"><p><strong>임명:</strong> 교구사역자 추천 → 담임목사 임명</p></div>
+      <div class="card-title" style="font-size:13px;margin-top:10px;margin-bottom:8px">자격 요건</div>
+      <ul class="checklist-edu">
+        <li>성령의 소명 확신</li>
+        <li>모범적 인격</li>
+        <li>목자 경력 2년+</li>
+        <li>전도/배가·파송 경험</li>
+        <li>인턴훈련 이수</li>
+        <li>지속훈련 헌신</li>
+        <li>권위에 대한 순종</li>
+        <li>정년 만 70세 (필요에 따라 연장 가능)</li>
+      </ul>
+      <div class="card-title" style="font-size:13px;margin-top:10px;margin-bottom:8px">필수 교육</div>
+      <div>
+        <span class="pill">새가족 교육</span>
+        <span class="pill">필수 양육</span>
+        <span class="pill">선택양육 2개+</span>
+        <span class="pill">목자코칭</span>
+        <span class="pill">제자반</span>
+        <span class="pill">사역자반</span>
+      </div>
+    </div>
+
+    <div class="verse-box" style="margin-bottom:16px">
+      <div class="v-ref">📖 함께 붙드는 말씀</div>
+      "서로 권면하며 사랑과 선행을 격려하자"(히 10:24–25)<br>
+      "너희 중에 있는 하나님의 양 무리를 치되… 본이 되라"(벧전 5:2–3)
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(i){
+  document.querySelectorAll('.main-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.tab-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+function toggleWeek(el){
+  el.classList.toggle('collapsed');
+  const body=el.nextElementSibling;
+  body.classList.toggle('open');
+}
+</script>
+</body>
+</html>

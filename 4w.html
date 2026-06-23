@@ -397,6 +397,7 @@ textarea{resize:vertical;min-height:80px}
     <button class="mode-btn" onclick="switchWMode(1)">🎸 키로 찾기</button>
     <button class="mode-btn" onclick="switchWMode(2)">🌊 분위기로 찾기</button>
     <button class="mode-btn" onclick="switchWMode(3)">🔕 침묵 타이머</button>
+    <button class="mode-btn" onclick="switchWMode(4)">📋 도우미 준비</button>
   </div>
 
   <!-- 주제 -->
@@ -448,6 +449,7 @@ textarea{resize:vertical;min-height:80px}
 
   <!-- 침묵 타이머 -->
   <div class="worship-panel" id="wm-3">
+
     <div class="card">
       <div class="card-title">🔕 침묵 기도 타이머</div>
       <div class="silence-timer">
@@ -467,6 +469,89 @@ textarea{resize:vertical;min-height:80px}
         <div class="btn-row" style="justify-content:center;margin-top:14px">
           <button class="btn btn-primary" onclick="startSilence()" id="silence-start-btn">▶ 시작</button>
           <button class="btn btn-outline" onclick="resetSilence()">↺ 초기화</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 도우미 준비 -->
+  <div class="worship-panel" id="wm-4">
+    <div style="padding:0 16px 16px">
+      <div class="card">
+        <div class="card-title">📋 찬양도우미 준비 체크리스트</div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="wcheck-bar" style="width:0%"></div></div>
+        <div class="progress-label" style="margin-bottom:12px"><span id="wcheck-count">0</span>/7 완료</div>
+        <div id="wcheck-list">
+          <div class="checklist-item"><input type="checkbox" id="wc0" onchange="updateWCheck()"><label for="wc0">모임 하루 전 3–4곡 기도로 선곡 완료</label></div>
+          <div class="checklist-item"><input type="checkbox" id="wc1" onchange="updateWCheck()"><label for="wc1">나눔지 곡 확인 (주어진 곡 우선)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="wc2" onchange="updateWCheck()"><label for="wc2">악보 또는 가사지 준비</label></div>
+          <div class="checklist-item"><input type="checkbox" id="wc3" onchange="updateWCheck()"><label for="wc3">반주 방법 확정 (악기 / MR / 무반주 아카펠라)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="wc4" onchange="updateWCheck()"><label for="wc4">악기 가능자 섭외 또는 MR 테스트</label></div>
+          <div class="checklist-item"><input type="checkbox" id="wc5" onchange="updateWCheck()"><label for="wc5">합심기도 전환 멘트 준비</label></div>
+          <div class="checklist-item"><input type="checkbox" id="wc6" onchange="updateWCheck()"><label for="wc6">새가족 있을 경우 환영 찬양 선정</label></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🙌 7가지 찬양 인도법 <span style="font-size:11px;font-weight:400;color:var(--sub)">(수영로교회 사랑방백서 수록)</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff">
+            <div style="font-size:22px;margin-bottom:4px">🙌</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">두 손 들고</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">두 손을 높이 들고 찬양</div>
+          </div>
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff">
+            <div style="font-size:22px;margin-bottom:4px">✋</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">오른손만</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">오른손만 들고</div>
+          </div>
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff">
+            <div style="font-size:22px;margin-bottom:4px">👁️</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">눈 감고</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">집중하며 찬양</div>
+          </div>
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff">
+            <div style="font-size:22px;margin-bottom:4px">🎵</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">허밍으로</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">콧노래로 부드럽게</div>
+          </div>
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff">
+            <div style="font-size:22px;margin-bottom:4px">❤️</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">가슴에 손</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">가슴에 손을 얹고</div>
+          </div>
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff">
+            <div style="font-size:22px;margin-bottom:4px">🙆</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">일어서서</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">일어서서 찬양</div>
+          </div>
+          <div style="border-radius:10px;border:1.5px solid var(--gray2);padding:12px;text-align:center;background:#fff;grid-column:span 2">
+            <div style="font-size:22px;margin-bottom:4px">🤝</div>
+            <div style="font-size:13px;font-weight:700;color:var(--primary)">옆 분 손 잡고</div>
+            <div style="font-size:11px;color:var(--sub);margin-top:2px">옆 사람과 손을 잡으며 공동체성 강화</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎶 새가족 환영 찬양</div>
+        <div style="font-size:13px;color:var(--sub);margin-bottom:10px">새가족이 왔을 경우 아래 찬양 중 하나로 환영합니다</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 당신은 사랑받기 위해 태어난 사람</div>
+          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 당신은 시냇가에 심은 나무라</div>
+          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 당신은 하나님의 언약안에</div>
+          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 너는 시냇가에</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🙏 합심기도 전환 가이드</div>
+        <div style="background:var(--primary);color:#fff;border-radius:10px;padding:14px;margin-bottom:10px">
+          <div style="font-size:11px;font-weight:700;color:var(--mid);margin-bottom:6px">합심기도문 (말씀 전 기도)</div>
+          <div style="font-size:13px;line-height:1.7">"말씀하시는 하나님! 아브라함과 모세에게 말씀하신 하나님, 저희들에게 말씀하여 주시옵소서. 어리석은 저희들에게 말씀하시면 주님이 기뻐하시는 길로 가게 될 줄 믿습니다. 사모하는 자에게 주시겠다 하신 말씀을 허락하옵소서. 예수님의 이름으로 기도합니다. 아멘!"</div>
+        </div>
+        <div style="font-size:13px;color:var(--sub);line-height:1.7">
+          찬양이 끝난 후 → 말씀을 위한 기도를 준비된 분께 부탁합니다. 그 기도는 은혜의 생에 나와 있는 기도문을 그대로 읽어도 됩니다. 아니면 짧은 기도로 기도자에게 인도하도록 부탁합니다.
         </div>
       </div>
     </div>
@@ -964,6 +1049,12 @@ filteredQ=[...QUESTIONS]; showQ();
 function switchWMode(i){
   document.querySelectorAll('.mode-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
   document.querySelectorAll('.worship-panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+}
+function updateWCheck(){
+  const items=document.querySelectorAll('#wcheck-list input[type=checkbox]');
+  const done=[...items].filter(c=>c.checked).length;
+  document.getElementById('wcheck-count').textContent=done;
+  document.getElementById('wcheck-bar').style.width=(done/items.length*100)+'%';
 }
 function songCard(s){return`<div class="song-card"><div class="song-info"><div class="song-title">${s.title}</div><div class="song-meta">${s.artist} · Key ${s.key} · ${s.bpm} BPM</div></div><span class="song-badge">${s.genre}</span></div>`;}
 function selectTopic(t,el){
