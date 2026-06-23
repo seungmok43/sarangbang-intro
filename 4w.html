@@ -30,7 +30,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--gray);color:var(--te
 .main-tab:hover{color:#fff;background:rgba(255,255,255,.08)}
 
 /* ── 탭 패널 ── */
-.tab-panel{display:none;padding:0 0 80px}
+.tab-panel{display:none;padding:0 0 88px}
 .tab-panel.active{display:block}
 
 /* ── 서브탭 ── */
@@ -1272,5 +1272,12 @@ function genPrayer(){
 }
 function copyPrayer(){navigator.clipboard.writeText(document.getElementById('prayer-result').textContent).then(()=>alert('복사됐어요!'));}
 </script>
+<nav style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e8ede8;display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.08)">
+  <a href="index.html" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#aaa;gap:3px;text-decoration:none"><span style="font-size:22px">🏠</span>홈</a>
+  <a href="4w.html" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#1B4332;gap:3px;text-decoration:none"><span style="font-size:22px">✨</span>4W 키트</a>
+  <a href="education.html" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#aaa;gap:3px;text-decoration:none"><span style="font-size:22px">📚</span>교육</a>
+  <a href="report.html" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#aaa;gap:3px;text-decoration:none"><span style="font-size:22px">📋</span>보고서</a>
+  <a href="kit.html" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#aaa;gap:3px;text-decoration:none"><span style="font-size:22px">🛠</span>도구</a>
+</nav>
 </body>
 </html>

@@ -5,66 +5,162 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>수영로교회 사랑방</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans KR',sans-serif;background:#f4f8f5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
-.hero{text-align:center;margin-bottom:48px}
-.hero-badge{display:inline-block;background:#1B4332;color:#fff;font-size:12px;font-weight:700;letter-spacing:2px;padding:5px 16px;border-radius:20px;margin-bottom:16px}
-.hero h1{font-size:32px;font-weight:900;color:#1B4332;line-height:1.3;margin-bottom:10px}
-.hero p{color:#555;font-size:15px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:960px;width:100%}
-.card{background:#fff;border-radius:16px;padding:28px 24px;text-decoration:none;color:inherit;border:2px solid transparent;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.card:hover{border-color:#40916C;transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,67,50,.12)}
-.card.featured{background:#1B4332;color:#fff}
-.card.featured .card-title{color:#D8F3DC}
-.card.featured .card-desc{color:#B7E4C7}
-.card-icon{font-size:32px;margin-bottom:14px}
-.card-title{font-size:16px;font-weight:700;color:#1B4332;margin-bottom:6px}
-.card-desc{font-size:13px;color:#666;line-height:1.6}
-.card-tag{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;color:#40916C;background:#D8F3DC;padding:3px 10px;border-radius:10px}
-.card.featured .card-tag{color:#1B4332;background:#D8F3DC}
-footer{margin-top:48px;font-size:12px;color:#aaa;text-align:center}
+body{font-family:'Noto Sans KR',sans-serif;background:#f4f8f5;min-height:100vh;padding-bottom:72px}
+a{text-decoration:none;color:inherit}
+
+/* ── 헤더 ── */
+.top-bar{background:#1B4332;padding:16px 20px 14px;display:flex;align-items:center;justify-content:space-between}
+.top-bar-left .church{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:1.5px;font-weight:600;margin-bottom:2px}
+.top-bar-left .title{font-size:20px;font-weight:900;color:#fff}
+.top-bar-right{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px}
+
+/* ── 히어로 ── */
+.hero{background:linear-gradient(145deg,#1B4332 0%,#2D6A4F 60%,#40916C 100%);padding:28px 20px 36px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-30px;top:-30px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05)}
+.hero::before{content:'';position:absolute;right:40px;bottom:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-label{display:inline-block;background:rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+.hero h2{font-size:26px;font-weight:900;color:#fff;line-height:1.35;margin-bottom:10px}
+.hero p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:24px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.hero-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer}
+.hero-btn-primary{background:#fff;color:#1B4332}
+.hero-btn-ghost{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+
+/* ── 빠른 이동 ── */
+.quick-section{padding:20px 16px 0}
+.section-label{font-size:12px;font-weight:700;color:#5a7a5a;letter-spacing:.5px;margin-bottom:12px}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.quick-card{border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.quick-card::after{content:attr(data-emoji);position:absolute;right:-4px;bottom:-8px;font-size:52px;opacity:.12;line-height:1}
+.quick-card .qc-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;opacity:.7}
+.quick-card .qc-name{font-size:15px;font-weight:800;line-height:1.3}
+.quick-card .qc-desc{font-size:11px;opacity:.75;line-height:1.5;margin-top:2px}
+.qc-green{background:#1B4332;color:#fff}
+.qc-mid{background:#D8F3DC;color:#1B4332}
+.qc-white{background:#fff;color:#1B4332;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1.5px solid #e8ede8}
+
+/* ── 가로 스크롤 카드 ── */
+.hscroll{display:flex;gap:10px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none;margin-bottom:24px}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll-card{flex:none;width:160px;background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1.5px solid #e8ede8}
+.hscroll-card .hc-icon{font-size:24px;margin-bottom:8px;display:block}
+.hscroll-card .hc-name{font-size:13px;font-weight:700;color:#1B4332;margin-bottom:3px}
+.hscroll-card .hc-desc{font-size:11px;color:#5a7a5a;line-height:1.4}
+
+/* ── 하단 네비 ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e8ede8;display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#aaa;gap:3px}
+.bottom-nav a.active{color:#1B4332}
+.bottom-nav a .nav-icon{font-size:22px;line-height:1}
+.bottom-nav a .nav-dot{width:4px;height:4px;border-radius:50%;background:#1B4332;display:none;margin-top:1px}
+.bottom-nav a.active .nav-dot{display:block}
 </style>
 </head>
 <body>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <div class="church">SUYEONGRO CHURCH</div>
+    <div class="title">수영로교회 사랑방</div>
+  </div>
+  <div class="top-bar-right">⛪</div>
+</div>
+
 <div class="hero">
-  <div class="hero-badge">수영로교회</div>
-  <h1>수영로교회 사랑방</h1>
-  <p>사랑방 사역 소개 및 교육 자료 모음입니다.</p>
+  <div class="hero-label">SARANGBANG SYSTEM</div>
+  <h2>작은 교회,<br>큰 변화</h2>
+  <p>예배·훈련·사역이 동시에 흐르는<br>수영로교회 사랑방 사역을 소개합니다.</p>
+  <div class="hero-btns">
+    <a class="hero-btn hero-btn-primary" href="report.html">📋 사랑방 보고서</a>
+    <a class="hero-btn hero-btn-ghost" href="4w.html">✨ 4W 키트 열기</a>
+  </div>
 </div>
-<div class="cards">
-  <a class="card featured" href="report.html">
-    <div class="card-icon">📋</div>
-    <div class="card-title">사랑방 영역 보고서</div>
-    <div class="card-desc">조직 구조, 교육 체계, 웰컴데이, 마을목자 7대 과업 등 수영로교회 사랑방 전체 사역을 상세히 소개합니다.</div>
-    <span class="card-tag">핵심 보고서</span>
+
+<div class="quick-section">
+  <div class="section-label">주요 자료</div>
+  <div class="quick-grid">
+    <a class="quick-card qc-green" href="4w.html" data-emoji="✨">
+      <span class="qc-label">Meeting Tool</span>
+      <span class="qc-name">4W 온라인 키트</span>
+      <span class="qc-desc">모임에서 바로 쓰는 인터랙티브 도구</span>
+    </a>
+    <a class="quick-card qc-mid" href="education.html" data-emoji="📚">
+      <span class="qc-label">Education</span>
+      <span class="qc-name">사랑방 교육 가이드</span>
+      <span class="qc-desc">목자 리더십·4W·전도축제·마을목자</span>
+    </a>
+    <a class="quick-card qc-white" href="kit.html" data-emoji="🛠">
+      <span class="qc-label">Templates</span>
+      <span class="qc-name">도입 템플릿 키트</span>
+      <span class="qc-desc">서약서·심방가이드 등 12종</span>
+    </a>
+    <a class="quick-card qc-white" href="diagnosis.html" data-emoji="❤️">
+      <span class="qc-label">Diagnosis</span>
+      <span class="qc-name">소그룹 건강진단</span>
+      <span class="qc-desc">자가 진단 체크리스트</span>
+    </a>
+  </div>
+
+  <div class="section-label">교육 자료 둘러보기</div>
+</div>
+<div class="hscroll">
+  <a class="hscroll-card" href="education.html">
+    <span class="hc-icon">🏠</span>
+    <div class="hc-name">사랑방이란?</div>
+    <div class="hc-desc">정의·정체성·구성과 역할</div>
   </a>
-  <a class="card" href="4w.html">
-    <div class="card-icon">✨</div>
-    <div class="card-title">사랑방 4W 온라인 키트</div>
-    <div class="card-desc">Welcome·Worship·Word·Works 전 과정을 모임에서 바로 쓸 수 있는 인터랙티브 도구 모음.</div>
-    <span class="card-tag">인터랙티브 도구</span>
+  <a class="hscroll-card" href="education.html">
+    <span class="hc-icon">❓</span>
+    <div class="hc-name">왜 사랑방인가?</div>
+    <div class="hc-desc">필요한 6가지 이유와 유익</div>
   </a>
-  <a class="card" href="education.html">
-    <div class="card-icon">📚</div>
-    <div class="card-title">사랑방 교육 가이드</div>
-    <div class="card-desc">사랑방이란? · 왜 사랑방인가? · 목자 리더십 · 4W 진행 · 전도축제 · 마을목자 가이드북을 한 권에.</div>
-    <span class="card-tag">NEW · 교육 자료</span>
+  <a class="hscroll-card" href="education.html">
+    <span class="hc-icon">👤</span>
+    <div class="hc-name">목자 리더십</div>
+    <div class="hc-desc">건강한 목자·파레토 원리</div>
   </a>
-  <a class="card" href="kit.html">
-    <div class="card-icon">🛠️</div>
-    <div class="card-title">도입 템플릿 키트</div>
-    <div class="card-desc">사랑방 시스템 도입 시 바로 쓸 수 있는 서약서·체크리스트·심방가이드 등 12종.</div>
-    <span class="card-tag">실용 도구 12종</span>
+  <a class="hscroll-card" href="education.html">
+    <span class="hc-icon">🔄</span>
+    <div class="hc-name">4W 진행법</div>
+    <div class="hc-desc">90분 운영 실제·서약·베스트</div>
   </a>
-  <a class="card" href="diagnosis.html">
-    <div class="card-icon">❤️‍🔥</div>
-    <div class="card-title">소그룹 건강진단</div>
-    <div class="card-desc">우리 소그룹의 현재 상태를 진단하고 개선 방향을 찾는 체크리스트입니다.</div>
-    <span class="card-tag">자가 진단</span>
+  <a class="hscroll-card" href="education.html">
+    <span class="hc-icon">🌍</span>
+    <div class="hc-name">전도 축제</div>
+    <div class="hc-desc">베스트 인도 10단계·12주</div>
+  </a>
+  <a class="hscroll-card" href="education.html">
+    <span class="hc-icon">🗺</span>
+    <div class="hc-name">마을목자</div>
+    <div class="hc-desc">7대 과업·조직·자격</div>
   </a>
 </div>
-<footer>수영로교회 사랑방 영역 · 문의: 교구 사무실</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="active">
+    <span class="nav-icon">🏠</span>홈
+    <span class="nav-dot"></span>
+  </a>
+  <a href="4w.html">
+    <span class="nav-icon">✨</span>4W 키트
+    <span class="nav-dot"></span>
+  </a>
+  <a href="education.html">
+    <span class="nav-icon">📚</span>교육
+    <span class="nav-dot"></span>
+  </a>
+  <a href="report.html">
+    <span class="nav-icon">📋</span>보고서
+    <span class="nav-dot"></span>
+  </a>
+  <a href="kit.html">
+    <span class="nav-icon">🛠</span>도구
+    <span class="nav-dot"></span>
+  </a>
+</nav>
+
 </body>
 </html>
