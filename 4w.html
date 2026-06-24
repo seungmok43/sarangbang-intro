@@ -65,11 +65,12 @@ textarea{resize:vertical;min-height:80px}
 .field{margin-bottom:12px}
 
 /* ── 체크리스트 ── */
-.checklist-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray2)}
+.checklist-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--gray2)}
 .checklist-item:last-child{border-bottom:none}
 .checklist-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
-.checklist-item label{font-size:13px;cursor:pointer;line-height:1.4}
-.checklist-item.done label{text-decoration:line-through;opacity:.5}
+.checklist-item label{font-size:13px;cursor:pointer;line-height:1.4;flex:1}
+.checklist-item .step-n{font-size:10px;font-weight:700;color:var(--accent);min-width:22px;flex-shrink:0}
+.checklist-item.done label{text-decoration:line-through;opacity:.45}
 .progress-bar-wrap{background:var(--gray2);border-radius:10px;height:8px;margin:14px 0 6px;overflow:hidden}
 .progress-bar{height:100%;background:var(--accent);border-radius:10px;transition:width .4s ease}
 .progress-label{font-size:12px;color:var(--sub);text-align:right}
@@ -290,16 +291,16 @@ textarea{resize:vertical;min-height:80px}
       <div class="progress-label"><span id="check-count">0</span>/10 완료</div>
       <div id="check-done-msg" style="display:none;margin-top:8px;padding:10px;background:var(--light);border-radius:8px;font-size:13px;font-weight:700;color:var(--primary);text-align:center">오늘 모임 준비 완료! 🎉</div>
       <div id="checklist" style="margin-top:12px">
-        <div class="checklist-item"><input type="checkbox" id="c0" onchange="updateCheck()"><label for="c0">모임 30분 전 도착 — 공간 정돈 완료</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c1" onchange="updateCheck()"><label for="c1">간식 준비 (음료 포함, 알레르기 고려)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c2" onchange="updateCheck()"><label for="c2">조명 조절 (너무 밝지 않게, 따뜻한 분위기)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c3" onchange="updateCheck()"><label for="c3">배경 찬양 틀기 (모임 시작 전까지)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c4" onchange="updateCheck()"><label for="c4">자리 배치 — 원형/ㄷ자 (사각 테이블 X)</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c5" onchange="updateCheck()"><label for="c5">첫 방문자 이름 미리 파악 → 이름 불러 환영</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c6" onchange="updateCheck()"><label for="c6">단톡방 전날 안내 발송 완료</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c7" onchange="updateCheck()"><label for="c7">기도제목 노트 또는 나눔지 준비</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c8" onchange="updateCheck()"><label for="c8">처음 온 분 옆에 앉을 사람 미리 지정</label></div>
-        <div class="checklist-item"><input type="checkbox" id="c9" onchange="updateCheck()"><label for="c9">모임 후 귀가 안전 확인 (야간 모임 시)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c0" onchange="updateCheck()"><span class="step-n">01</span><label for="c0">단톡방 전날 안내 발송 완료</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c1" onchange="updateCheck()"><span class="step-n">02</span><label for="c1">모임 30분 전 도착 — 공간 정돈 완료</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c2" onchange="updateCheck()"><span class="step-n">03</span><label for="c2">간식 준비 (음료 포함, 알레르기 고려)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c3" onchange="updateCheck()"><span class="step-n">04</span><label for="c3">조명 조절 (너무 밝지 않게, 따뜻한 분위기)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c4" onchange="updateCheck()"><span class="step-n">05</span><label for="c4">배경 찬양 틀기 (모임 시작 전까지)</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c5" onchange="updateCheck()"><span class="step-n">06</span><label for="c5">자리 배치 — 원형/ㄷ자</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c6" onchange="updateCheck()"><span class="step-n">07</span><label for="c6">처음 온 분 옆에 앉을 사람 미리 지정</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c7" onchange="updateCheck()"><span class="step-n">08</span><label for="c7">첫 방문자 이름 미리 파악 → 이름 불러 환영</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c8" onchange="updateCheck()"><span class="step-n">09</span><label for="c8">기도제목 노트 또는 나눔지 준비</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c9" onchange="updateCheck()"><span class="step-n">10</span><label for="c9">모임 후 귀가 안전 확인 (야간 모임 시)</label></div>
       </div>
     </div>
   </div>

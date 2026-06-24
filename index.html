@@ -5,84 +5,81 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>수영로교회 사랑방</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans KR',sans-serif;background:#f4f8f5;min-height:100vh;padding-bottom:88px}
+body{font-family:'Noto Sans KR',sans-serif;background:#F2F4F0;min-height:100vh;padding-bottom:90px}
 a{text-decoration:none;color:inherit}
 
 /* ── 히어로 ── */
-.hero{background:#1B4332;padding:44px 24px 32px}
-.hero h1{font-size:32px;font-weight:900;color:#fff;line-height:1.25;margin-bottom:8px}
-.hero-sub{font-size:13px;color:rgba(255,255,255,.45);font-weight:400}
+.hero{background:#0D1F14;padding:52px 24px 40px}
+.hero h1{font-size:40px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:10px}
+.hl{color:#FFCD1E}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1px;font-weight:500;text-transform:uppercase}
 
-/* ── 카드 공통 ── */
-.cards{padding:18px 16px;display:flex;flex-direction:column;gap:11px}
+/* ── 카드 영역 ── */
+.cards{padding:16px 16px 0;display:flex;flex-direction:column;gap:10px}
 
-.card{border-radius:20px;display:block;transition:transform .15s}
-.card:active{transform:scale(.98)}
+/* 4W 메인 카드 */
+.card-kit{display:block;border-radius:22px;background:#1A3826;padding:20px 24px 18px;overflow:hidden;position:relative;transition:transform .15s;box-shadow:0 10px 40px rgba(13,31,20,.3)}
+.card-kit:active{transform:scale(.98)}
+.kit-4w{font-family:'Bebas Neue',sans-serif;font-size:118px;line-height:.88;color:#fff;letter-spacing:-2px;display:block}
+.kit-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:10px}
+.kit-sub{font-size:12px;color:rgba(255,255,255,.4);font-weight:400;line-height:1.5}
+.kit-cta{font-size:12px;font-weight:700;color:#FFCD1E;letter-spacing:.5px;white-space:nowrap}
 
-/* ── 4W 키트 (메인) ── */
-.card-kit{background:#40916C;padding:30px 24px;color:#fff;position:relative;overflow:hidden;box-shadow:0 8px 28px rgba(27,67,50,.3)}
-.card-kit .c-label{font-size:10px;font-weight:700;letter-spacing:2px;color:#B7E4C7;margin-bottom:12px}
-.card-kit .c-icon{font-size:48px;display:block;margin-bottom:12px}
-.card-kit .c-title{font-size:30px;font-weight:900;color:#fff;margin-bottom:8px}
-.card-kit .c-sub{font-size:14px;color:rgba(255,255,255,.75);font-style:italic}
-.card-kit .c-arrow{position:absolute;right:24px;bottom:24px;font-size:40px;font-weight:900;color:rgba(255,255,255,.2)}
+/* 보조 카드 */
+.card-row{display:flex;align-items:center;gap:14px;border-radius:18px;padding:20px 18px;transition:transform .15s}
+.card-row:active{transform:scale(.98)}
+.cr-icon{font-size:28px;flex-shrink:0}
+.cr-body{flex:1;min-width:0}
+.cr-title{font-size:16px;font-weight:800;color:#0D1F14;margin-bottom:3px}
+.cr-desc{font-size:11px;color:#8A9E8A;font-weight:500}
+.cr-arr{font-size:22px;color:#C0D4C0;flex-shrink:0}
 
-/* ── 보조 카드 ── */
-.card-secondary{padding:22px 20px;display:flex;align-items:center;gap:16px}
-.card-report{background:#fff;border:1.5px solid #e0ebe0;box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.card-edu{background:#D8F3DC}
-.cs-icon{font-size:36px;flex-shrink:0}
-.cs-body{}
-.cs-title{font-size:18px;font-weight:900;color:#1B4332;margin-bottom:3px}
-.cs-desc{font-size:12px;color:#5a7a5a}
-.cs-arrow{margin-left:auto;font-size:22px;color:#74C69D;flex-shrink:0}
+.card-report{background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.07)}
+.card-edu{background:#DFF2E6}
 
 /* ── 하단 네비 ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e8ede8;display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
-.bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#bbb;gap:3px}
-.bottom-nav a.active{color:#1B4332}
-.nav-icon{font-size:22px;line-height:1}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #EAEAEA;display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:200;box-shadow:0 -2px 16px rgba(0,0,0,.06)}
+.bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;padding:8px 4px 10px;font-size:10px;font-weight:600;color:#CCC;gap:2px}
+.bottom-nav a.active{color:#0D1F14}
+.nav-icon{font-size:20px;line-height:1}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1>사랑방이<br>교회입니다.</h1>
+  <h1><span class="hl">사랑방</span>이<br><span class="hl">교회</span>입니다.</h1>
   <div class="hero-sub">수영로교회 사랑목자 온라인 키트</div>
 </div>
 
 <div class="cards">
 
-  <!-- 4W 키트 -->
-  <a class="card card-kit" href="4w.html">
-    <div class="c-label">MEETING KIT</div>
-    <span class="c-icon">✨</span>
-    <div class="c-title">4W 키트</div>
-    <div class="c-sub">사랑방이 살아야 교회가 산다</div>
-    <span class="c-arrow">›</span>
+  <a class="card-kit" href="4w.html">
+    <span class="kit-4w">4W</span>
+    <div class="kit-bottom">
+      <div class="kit-sub">사랑방이 살아야<br>교회가 산다</div>
+      <div class="kit-cta">지금 열기 →</div>
+    </div>
   </a>
 
-  <!-- 목자 보고서 -->
-  <a class="card card-secondary card-report" href="https://script.google.com/macros/s/AKfycbwMJgooqxa044D014lFhZJIV8ypG0-ZBxWwDkfcx8561UPD6HIjJmc_N9IEGLieAYsayw/exec" target="_blank">
-    <span class="cs-icon">📋</span>
-    <div class="cs-body">
-      <div class="cs-title">목자 보고서</div>
-      <div class="cs-desc">주간 보고 작성하기</div>
+  <a class="card-row card-report" href="https://script.google.com/macros/s/AKfycbwMJgooqxa044D014lFhZJIV8ypG0-ZBxWwDkfcx8561UPD6HIjJmc_N9IEGLieAYsayw/exec" target="_blank">
+    <span class="cr-icon">📋</span>
+    <div class="cr-body">
+      <div class="cr-title">목자 보고서</div>
+      <div class="cr-desc">주간 보고 작성하기</div>
     </div>
-    <span class="cs-arrow">›</span>
+    <span class="cr-arr">›</span>
   </a>
 
-  <!-- 사랑방을 말하다 -->
-  <a class="card card-secondary card-edu" href="education.html">
-    <span class="cs-icon">📖</span>
-    <div class="cs-body">
-      <div class="cs-title">사랑방을 말하다</div>
-      <div class="cs-desc">운영 철학 · 목자 리더십 · 전도축제</div>
+  <a class="card-row card-edu" href="education.html">
+    <span class="cr-icon">📖</span>
+    <div class="cr-body">
+      <div class="cr-title">사랑방을 말하다</div>
+      <div class="cr-desc">운영 철학 · 목자 리더십 · 전도축제</div>
     </div>
-    <span class="cs-arrow">›</span>
+    <span class="cr-arr">›</span>
   </a>
 
 </div>
