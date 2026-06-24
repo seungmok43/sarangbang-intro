@@ -140,6 +140,9 @@ textarea{resize:vertical;min-height:80px}
 .song-title{font-size:14px;font-weight:700;color:var(--text)}
 .song-meta{font-size:11px;color:var(--sub);margin-top:2px}
 .song-badge{padding:3px 8px;border-radius:10px;font-size:10px;font-weight:700;background:var(--light);color:var(--accent)}
+.song-card{cursor:pointer}
+.lyrics-wrap{display:none;padding:12px 14px;background:var(--light);border-top:1px solid var(--gray2)}
+.lyrics-text{font-size:13px;line-height:2.1;color:var(--text)}
 .key-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .key-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
 .key-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
@@ -406,16 +409,11 @@ textarea{resize:vertical;min-height:80px}
   <!-- 주제 -->
   <div class="worship-panel active" id="wm-0">
     <div class="topic-tags" id="topic-tags">
-      <button class="topic-tag active" onclick="selectTopic('감사',this)">🙏 감사</button>
-      <button class="topic-tag" onclick="selectTopic('회개',this)">😢 회개</button>
-      <button class="topic-tag" onclick="selectTopic('예배',this)">✨ 예배</button>
+      <button class="topic-tag active" onclick="selectTopic('경배',this)">🙌 경배</button>
+      <button class="topic-tag" onclick="selectTopic('성령',this)">🔥 성령</button>
+      <button class="topic-tag" onclick="selectTopic('기도',this)">🙏 기도</button>
       <button class="topic-tag" onclick="selectTopic('위로',this)">💙 위로</button>
-      <button class="topic-tag" onclick="selectTopic('전도',this)">🌍 전도</button>
-      <button class="topic-tag" onclick="selectTopic('사랑',this)">❤️ 사랑</button>
-      <button class="topic-tag" onclick="selectTopic('가정',this)">🏠 가정</button>
-      <button class="topic-tag" onclick="selectTopic('치유',this)">🌿 치유</button>
-      <button class="topic-tag" onclick="selectTopic('소망',this)">🌅 소망</button>
-      <button class="topic-tag" onclick="selectTopic('결단',this)">🔥 결단</button>
+      <button class="topic-tag" onclick="selectTopic('새가족',this)">🤝 새가족</button>
     </div>
     <div id="topic-songs"></div>
     <div class="card">
@@ -833,16 +831,42 @@ const FAITH_DESC = {
   공동체형:{icon:'🤝',sub:'관계의 사람',desc:'함께 나눔 속에서 하나님을 만납니다. 공동체의 이야기 안에서 하나님의 음성을 듣습니다.'},
 };
 const WORSHIP_DATA = {
-  감사:[{title:'감사해',artist:'예수전도단',genre:'경배',key:'C',bpm:80},{title:'주 이름 찬양',artist:'할렐루야코리아',genre:'찬양',key:'C',bpm:85},{title:'나의 모든 삶의 순간',artist:'어노인팅',genre:'경배',key:'D',bpm:55}],
-  회개:[{title:'용서하소서',artist:'예수전도단',genre:'회개',key:'A',bpm:58},{title:'나 주의 도움 받고자',artist:'어노인팅',genre:'경배',key:'A',bpm:62},{title:'주의 피로 물들여진',artist:'전통찬송',genre:'경건',key:'F',bpm:70}],
-  예배:[{title:'예배합니다',artist:'예수전도단',genre:'경배',key:'D',bpm:52},{title:'온 맘 다해',artist:'어노인팅',genre:'찬양',key:'C',bpm:75},{title:'하나님은 우리의 피난처',artist:'마커스워십',genre:'경배',key:'C',bpm:78}],
-  위로:[{title:'주 나의 모든 것',artist:'예수전도단',genre:'경배',key:'F',bpm:50},{title:'두려운 마음 가라앉혀',artist:'어노인팅',genre:'경건',key:'G',bpm:48},{title:'주님 손 잡고',artist:'마커스워십',genre:'위로',key:'A',bpm:60}],
-  전도:[{title:'나 같은 죄인 살리신',artist:'전통찬송',genre:'복음',key:'F',bpm:72},{title:'아무것도 두려워 말라',artist:'예수전도단',genre:'선포',key:'E',bpm:112},{title:'세상을 이기는 힘',artist:'어노인팅',genre:'찬양',key:'G',bpm:100}],
-  사랑:[{title:'사랑합니다 나의 예수님',artist:'예수전도단',genre:'경배',key:'D',bpm:76},{title:'주의 사랑이 내 안에',artist:'마커스워십',genre:'경배',key:'G',bpm:82},{title:'당신은 사랑받기 위해',artist:'전통CCM',genre:'찬양',key:'C',bpm:80}],
-  가정:[{title:'주 날 인도하시는',artist:'어노인팅',genre:'경건',key:'A',bpm:65},{title:'이 집에서',artist:'예수전도단',genre:'가정',key:'F',bpm:70},{title:'하나님의 가족',artist:'마커스워십',genre:'공동체',key:'F',bpm:74}],
-  치유:[{title:'치료자 되신 주',artist:'어노인팅',genre:'경배',key:'F',bpm:55},{title:'주님 품에',artist:'예수전도단',genre:'위로',key:'E',bpm:45},{title:'회복하여 주소서',artist:'마커스워십',genre:'간구',key:'E',bpm:58}],
-  소망:[{title:'다시 일어나',artist:'마커스워십',genre:'선포',key:'D',bpm:108},{title:'내 삶의 이유',artist:'예수전도단',genre:'찬양',key:'E',bpm:72},{title:'주님과 함께라면',artist:'어노인팅',genre:'소망',key:'G',bpm:78}],
-  결단:[{title:'주님 뜻대로 살기로',artist:'전통찬송',genre:'결단',key:'Bb',bpm:96},{title:'내 모든 삶을 드리리',artist:'어노인팅',genre:'헌신',key:'E',bpm:68},{title:'여기에 서서',artist:'마커스워십',genre:'결단',key:'G',bpm:80}],
+  경배:[
+    {title:'거룩 거룩 거룩 만군의 주여',en:'Holy Is The Lord Of Hosts',artist:'Nolene Prince',key:'C',bpm:75,genre:'경배',
+     lyrics:'[1절]\n거룩 거룩 거룩 만군의 주여\n거룩 거룩 거룩 만군의 주여\n그 영광이온 땅에 충만\n그 영광이온 땅에 충만\n그 영광이온 땅에 충만 거룩하신 주\n\n[2절]\n존귀하신 예수 하나님 어린 양\n존귀하신 예수 하나님 어린 양\n온 세상 죄를 구속하셨네\n온 세상 죄를 구속하셨네\n온 세상 죄를 구속하셨네 어린 양 예수'},
+    {title:'내 구주 예수님',en:'Shout To The Lord',artist:'Darlene Zschech',key:'C',bpm:68,genre:'경배',
+     lyrics:'내 구주 예수님 주같은 분은 없네\n내 평생에 찬양하리 놀라운 주의 사랑을\n위로자 되시며 피난처 되신 주님\n나의 영혼 온맘 다해 주를 경배합니다\n\n[후렴]\n온 땅이여 주님께 외쳐라\n능력과 위엄의 왕 되신 주\n산과 바다 소리쳐 주의 이름을 높이리\n주행한 일 기뻐 노래하며\n영원히 주님을 사랑하리라\n신실하신 주의 약속 속 나 받았네'},
+    {title:'엎드려 경배해',en:'Mercy',artist:'Matt Redman & Jonas Myrin',key:'C',bpm:64,genre:'경배',
+     lyrics:'[1절]\n엎드려 경배해 십자가 발앞에 날 향한 그 자비\n이제는 더이상 정죄함 없으리 날 덮는 그 보혈\n[2절]\n떡과 잔 들고서 우리 다 기억해 주님의 사랑을\n우리의 허물을 대신해 달라신 주님의 십자가\n\n[후렴]\n주의 자비 바다처럼 깊어\n찬양해 할렐루야 영원 영원토록\n\n[Bridge]\n놀라우신 주의 자비 내가 어찌 잊으리요\n찬양하리 할렐루야 할렐루야 아멘'},
+    {title:'예수 사랑해요',en:'Alleluia',artist:'Jude Del Hierro',key:'C',bpm:78,genre:'찬양',
+     lyrics:'예수 사랑해요 나 주 앞에 엎드려\n경배와 찬양 왕께 드리네\n알렐루야 알렐루야\n알렐루야 알렐루야'},
+  ],
+  성령:[
+    {title:'거룩하신 성령이여',en:'Holy Spirit We Welcome You',artist:'Chris A. Bowater',key:'C',bpm:60,genre:'성령',
+     lyrics:'거룩하신 성령이여 우리에게 임하소서\n성령의 불로 오셔서 세상 헛된 마음 태우소서\n손 들고 주를 바랄 때\n성령이여 성령이여 임하소서'},
+    {title:'나는 아네 (불을 내려주소서)',en:'',artist:'천관웅',key:'C',bpm:80,genre:'성령',
+     lyrics:'[1절]\n나는 아네 내가 살아가는 이유 불이 되는 것\n작은 불이 큰 산 모두 태우듯이 나를 쓰소서\n[2절]\n주 발 앞에 신을 벗고 기도하니 불을 주소서\n성령으로 연단받은 불의 사람 되게 하소서\n\n[후렴]\n불을 내려주소서\n내게 성령의 불을\n죽어진 영혼 살릴 수 있도록 나를 태워주소서\n제단 위에 나를 드리니\n열방의 불로 세우소서'},
+    {title:'성령이여 임하소서',en:'',artist:'설경옥',key:'C',bpm:72,genre:'성령',
+     lyrics:'성령이여 임하소서 메 마른 나의 심령 위에\n주님의 은혜의 단비 내려 날 흠뻑 적셔주옵소서\n주의 권세 주의 능력 지금이 시간 임하셔서\n악한 권세 모두 깨뜨리고 주의 나라 임하소서\n\n[후렴]\n영광 할렐루야 예수의 그 피가\n내게 승리 주네 구원이 되시네\n영광 할렐루야 예수의 이름이\n능력되네 소망이 되시네'},
+  ],
+  기도:[
+    {title:'기도를 멈추지 마라',en:'',artist:'조영준',key:'C',bpm:88,genre:'기도',
+     lyrics:'기도를 멈추지 마라 눈앞의 상황이 마음을 눌러도 원망치 마라\n너의 입을 지켜라 저들은 너의 입을 보고 있다\n\n[후렴]\n너 기도를 멈추지 마라\n내가 너의 그 모든 상황을 바로 역전시키리니\n너 기도를 멈추지 마라\n내가 잠시도 쉬지 않고 모든 걸 지켜보고 있으니\n바로 역전되리라\n\n[Bridge]\n저들의 힘이 너를 압도해도\n저들의 힘이 숨을 조여도\n너는 보리라 기도의 능력을\n내가 역전시키리라'},
+    {title:'목마른 사슴 (As The Deer)',en:'As The Deer',artist:'Martin J. Nystrom',key:'C',bpm:62,genre:'경배',
+     lyrics:'목마른 사슴 시냇물을 찾아헤매이듯이\n내 영혼 주를 찾기에 갈망하나이다\n금보다 귀한 나의 주님 내게만 족주신 주\n당신만이 나의 기쁨 또한 나의 참 보배\n\n[후렴]\n주님만이 나의 힘 나의 방패 나의 참 소망\n나의 몸 정성 다 바쳐서 주님 경배합니다'},
+  ],
+  위로:[
+    {title:'나 지치고 내 영혼 (날 세우시네)',en:'You Raise Me Up',artist:'Rolf Loyland & Brendan Graham',key:'C',bpm:56,genre:'위로',
+     lyrics:'나 지치고 내 영혼 연약할 때 근심 속에 내 마음 무거워\n주 오셔서 함께 하실 때까지 나 잠잠히 주님을 기다려\n\n[후렴]\n날 세우사 저 산에 우뚝 서리\n날 세우사 풍랑 가운데도\n함께 하심 나 강하게 하네\n날 세우사 모든 것 할 수 있네'},
+    {title:'힘들고 지쳐 (너는 내 아들이라)',en:'',artist:'이재왕 & 이은수',key:'C',bpm:74,genre:'위로',
+     lyrics:'[1절]\n힘들고 지쳐 낙망하고 넘어져 일어날 힘 전혀 없을 때\n조용히 다가와 손 잡아주시며 나에게 말씀하시네\n[2절]\n게 실망하며 내 자신 연약해 고통 속에 눈물 흘릴 때\n못자국 난 그 손길 눈물 닦아주시며 나에게 말씀하시네\n\n[후렴]\n너는 내 아들이라 오늘날 내가 너를 낳았도다\n너는 내 아들이라 나의 사랑하는 내 아들이라\n\n[Bridge]\n언제나 변함없이 너는 내 아들이라\n나의 십자가 고통 해산의 그 고통으로 내가 너를 낳았으니'},
+  ],
+  새가족:[
+    {title:'당신은 사랑받기 위해 태어난 사람',en:'',artist:'이민섭',key:'D',bpm:76,genre:'환영',
+     lyrics:'당신은 사랑받기 위해 태어난 사람\n당신의 삶 속에서 그 사랑 받고 있지요\n당신은 사랑받기 위해 태어난 사람\n당신의 삶 속에서 그 사랑 받고 있지요\n\n태초부터 시작된 하나님의 사랑은\n우리의 만남을 통해 열매를 맺어요\n당신이 이 세상에 존재함 자체만으로도\n우리에겐 얼마나 큰 기쁨인지 몰라요'},
+    {title:'내가 먼저 손을 내밀리',en:'',artist:'수영로교회 찬양집',key:'C',bpm:80,genre:'환영',
+     lyrics:'(2차 촬영분 가사 추가 예정)'},
+  ],
 };
 const PHASES=[
   {name:'도입 질문',duration:5,color:'#74C69D',tip:'Q1 도입 질문 — 정답 없는 삶 나눔으로 시작. 목자가 먼저 짧게 시범 나눔.'},
@@ -1098,19 +1122,26 @@ function updateWCheck(){
   document.getElementById('wcheck-count').textContent=done;
   document.getElementById('wcheck-bar').style.width=(done/items.length*100)+'%';
 }
-function songCard(s){return`<div class="song-card"><div class="song-info"><div class="song-title">${s.title}</div><div class="song-meta">${s.artist} · Key ${s.key} · ${s.bpm} BPM</div></div><span class="song-badge">${s.genre}</span></div>`;}
+function toggleLyrics(id){var el=document.getElementById(id);if(el)el.style.display=el.style.display==='block'?'none':'block';}
+function songCard(s,i){
+  var id='lyr'+i;
+  var meta=(s.en?'<em style="font-style:normal;color:var(--sub)">'+s.en+'</em> · ':'')+s.artist;
+  var lyrHtml=s.lyrics?'<div id="'+id+'" class="lyrics-wrap"><div class="lyrics-text">'+s.lyrics.replace(/\n/g,'<br>')+'</div></div>':'';
+  return '<div style="border:1.5px solid var(--gray2);border-radius:12px;overflow:hidden;margin-bottom:8px"><div class="song-card" style="margin:0;box-shadow:none;border-radius:0;border:none" onclick="toggleLyrics(\''+id+'\')"><div class="song-info"><div class="song-title">'+s.title+'</div><div class="song-meta" style="font-size:11px">'+meta+'</div></div><span class="song-badge">Key '+s.key+'</span></div>'+lyrHtml+'</div>';
+}
 function selectTopic(t,el){
   document.querySelectorAll('.topic-tag').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('topic-songs').innerHTML=`<div class="card"><div class="card-title">🎵 ${t} 찬양 콘티</div>${(WORSHIP_DATA[t]||[]).map(songCard).join('')}</div>`;
+  var songs=WORSHIP_DATA[t]||[];
+  document.getElementById('topic-songs').innerHTML=songs.length?'<div class="card"><div class="card-title">🎵 '+t+' 찬양 ('+songs.length+'곡) — 탭하면 가사 펼치기</div>'+songs.map((s,i)=>songCard(s,'t'+i)).join('')+'</div>':'';
 }
-selectTopic('감사',document.querySelector('.topic-tag'));
+selectTopic('경배',document.querySelector('.topic-tag'));
 
 function selectKey(k,el){
   document.querySelectorAll('.key-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
-  const songs=Object.values(WORSHIP_DATA).flat().filter(s=>s.key===k);
-  document.getElementById('key-songs').innerHTML=`<div class="card"><div class="card-title">🎸 Key ${k} 찬양</div>${songs.map(songCard).join('')}</div>`;
+  var songs=Object.values(WORSHIP_DATA).flat().filter(s=>s.key===k);
+  document.getElementById('key-songs').innerHTML='<div class="card"><div class="card-title">🎸 Key '+k+' 찬양 ('+songs.length+'곡)</div>'+songs.map((s,i)=>songCard(s,'k'+i)).join('')+'</div>';
 }
 selectKey('C',document.querySelector('.key-btn'));
 
@@ -1120,7 +1151,7 @@ function selectMood(m,el){
   const all=Object.values(WORSHIP_DATA).flat();
   const songs=m==='slow'?all.filter(s=>s.bpm<=60):m==='mid'?all.filter(s=>s.bpm>60&&s.bpm<=90):all.filter(s=>s.bpm>90);
   const label=m==='slow'?'🕯 조용한 경배':m==='mid'?'🌿 보통 찬양':'🔥 활기찬 찬양';
-  document.getElementById('mood-songs').innerHTML=`<div class="card"><div class="card-title">${label}</div>${songs.map(songCard).join('')}</div>`;
+  document.getElementById('mood-songs').innerHTML='<div class="card"><div class="card-title">'+label+'</div>'+songs.map((s,i)=>songCard(s,'m'+i)).join('')+'</div>';
 }
 selectMood('mid',document.querySelector('.mood-btn.active'));
 
