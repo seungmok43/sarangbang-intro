@@ -319,26 +319,27 @@ textarea{resize:vertical;min-height:80px}
     </div>
   </div>
 
-  <!-- B: 아이스브레이크 (마음날씨 + 유형검사 + 질문뱅크) -->
+  <!-- B: 아이스브레이크 (질문뱅크 + 유형검사 + 마음날씨) -->
   <div class="sub-panel" id="w-1">
 
-    <!-- 마음 날씨 -->
+    <!-- 질문 뱅크 -->
     <div style="padding:16px 16px 0">
-      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:8px">☀️ 마음 날씨</div>
+      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:8px">🎲 질문 뱅크</div>
       <div class="card" style="margin-bottom:0">
-        <div class="card-title">오늘 내 마음 날씨는?</div>
-        <div class="weather-grid">
-          <div class="weather-card" onclick="selectWeather(this,'☀️','맑음')"><span class="icon">☀️</span><span class="label">맑음</span></div>
-          <div class="weather-card" onclick="selectWeather(this,'⛅','구름조금')"><span class="icon">⛅</span><span class="label">구름조금</span></div>
-          <div class="weather-card" onclick="selectWeather(this,'🌧','비')"><span class="icon">🌧</span><span class="label">비</span></div>
-          <div class="weather-card" onclick="selectWeather(this,'⛈','폭풍')"><span class="icon">⛈</span><span class="label">폭풍</span></div>
-          <div class="weather-card" onclick="selectWeather(this,'🌫','안개')"><span class="icon">🌫</span><span class="label">안개</span></div>
-          <div class="weather-card" onclick="selectWeather(this,'🌈','비 갠 후')"><span class="icon">🌈</span><span class="label">비 갠 후</span></div>
+        <div class="card-title">아이스브레이킹 질문 뱅크</div>
+        <div class="cat-filters" id="cat-filters">
+          <button class="cat-btn active" onclick="filterQ('전체',this)">전체</button>
+          <button class="cat-btn" onclick="filterQ('신앙',this)">✝️ 신앙</button>
+          <button class="cat-btn" onclick="filterQ('관계',this)">🤝 관계</button>
+          <button class="cat-btn" onclick="filterQ('자기발견',this)">🌱 자기발견</button>
+          <button class="cat-btn" onclick="filterQ('가벼운',this)">😄 가벼운</button>
+          <button class="cat-btn" onclick="filterQ('말씀',this)">📖 말씀</button>
         </div>
-        <div class="weather-result" id="weather-result">
-          <p style="font-size:13px;color:var(--sub);margin-bottom:6px">왜냐하면...</p>
-          <input type="text" id="weather-reason" placeholder="한 줄로 나눠주세요"/>
-          <div class="btn-row"><button class="btn btn-primary btn-sm" onclick="copyWeather()">📋 나눔 텍스트 복사</button></div>
+        <div class="q-card" id="q-card"><div class="q-card-text" id="q-text">버튼을 눌러 질문을 뽑아보세요!</div></div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="randomQ()">🎲 랜덤 뽑기</button>
+          <button class="btn btn-outline" onclick="nextQ()">다음 질문 →</button>
+          <button class="btn btn-accent btn-sm" onclick="copyQ()">📋 복사</button>
         </div>
       </div>
     </div>
@@ -352,7 +353,7 @@ textarea{resize:vertical;min-height:80px}
           <button class="faith-btn" id="faith-tab-btn" onclick="switchTypeTab('faith')" style="flex:1;padding:9px;border-radius:8px;font-size:13px;font-weight:700">✝️ 신앙 유형 검사</button>
         </div>
         <!-- MBTI -->
-        <div id="mbti-section">
+        <div id="mbti-section" style="display:none">
           <div id="mbti-steps"></div>
           <div class="mbti-result" id="mbti-result">
             <div class="type-code" id="res-code">ENFP</div>
@@ -379,24 +380,23 @@ textarea{resize:vertical;min-height:80px}
       </div>
     </div>
 
-    <!-- 질문 뱅크 -->
+    <!-- 마음 날씨 -->
     <div style="padding:16px">
-      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:8px">🎲 질문 뱅크</div>
+      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:8px">☀️ 마음 날씨</div>
       <div class="card" style="margin-bottom:0">
-        <div class="card-title">아이스브레이킹 질문 뱅크</div>
-        <div class="cat-filters" id="cat-filters">
-          <button class="cat-btn active" onclick="filterQ('전체',this)">전체</button>
-          <button class="cat-btn" onclick="filterQ('신앙',this)">✝️ 신앙</button>
-          <button class="cat-btn" onclick="filterQ('관계',this)">🤝 관계</button>
-          <button class="cat-btn" onclick="filterQ('자기발견',this)">🌱 자기발견</button>
-          <button class="cat-btn" onclick="filterQ('가벼운',this)">😄 가벼운</button>
-          <button class="cat-btn" onclick="filterQ('말씀',this)">📖 말씀</button>
+        <div class="card-title">오늘 내 마음 날씨는?</div>
+        <div class="weather-grid">
+          <div class="weather-card" onclick="selectWeather(this,'☀️','맑음')"><span class="icon">☀️</span><span class="label">맑음</span></div>
+          <div class="weather-card" onclick="selectWeather(this,'⛅','구름조금')"><span class="icon">⛅</span><span class="label">구름조금</span></div>
+          <div class="weather-card" onclick="selectWeather(this,'🌧','비')"><span class="icon">🌧</span><span class="label">비</span></div>
+          <div class="weather-card" onclick="selectWeather(this,'⛈','폭풍')"><span class="icon">⛈</span><span class="label">폭풍</span></div>
+          <div class="weather-card" onclick="selectWeather(this,'🌫','안개')"><span class="icon">🌫</span><span class="label">안개</span></div>
+          <div class="weather-card" onclick="selectWeather(this,'🌈','비 갠 후')"><span class="icon">🌈</span><span class="label">비 갠 후</span></div>
         </div>
-        <div class="q-card" id="q-card"><div class="q-card-text" id="q-text">버튼을 눌러 질문을 뽑아보세요!</div></div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="randomQ()">🎲 랜덤 뽑기</button>
-          <button class="btn btn-outline" onclick="nextQ()">다음 질문 →</button>
-          <button class="btn btn-accent btn-sm" onclick="copyQ()">📋 복사</button>
+        <div class="weather-result" id="weather-result">
+          <p style="font-size:13px;color:var(--sub);margin-bottom:6px">왜냐하면...</p>
+          <input type="text" id="weather-reason" placeholder="한 줄로 나눠주세요"/>
+          <div class="btn-row"><button class="btn btn-primary btn-sm" onclick="copyWeather()">📋 나눔 텍스트 복사</button></div>
         </div>
       </div>
     </div>
@@ -716,6 +716,7 @@ textarea{resize:vertical;min-height:80px}
     <button class="sub-btn" onclick="switchSub('wk',2)">⛪ 웰컴사랑방</button>
     <button class="sub-btn" onclick="switchSub('wk',3)">🎫 출석 스탬프</button>
     <button class="sub-btn" onclick="switchSub('wk',4)">✉️ 파송 기도문</button>
+    <button class="sub-btn" onclick="switchSub('wk',5)">🌍 선교사 기도</button>
   </div>
 
   <!-- 결단 공유 -->
@@ -793,6 +794,201 @@ textarea{resize:vertical;min-height:80px}
       <div class="btn-row" id="prayer-btns" style="display:none">
         <button class="btn btn-accent btn-sm" onclick="copyPrayer()">📋 복사</button>
         <button class="btn btn-outline btn-sm" onclick="window.print()">🖨 인쇄</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 선교사 기도 -->
+  <div class="sub-panel" id="wk-5">
+    <!-- 헤더 -->
+    <div style="padding:16px 16px 0">
+      <div class="card" style="background:linear-gradient(135deg,#1B4332,#40916C);color:#fff;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:800;margin-bottom:2px">34교구 결연지역 · 중앙아시아 1</div>
+        <div style="font-size:12px;opacity:.85">🇰🇿 카자흐스탄 (쉼켄트 · 탈가르 · 알마티 · 아티라우 · 탈디코르간)</div>
+        <div style="font-size:11px;opacity:.65;margin-top:5px">📅 매월 2주차 주일 17:00 · 본당 1층 VIP실</div>
+      </div>
+    </div>
+
+    <!-- 내 마을 선교사 찾기 -->
+    <div style="padding:8px 16px 0">
+      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:6px">🔍 내 마을로 찾기</div>
+      <select id="village-select" onchange="findMyMissionary(this.value)" style="width:100%;padding:10px;border:1.5px solid var(--gray2);border-radius:10px;font-size:13px;font-family:inherit">
+        <option value="">마을 선택...</option>
+        <optgroup label="파송 · 김복희 선교사 (쉼켄트)">
+          <option value="0">전호숙 마을 — 경옥, 민우, 송영희, 혜숙, 효숙1,2</option>
+          <option value="0">정순덕 마을 — 경진, 귀임, 순덕, 인덕, 황미숙</option>
+        </optgroup>
+        <optgroup label="파송 · 이심온/박지혜 선교사 (탈가르)">
+          <option value="1">이은희 마을 — 규범, 상윤, 옥토, 유경, 영일, 영광, 영훈, 이옥, 필선</option>
+          <option value="1">도언희 마을 — 언희, 은우, 열매, 해진, 해순1, 해순2</option>
+        </optgroup>
+        <optgroup label="파송 · 이병우/김다래 선교사 (알마티)">
+          <option value="2">김명자 마을 — 덕의, 명자1,2, 생수(인수), 성실, 연숙, 윤옥</option>
+        </optgroup>
+        <optgroup label="협력 · 강혜영 선교사 (아티라우)">
+          <option value="3">진경아 마을 — 맘보(유태), 경아, 성희, 안희, 혜원, 경은</option>
+          <option value="3">이청희 마을 — 경자, 미란, 선영, 용주, 윤숙</option>
+        </optgroup>
+        <optgroup label="협력 · 김기석/이영미 선교사 (탈가르)">
+          <option value="4">정순화 마을 — 경민지은, 영옥, 선희, 순화1,2</option>
+        </optgroup>
+        <optgroup label="협력 · 이성덕/김주영 선교사 (탈디코르간)">
+          <option value="5">김일하 마을 — 소영, 은진, 미자, 엘림(일하), 인우은진</option>
+        </optgroup>
+      </select>
+      <div id="village-result" style="display:none;margin-top:8px;padding:10px 12px;background:var(--light);border-radius:10px;font-size:13px;color:var(--primary);font-weight:700"></div>
+    </div>
+
+    <!-- 파송 선교사 -->
+    <div style="padding:12px 16px 0">
+      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:6px">✈️ 파송 선교사</div>
+
+      <!-- 1. 김복희 -->
+      <div style="border:1.5px solid #b7e4c7;border-radius:12px;overflow:hidden;margin-bottom:8px" id="mc0-wrap">
+        <div onclick="toggleMCard('mc0')" style="background:#d8f3dc;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;font-weight:800;color:#1B4332">김복희 선교사</span><span style="font-size:11px;color:#52796f;margin-left:8px">쉼켄트</span><span style="font-size:10px;background:#1B4332;color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px">파송</span></div>
+          <span id="mc0-arr" style="font-size:10px;color:var(--sub)">▼</span>
+        </div>
+        <div id="mc0" style="display:none;padding:12px 14px;background:#fff;font-size:12px;line-height:1.8;color:var(--text)">
+          <div style="font-size:11px;color:var(--sub);margin-bottom:8px">📍 전호숙·정순덕 마을 결연</div>
+          <ol style="padding-left:16px;margin:0">
+            <li>카작 사회의 부당한 관행이 사라지고, 현지 교회와 목회자들에게 부흥과 영적 성장이 일어나게 하소서.</li>
+            <li>현지S교회 성도들이 '말씀 읽기' 운동에 성령님 인도하여 주시고, 세례받은 청소년 4명이 말씀으로 굳건히 서도록.</li>
+            <li>주일학교에 현지 교사가 충원되어 감사하고, 모든 교사들에게 가르치는 은사와 인내로 채워주소서.</li>
+            <li>'십대를 위한 성경적 성교육' 다섯 번째 그룹까지 잘 마무리하고, 아이들이 하나님께 귀히 여김 받음을 깨닫도록.</li>
+            <li>장애 여성들의 가정교회 모임에서 치유와 회복이 일어나고, 믿지 않는 가족들이 구원받도록.</li>
+            <li>만성질환으로 홀로 지내시는 Z자매님의 건강을 위해, ADHD 아동 가정이 함께 드리는 예배마다 주님의 임재를 체험하도록.</li>
+            <li>연약한 체력에 강건함을 더하여 주셔서 맡겨주신 사역을 지혜롭게 잘 감당하고, 복음의 능력이 현지 영혼에게 지속적으로 흘러가도록.</li>
+          </ol>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="event.stopPropagation();showToast('🙏 김복희 선교사를 위해 함께 기도합니다!')">🙏 함께 기도하기</button>
+        </div>
+      </div>
+
+      <!-- 2. 이심온/박지혜 -->
+      <div style="border:1.5px solid #b7e4c7;border-radius:12px;overflow:hidden;margin-bottom:8px" id="mc1-wrap">
+        <div onclick="toggleMCard('mc1')" style="background:#d8f3dc;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;font-weight:800;color:#1B4332">이심온·박지혜 선교사</span><span style="font-size:11px;color:#52796f;margin-left:8px">탈가르</span><span style="font-size:10px;background:#1B4332;color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px">파송</span></div>
+          <span id="mc1-arr" style="font-size:10px;color:var(--sub)">▼</span>
+        </div>
+        <div id="mc1" style="display:none;padding:12px 14px;background:#fff;font-size:12px;line-height:1.8;color:var(--text)">
+          <div style="font-size:11px;color:var(--sub);margin-bottom:8px">📍 이은희·도언희 마을 결연 · 자녀: 성원, 근원</div>
+          <ol style="padding-left:16px;margin:0">
+            <li>에들렛 공동체 성도들이 복음의 빛진자로서 살아가도록.</li>
+            <li>사역자들과 리더십이 겸손함으로 공동체의 모범이 되도록.</li>
+            <li>사춘기 중에 있는 백투르쏜과 딜라즈의 믿음이 견고해지도록.</li>
+            <li>부부에게 모든 사역을 잘 감당할 능력과 지혜를 주시도록.</li>
+            <li>방학 기간 동안 성원·근원이 안전하게 좋은 추억을 만들고 다음 학년 준비도 잘 하도록.</li>
+            <li>성원·근원이 매일 삶에서 인격적인 하나님을 만날 수 있도록.</li>
+          </ol>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="event.stopPropagation();showToast('🙏 이심온·박지혜 선교사를 위해 함께 기도합니다!')">🙏 함께 기도하기</button>
+        </div>
+      </div>
+
+      <!-- 3. 이병우/김다래 -->
+      <div style="border:1.5px solid #b7e4c7;border-radius:12px;overflow:hidden;margin-bottom:8px" id="mc2-wrap">
+        <div onclick="toggleMCard('mc2')" style="background:#d8f3dc;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;font-weight:800;color:#1B4332">이병우·김다래 선교사</span><span style="font-size:11px;color:#52796f;margin-left:8px">알마티</span><span style="font-size:10px;background:#1B4332;color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px">파송</span></div>
+          <span id="mc2-arr" style="font-size:10px;color:var(--sub)">▼</span>
+        </div>
+        <div id="mc2" style="display:none;padding:12px 14px;background:#fff;font-size:12px;line-height:1.8;color:var(--text)">
+          <div style="font-size:11px;color:var(--sub);margin-bottom:8px">📍 김명자 마을 결연 · 자녀: 연서, 아윤</div>
+          <ol style="padding-left:16px;margin:0">
+            <li>급변하는 현장 상황과 비즈니스 비자 전환 절차, 신변 안전 문제 앞에서 염려 대신 감사와 기쁨으로 감당하도록.</li>
+            <li>사업 초기비용·유지비용·법인세가 모금되도록.</li>
+            <li>영혼을 살리기 위한 언어를 잘 배울 수 있는 지혜와 끈기를 주시도록.</li>
+            <li>첫째 이래의 코피 증상이 고쳐지고 회복되도록.</li>
+            <li>사역과 안전을 위한 이동 수단이 빠른 시일 내에 구해지도록.</li>
+            <li>처음과 나중 되시는 주님만을 신뢰하고 잘 따라가는 가정이 되도록.</li>
+          </ol>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="event.stopPropagation();showToast('🙏 이병우·김다래 선교사를 위해 함께 기도합니다!')">🙏 함께 기도하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 협력 선교사 -->
+    <div style="padding:8px 16px 0">
+      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:6px">🤝 협력 선교사</div>
+
+      <!-- 4. 강혜영 -->
+      <div style="border:1.5px solid #c3dfe0;border-radius:12px;overflow:hidden;margin-bottom:8px" id="mc3-wrap">
+        <div onclick="toggleMCard('mc3')" style="background:#e0f4f5;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;font-weight:800;color:#2d6a6f">강혜영 선교사</span><span style="font-size:11px;color:#52796f;margin-left:8px">아티라우</span><span style="font-size:10px;background:#2d6a6f;color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px">협력</span></div>
+          <span id="mc3-arr" style="font-size:10px;color:var(--sub)">▼</span>
+        </div>
+        <div id="mc3" style="display:none;padding:12px 14px;background:#fff;font-size:12px;line-height:1.8;color:var(--text)">
+          <div style="font-size:11px;color:var(--sub);margin-bottom:8px">📍 진경아·이청희 마을 결연</div>
+          <ol style="padding-left:16px;margin:0">
+            <li>선교 보고를 할 때마다 하나님의 은혜와 일하심을 나누고 풍성한 시간이 되도록.</li>
+            <li>어머니의 무릎·허리 통증이 없어지고 하나님의 긍휼하심과 선하신 손길이 임하도록.</li>
+            <li>Ng 자매가 아이들 캠프를 준비하는데 주님이 지혜와 힘을 주시도록.</li>
+            <li>다음 사역을 잘 알아보고 준비할 수 있도록, 관계된 사람들을 만나 정보와 도움을 받도록.</li>
+            <li>매일 말씀과 기도로 만나주시고, 채워주시고, 인도해 주시도록.</li>
+          </ol>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="event.stopPropagation();showToast('🙏 강혜영 선교사를 위해 함께 기도합니다!')">🙏 함께 기도하기</button>
+        </div>
+      </div>
+
+      <!-- 5. 김기석/이영미 -->
+      <div style="border:1.5px solid #c3dfe0;border-radius:12px;overflow:hidden;margin-bottom:8px" id="mc4-wrap">
+        <div onclick="toggleMCard('mc4')" style="background:#e0f4f5;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;font-weight:800;color:#2d6a6f">김기석·이영미 선교사</span><span style="font-size:11px;color:#52796f;margin-left:8px">탈가르</span><span style="font-size:10px;background:#2d6a6f;color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px">협력</span></div>
+          <span id="mc4-arr" style="font-size:10px;color:var(--sub)">▼</span>
+        </div>
+        <div id="mc4" style="display:none;padding:12px 14px;background:#fff;font-size:12px;line-height:1.8;color:var(--text)">
+          <div style="font-size:11px;color:var(--sub);margin-bottom:8px">📍 정순화 마을 결연</div>
+          <ol style="padding-left:16px;margin:0">
+            <li>사역의 경험을 잘 정리하고 나누는 일에 하나님의 은혜가 있기를.</li>
+            <li>신학교 사역이 하나님의 뜻 가운데 좀 더 확장될 수 있도록.</li>
+            <li>반석·샘물이 건강하고 늘 기쁨과 감사와 평안이 넘치도록.</li>
+            <li>딸들과 사위가 각자의 삶에 충실하고 윤서가 건강하고 지혜롭게 자라도록.</li>
+          </ol>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="event.stopPropagation();showToast('🙏 김기석·이영미 선교사를 위해 함께 기도합니다!')">🙏 함께 기도하기</button>
+        </div>
+      </div>
+
+      <!-- 6. 이성덕/김주영 -->
+      <div style="border:1.5px solid #c3dfe0;border-radius:12px;overflow:hidden;margin-bottom:8px" id="mc5-wrap">
+        <div onclick="toggleMCard('mc5')" style="background:#e0f4f5;padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;font-weight:800;color:#2d6a6f">이성덕·김주영 선교사</span><span style="font-size:11px;color:#52796f;margin-left:8px">탈디코르간</span><span style="font-size:10px;background:#2d6a6f;color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px">협력</span></div>
+          <span id="mc5-arr" style="font-size:10px;color:var(--sub)">▼</span>
+        </div>
+        <div id="mc5" style="display:none;padding:12px 14px;background:#fff;font-size:12px;line-height:1.8;color:var(--text)">
+          <div style="font-size:11px;color:var(--sub);margin-bottom:8px">📍 김일하 마을 결연</div>
+          <ol style="padding-left:16px;margin:0">
+            <li>한국어 센터가 안정적으로 운영되고, 새로운 팀원들과 빠르게 친밀감이 형성되어 좋은 협력이 이루어지도록.</li>
+            <li>학생들과 학부모들에게 하나님의 사랑이 자연스럽게 흘러가도록.</li>
+            <li>지역교회가 영적으로 부흥하고 새로운 성도들이 세워지도록.</li>
+            <li>아들 유민의 찬양 사역과 딸 유미의 졸업 후 진로 가운데 임마누엘 주님을 경험하도록.</li>
+          </ol>
+          <button class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" onclick="event.stopPropagation();showToast('🙏 이성덕·김주영 선교사를 위해 함께 기도합니다!')">🙏 함께 기도하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 여름 단기선교 기도카드 -->
+    <div style="padding:8px 16px 16px">
+      <div style="font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.5px;margin-bottom:6px">🌏 여름 단기선교 기도카드</div>
+      <div style="border:2px solid #74C69D;border-radius:12px;overflow:hidden">
+        <div style="background:linear-gradient(135deg,#0d4f6b,#1a7a9a);color:#fff;padding:12px 14px">
+          <div style="font-size:11px;letter-spacing:1px;opacity:.8">34 L.I.F.E · KAZAKHSTAN MISSION TRIP</div>
+          <div style="font-size:15px;font-weight:800;margin:2px 0">카자흐스탄 단기선교</div>
+          <div style="font-size:12px;opacity:.85">2026. 07. 10 – 18</div>
+        </div>
+        <div style="padding:12px 14px;background:#fff;font-size:12px;color:var(--text)">
+          <div style="font-weight:700;color:var(--primary);margin-bottom:8px">🙏 단기선교를 위해 기도해주세요!</div>
+          <ol style="padding-left:16px;margin:0;line-height:2">
+            <li><b>출국과 이동의 안전</b> — 부산→알마티 무사 도착, 장거리 이동 중 건강 보호</li>
+            <li><b>주일 예배와 식사 섬김</b> — 7/12, 한국음식 섬김과 단체 특송·교제가 사랑으로 전해지도록</li>
+            <li><b>어린이 캠프 (7/13)</b> — 풍선아트·달고나 등 프로그램으로 현지 아이들이 복음의 사랑을 경험하도록</li>
+            <li><b>교회 봉사 작업 (7/16)</b> — 청소·페인트칠·제초 작업이 안전하게 마무리되도록</li>
+            <li><b>현지 교회와 동역</b> — 에들렛 교회와 목회자·선교사님과의 교제가 깊은 동역으로 이어지도록</li>
+            <li><b>물품과 재정</b> — 선물·사역 물품이 차질 없이, 필요한 재정이 넉넉히 채워지도록</li>
+            <li><b>팀의 하나됨과 건강</b> — 한 마음으로 연합하여 섬기고 모든 일정이 하나님께 영광 돌리는 시간이 되도록</li>
+          </ol>
+          <div style="margin-top:10px;padding:8px 10px;background:var(--gray);border-radius:8px;font-size:11px;color:var(--sub)">
+            선교대원: 이승목 김수진 김일하 서경자 이규철 이미란 이용주 임명재 임효명 정순화 차윤정 황규범
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1922,6 +2118,27 @@ function addStamp(){
   renderStamps();
 }
 renderStamps();
+
+// ── Works: 선교사 기도 ──────────────────────────────────
+function toggleMCard(id){
+  var el=document.getElementById(id);
+  var arr=document.getElementById(id+'-arr');
+  var open=el.style.display==='block';
+  el.style.display=open?'none':'block';
+  if(arr)arr.textContent=open?'▼':'▲';
+}
+function findMyMissionary(idx){
+  var el=document.getElementById('village-result');
+  if(!idx&&idx!=='0'){el.style.display='none';return;}
+  var names=['김복희 선교사 (쉼켄트)','이심온·박지혜 선교사 (탈가르)','이병우·김다래 선교사 (알마티)','강혜영 선교사 (아티라우)','김기석·이영미 선교사 (탈가르)','이성덕·김주영 선교사 (탈디코르간)'];
+  el.style.display='block';
+  el.innerHTML='🙏 결연 선교사: '+names[parseInt(idx)]+'<br><span style="font-size:11px;font-weight:400;color:var(--sub)">아래 카드에서 기도제목을 확인하세요</span>';
+  var wraps=['mc0','mc1','mc2','mc3','mc4','mc5'];
+  wraps.forEach(function(id,i){
+    var w=document.getElementById(id+'-wrap');
+    if(w)w.style.border=i===parseInt(idx)?'2px solid var(--accent)':'1.5px solid '+(i<3?'#b7e4c7':'#c3dfe0');
+  });
+}
 
 // ── Works: 파송기도문 ──────────────────────────────────
 function genPrayer(){
