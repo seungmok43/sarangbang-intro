@@ -588,12 +588,7 @@ textarea{resize:vertical;min-height:80px}
       <div class="card">
         <div class="card-title">🎶 새가족 환영 찬양</div>
         <div style="font-size:13px;color:var(--sub);margin-bottom:10px">새가족이 왔을 경우 아래 찬양 중 하나로 환영합니다</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 당신은 사랑받기 위해 태어난 사람</div>
-          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 당신은 시냇가에 심은 나무라</div>
-          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 당신은 하나님의 언약안에</div>
-          <div style="background:var(--light);border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary)">🎵 너는 시냇가에</div>
-        </div>
+        <div id="welcome-song-list" style="display:flex;flex-direction:column;gap:8px"></div>
       </div>
 
       <div class="card">
@@ -1596,6 +1591,27 @@ function selectMood(m,el){
   document.getElementById('mood-songs').innerHTML='<div class="card"><div class="card-title">'+label+'</div>'+songs.map((s,i)=>songCard(s,'m'+i)).join('')+'</div>';
 }
 selectMood('mid',document.querySelector('.mood-btn.active'));
+
+// ── 새가족 환영 찬양 (클릭 시 가사 표시) ──────────────────
+(function(){
+  var WELCOME_TITLES=['당신은 사랑받기 위해','너는 시냇가에 심은 나무라','당신은 하나님의 언약 안에','당신은 시냇가에 심은 나무라'];
+  var all=Object.values(WORSHIP_DATA).flat();
+  var container=document.getElementById('welcome-song-list');
+  if(!container)return;
+  var seen=new Set();
+  var songs=WELCOME_TITLES.map(function(t){return all.find(function(s){return s.title===t;});}).filter(Boolean).filter(function(s){if(seen.has(s.title))return false;seen.add(s.title);return true;});
+  // 새가족(환영) 장르 곡 추가 (중복 제외)
+  all.filter(function(s){return s.genre==='환영';}).forEach(function(s){if(!seen.has(s.title)){seen.add(s.title);songs.push(s);}});
+  songs.forEach(function(s,i){
+    var id='wl'+i;
+    var lyrHtml=s.lyrics?'<div id="'+id+'" style="display:none;padding:10px 12px 4px;border-top:1px solid var(--gray2)"><div style="font-size:13px;line-height:1.9;color:var(--text);white-space:pre-line">'+s.lyrics.replace(/\\n/g,'\n')+'</div><button style="margin:8px 0 4px;font-size:12px;padding:6px 14px;border-radius:20px;border:none;background:var(--accent);color:#fff;cursor:pointer" onclick="event.stopPropagation();addToConti(this.dataset.t)" data-t="'+s.title+'">＋ 콘티에 추가</button></div>':'';
+    var div=document.createElement('div');
+    div.style.cssText='border:1.5px solid var(--gray2);border-radius:10px;overflow:hidden;cursor:pointer;';
+    div.innerHTML='<div style="background:var(--light);padding:10px 12px;font-size:13px;font-weight:600;color:var(--primary);display:flex;justify-content:space-between;align-items:center"><span>🎵 '+s.title+'</span><span id="arr'+id+'" style="font-size:10px;color:var(--sub)">▼</span></div>'+lyrHtml;
+    div.querySelector('[style*="background:var(--light)"]').onclick=function(){var el=document.getElementById(id);var arr=document.getElementById('arr'+id);if(!el)return;var open=el.style.display==='block';el.style.display=open?'none':'block';arr.textContent=open?'▼':'▲';};
+    container.appendChild(div);
+  });
+})();
 
 // ── 콘티 ─────────────────────────────────────────────────
 var contiList=JSON.parse(localStorage.getItem('sb_conti')||'[]');
