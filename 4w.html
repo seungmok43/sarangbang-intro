@@ -1677,19 +1677,56 @@ function moveConti(i,dir){
   localStorage.setItem('sb_conti',JSON.stringify(contiList));
   renderConti();
 }
-var CONTI_PRESETS={
-  경배:['예수 사랑해요','빛나는 왕의 왕','거룩 거룩 거룩 만군의 주여','내 구주 예수님'],
-  성령:['이 땅의 황무함을','나는 아네','하늘의 문을 여소서','성령이여 임하소서'],
-  위로:['나 지치고 내 영혼','상한 마음에 쓰러진 자','아침이 밝아 올 때에'],
-  새가족:['당신은 사랑받기 위해','주 하나님 독생자 예수','예수 사랑해요'],
+// 빠른 콘티 — BPM 흐름 기반 랜덤 선곡
+// 각 슬롯: {genres, bpmMin, bpmMax} 순서대로 선곡
+var PRESET_FLOWS={
+  경배:[
+    {genres:['찬양','경배'],bpmMin:88,bpmMax:999},  // 찬양으로 시작
+    {genres:['경배'],bpmMin:70,bpmMax:90},            // 경배
+    {genres:['경배'],bpmMin:56,bpmMax:72},            // 깊은 경배
+    {genres:['경배'],bpmMin:56,bpmMax:68},            // 마무리 경배
+  ],
+  성령:[
+    {genres:['경배','찬양'],bpmMin:80,bpmMax:999},    // 선포
+    {genres:['성령','기도'],bpmMin:68,bpmMax:85},     // 간구
+    {genres:['성령'],bpmMin:60,bpmMax:75},            // 임재
+    {genres:['경배','위로'],bpmMin:56,bpmMax:68},     // 마무리
+  ],
+  위로:[
+    {genres:['위로'],bpmMin:60,bpmMax:78},            // 연약함 고백
+    {genres:['기도','위로'],bpmMin:60,bpmMax:75},     // 갈망
+    {genres:['경배','위로'],bpmMin:56,bpmMax:72},     // 확신
+  ],
+  새가족:[
+    {genres:['환영'],bpmMin:60,bpmMax:999},           // 환영
+    {genres:['찬양','경배'],bpmMin:78,bpmMax:999},    // 찬양
+    {genres:['경배','위로'],bpmMin:56,bpmMax:72},     // 소프트 랜딩
+  ],
 };
+function pickRandom(pool,exclude){
+  var filtered=pool.filter(function(s){return !exclude.has(s.title);});
+  if(!filtered.length)return null;
+  return filtered[Math.floor(Date.now()*0.001%1*filtered.length+Math.random()*filtered.length)%filtered.length];
+}
 function loadPreset(key){
-  var titles=CONTI_PRESETS[key];if(!titles)return;
+  var flow=PRESET_FLOWS[key];if(!flow)return;
   var all=Object.values(WORSHIP_DATA).flat();
-  contiList=titles.map(function(t){return all.find(function(s){return s.title===t;});}).filter(Boolean);
+  var used=new Set();
+  var result=[];
+  flow.forEach(function(slot){
+    var pool=all.filter(function(s){
+      var gOk=slot.genres.indexOf(s.genre)>=0;
+      var bOk=s.bpm>=slot.bpmMin&&s.bpm<=slot.bpmMax;
+      return gOk&&bOk;
+    });
+    var pick=pickRandom(pool,used);
+    if(pick){used.add(pick.title);result.push(pick);}
+  });
+  if(!result.length){showToast('조건에 맞는 곡이 없어요');return;}
+  contiList=result;
   localStorage.setItem('sb_conti',JSON.stringify(contiList));
   renderConti();
-  showToast(key+' 콘티 불러옴 ✓');
+  showToast('🎲 '+key+' 콘티 새로 뽑았어요!');
 }
 function clearConti(){
   contiList=[];localStorage.removeItem('sb_conti');renderConti();
