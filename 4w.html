@@ -143,6 +143,17 @@ textarea{resize:vertical;min-height:80px}
 .song-card{cursor:pointer}
 .lyrics-wrap{display:none;padding:12px 14px;background:var(--light);border-top:1px solid var(--gray2)}
 .lyrics-text{font-size:13px;line-height:2.1;color:var(--text)}
+.conti-add-btn{display:block;width:100%;margin-top:10px;padding:9px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.3px}
+.conti-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray2)}
+.conti-item:last-child{border-bottom:none}
+.conti-num{min-width:24px;height:24px;background:var(--primary);color:#fff;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.conti-info{flex:1;min-width:0}
+.conti-title{font-size:13px;font-weight:700;color:var(--text)}
+.conti-meta{font-size:11px;color:var(--sub);margin-top:2px}
+.conti-flow{font-size:11px;color:var(--accent);margin-top:3px;line-height:1.4}
+.conti-del{background:none;border:none;font-size:14px;color:#bbb;cursor:pointer;padding:2px 4px;line-height:1}
+.preset-btn{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:600;cursor:pointer;text-align:left;color:var(--primary);margin-bottom:8px;transition:background .15s}
+.preset-btn:last-child{margin-bottom:0}
 .key-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .key-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--gray2);background:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
 .key-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
@@ -404,6 +415,7 @@ textarea{resize:vertical;min-height:80px}
     <button class="mode-btn" onclick="switchWMode(2)">🌊 분위기로 찾기</button>
     <button class="mode-btn" onclick="switchWMode(3)">🔕 침묵 타이머</button>
     <button class="mode-btn" onclick="switchWMode(4)">📋 도우미 준비</button>
+    <button class="mode-btn" onclick="switchWMode(5)">📝 콘티</button>
   </div>
 
   <!-- 주제 -->
@@ -593,6 +605,35 @@ textarea{resize:vertical;min-height:80px}
         <div style="font-size:13px;color:var(--sub);line-height:1.7">
           찬양이 끝난 후 → 말씀을 위한 기도를 준비된 분께 부탁합니다. 그 기도는 은혜의 생에 나와 있는 기도문을 그대로 읽어도 됩니다. 아니면 짧은 기도로 기도자에게 인도하도록 부탁합니다.
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 콘티 -->
+  <div class="worship-panel" id="wm-5">
+    <div style="padding:0 16px 16px">
+      <div class="card">
+        <div class="card-title">⚡ 빠른 콘티 추천</div>
+        <p style="font-size:12px;color:var(--sub);margin-bottom:12px">주제 선택 → BPM 흐름에 맞는 곡 순서 자동 구성</p>
+        <button class="preset-btn" onclick="loadPreset('경배')">🙌 경배 집회 — 찬양 → 경배 → 깊은 경배 (4곡 · 약 16분)</button>
+        <button class="preset-btn" onclick="loadPreset('성령')">🔥 성령 집회 — 선포 → 간구 → 임재 (4곡 · 약 16분)</button>
+        <button class="preset-btn" onclick="loadPreset('위로')">💙 위로 모임 — 연약함 → 갈망 → 확신 (3곡 · 약 12분)</button>
+        <button class="preset-btn" onclick="loadPreset('새가족')">🤝 새가족 환영 — 환영 → 찬양 → 소프트 랜딩 (3곡 · 약 12분)</button>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div class="card-title" style="margin-bottom:0">📝 내 콘티</div>
+          <button onclick="clearConti()" style="font-size:12px;color:var(--sub);background:none;border:none;cursor:pointer;padding:4px 0">전체 삭제</button>
+        </div>
+        <div id="conti-list"></div>
+        <div id="conti-footer" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--gray2)">
+          <div id="conti-stats" style="font-size:12px;color:var(--sub);margin-bottom:10px"></div>
+          <button onclick="shareConti()" style="width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer">📋 콘티 텍스트 복사</button>
+        </div>
+      </div>
+      <div class="card" style="background:var(--gray);border:none;box-shadow:none">
+        <div class="card-title" style="font-size:13px">💡 수동으로 곡 추가하는 법</div>
+        <div style="font-size:13px;color:var(--sub);line-height:1.8">1. <strong>🎵 주제로 찾기</strong> 탭 이동<br>2. 원하는 곡 탭 → 가사 펼치기<br>3. <strong>＋ 콘티에 추가</strong> 버튼 클릭</div>
       </div>
     </div>
   </div>
@@ -1126,7 +1167,8 @@ function toggleLyrics(id){var el=document.getElementById(id);if(el)el.style.disp
 function songCard(s,i){
   var id='lyr'+i;
   var meta=(s.en?'<em style="font-style:normal;color:var(--sub)">'+s.en+'</em> · ':'')+s.artist;
-  var lyrHtml=s.lyrics?'<div id="'+id+'" class="lyrics-wrap"><div class="lyrics-text">'+s.lyrics.replace(/\n/g,'<br>')+'</div></div>':'';
+  var addBtn='<button class="conti-add-btn" onclick="event.stopPropagation();addToConti(this.dataset.t)" data-t="'+s.title+'">＋ 콘티에 추가</button>';
+  var lyrHtml=s.lyrics?'<div id="'+id+'" class="lyrics-wrap"><div class="lyrics-text">'+s.lyrics.replace(/\n/g,'<br>')+'</div>'+addBtn+'</div>':'';
   return '<div style="border:1.5px solid var(--gray2);border-radius:12px;overflow:hidden;margin-bottom:8px"><div class="song-card" style="margin:0;box-shadow:none;border-radius:0;border:none" onclick="toggleLyrics(\''+id+'\')"><div class="song-info"><div class="song-title">'+s.title+'</div><div class="song-meta" style="font-size:11px">'+meta+'</div></div><span class="song-badge">Key '+s.key+'</span></div>'+lyrHtml+'</div>';
 }
 function selectTopic(t,el){
@@ -1154,6 +1196,107 @@ function selectMood(m,el){
   document.getElementById('mood-songs').innerHTML='<div class="card"><div class="card-title">'+label+'</div>'+songs.map((s,i)=>songCard(s,'m'+i)).join('')+'</div>';
 }
 selectMood('mid',document.querySelector('.mood-btn.active'));
+
+// ── 콘티 ─────────────────────────────────────────────────
+var contiList=JSON.parse(localStorage.getItem('sb_conti')||'[]');
+
+function bpmLabel(bpm){return bpm<=60?'🕯 경배':bpm<=80?'🌿 찬양':'🔥 활기';}
+function flowTip(prev,cur){
+  if(!prev)return'';
+  var d=prev.bpm-cur.bpm;
+  if(d>20)return'⬇ 분위기를 낮춰 경배로 — 마지막 음 홀딩 후 전환';
+  if(d<-20)return'⬆ 에너지 높이기 — 박수로 브릿지하세요';
+  return'→ 자연스럽게 이어서';
+}
+function renderConti(){
+  var el=document.getElementById('conti-list'),footer=document.getElementById('conti-footer'),stats=document.getElementById('conti-stats');
+  if(!el)return;
+  if(!contiList.length){
+    el.innerHTML='<div style="text-align:center;padding:24px 0;color:var(--sub);font-size:13px">주제로 찾기에서<br><strong>＋ 콘티 추가</strong>를 눌러 곡을 담아보세요</div>';
+    if(footer)footer.style.display='none';
+    return;
+  }
+  var html='';
+  contiList.forEach(function(s,i){
+    var tip=flowTip(contiList[i-1],s);
+    html+='<div class="conti-item">'
+      +'<div class="conti-num">'+(i+1)+'</div>'
+      +'<div class="conti-info">'
+        +'<div class="conti-title">'+s.title+'</div>'
+        +'<div class="conti-meta">'+s.artist+' · Key '+s.key+' · '+bpmLabel(s.bpm)+'</div>'
+        +(i>0&&tip?'<div class="conti-flow">'+tip+'</div>':'')
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;gap:2px;align-items:center">'
+        +(i>0?'<button onclick="moveConti('+i+',-1)" class="conti-del">↑</button>':'<span style="height:21px;display:block"></span>')
+        +(i<contiList.length-1?'<button onclick="moveConti('+i+',1)" class="conti-del">↓</button>':'<span style="height:21px;display:block"></span>')
+        +'<button onclick="removeFromConti('+i+')" class="conti-del" style="color:#e57373">✕</button>'
+      +'</div>'
+      +'</div>';
+  });
+  el.innerHTML=html;
+  if(footer){
+    footer.style.display='block';
+    if(stats)stats.textContent='총 '+contiList.length+'곡 · 약 '+Math.round(contiList.length*4)+'분 예상 (곡당 4분 기준)';
+  }
+}
+function addToConti(title){
+  if(contiList.some(function(s){return s.title===title;})){showToast('이미 추가된 곡입니다');return;}
+  var s=Object.values(WORSHIP_DATA).flat().find(function(x){return x.title===title;});
+  if(!s)return;
+  contiList.push(s);
+  localStorage.setItem('sb_conti',JSON.stringify(contiList));
+  renderConti();
+  var short=title.length>12?title.slice(0,12)+'…':title;
+  showToast('"'+short+'" 추가됨 ✓');
+}
+function removeFromConti(i){
+  contiList.splice(i,1);
+  localStorage.setItem('sb_conti',JSON.stringify(contiList));
+  renderConti();
+}
+function moveConti(i,dir){
+  var j=i+dir;
+  if(j<0||j>=contiList.length)return;
+  var tmp=contiList[i];contiList[i]=contiList[j];contiList[j]=tmp;
+  localStorage.setItem('sb_conti',JSON.stringify(contiList));
+  renderConti();
+}
+var CONTI_PRESETS={
+  경배:['예수 사랑해요','거룩 거룩 거룩 만군의 주여','내 구주 예수님','엎드려 경배해'],
+  성령:['기도를 멈추지 마라','나는 아네 (불을 내려주소서)','거룩하신 성령이여','성령이여 임하소서'],
+  위로:['나 지치고 내 영혼 (날 세우시네)','목마른 사슴 (As The Deer)','힘들고 지쳐 (너는 내 아들이라)'],
+  새가족:['당신은 사랑받기 위해 태어난 사람','예수 사랑해요','나 지치고 내 영혼 (날 세우시네)'],
+};
+function loadPreset(key){
+  var titles=CONTI_PRESETS[key];if(!titles)return;
+  var all=Object.values(WORSHIP_DATA).flat();
+  contiList=titles.map(function(t){return all.find(function(s){return s.title===t;});}).filter(Boolean);
+  localStorage.setItem('sb_conti',JSON.stringify(contiList));
+  renderConti();
+  showToast(key+' 콘티 불러옴 ✓');
+}
+function clearConti(){
+  contiList=[];localStorage.removeItem('sb_conti');renderConti();
+}
+function shareConti(){
+  var lines=['📋 사랑방 찬양 콘티\n'];
+  contiList.forEach(function(s,i){lines.push((i+1)+'. '+s.title+' (Key '+s.key+')');});
+  lines.push('\n총 '+contiList.length+'곡 · 약 '+Math.round(contiList.length*4)+'분');
+  var text=lines.join('\n');
+  if(navigator.clipboard){navigator.clipboard.writeText(text).then(function(){showToast('클립보드에 복사됨 ✓');});}
+  else{alert(text);}
+}
+function showToast(msg){
+  var el=document.getElementById('toast-msg');
+  if(!el){
+    el=document.createElement('div');el.id='toast-msg';
+    el.style.cssText='position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(27,67,50,.95);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;pointer-events:none;white-space:nowrap;transition:opacity .3s;opacity:0';
+    document.body.appendChild(el);
+  }
+  el.textContent=msg;el.style.opacity='1';
+  clearTimeout(el._t);el._t=setTimeout(function(){el.style.opacity='0';},2200);
+}
+renderConti();
 
 // 침묵 타이머
 let silenceDur=60, silenceLeft=60, silenceInt=null, silenceRunning=false;
