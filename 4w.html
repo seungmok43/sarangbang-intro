@@ -715,95 +715,13 @@ textarea{resize:vertical;min-height:80px}
 ════════════════════════════════════════ -->
 <div class="tab-panel" id="panel-3">
   <div class="sub-tabs">
-    <button class="sub-btn active" onclick="switchSub('wk',0)">📝 결단 공유</button>
-    <button class="sub-btn" onclick="switchSub('wk',1)">🙏 VIP 기도</button>
+    <button class="sub-btn active" onclick="switchSub('wk',0)">🌍 선교사님을 위한 기도</button>
+    <button class="sub-btn" onclick="switchSub('wk',1)">🙏 VIP를 위한 기도</button>
     <button class="sub-btn" onclick="switchSub('wk',2)">⛪ 웰컴사랑방</button>
-    <button class="sub-btn" onclick="switchSub('wk',3)">🎫 출석 스탬프</button>
-    <button class="sub-btn" onclick="switchSub('wk',4)">✉️ 파송 기도문</button>
-    <button class="sub-btn" onclick="switchSub('wk',5)">🌍 선교사 기도</button>
   </div>
 
-  <!-- 결단 공유 -->
+  <!-- 선교사님을 위한 기도 -->
   <div class="sub-panel active" id="wk-0">
-    <div class="card">
-      <div class="card-title">📝 이번 주 결단 나눔</div>
-      <p style="font-size:12px;color:var(--sub);margin-bottom:12px">이번 주, 말씀을 붙들고 어떻게 살겠습니까? 한 문장으로 적어주세요.</p>
-      <div class="decision-input-row">
-        <input type="text" id="d-name" placeholder="이름" style="max-width:90px"/>
-        <input type="text" id="d-text" placeholder="이번 주 결단을 한 문장으로" onkeydown="if(event.key==='Enter')addDecision()"/>
-        <button class="btn btn-primary btn-sm" onclick="addDecision()">추가</button>
-      </div>
-      <div class="decision-cards" id="decision-cards"></div>
-      <div class="btn-row">
-        <button class="btn btn-outline btn-sm" onclick="window.print()">📋 인쇄</button>
-        <button class="btn btn-outline btn-sm" onclick="togglePrevD()">지난 주 결단 ▼</button>
-      </div>
-      <div class="prev-decisions" id="prev-decisions"></div>
-    </div>
-  </div>
-
-  <!-- VIP 기도 -->
-  <div class="sub-panel" id="wk-1">
-    <div class="card">
-      <div class="card-title">🙏 VIP 기도 카드</div>
-      <button class="btn btn-primary btn-sm" onclick="openVipModal()" style="margin-bottom:14px">+ VIP 추가</button>
-      <div class="vip-cards-grid" id="vip-cards"></div>
-    </div>
-  </div>
-
-  <!-- 웰컴사랑방 -->
-  <div class="sub-panel" id="wk-2">
-    <div class="card">
-      <div class="card-title">⛪ 웰컴사랑방 — 교회 안의 열방</div>
-      <div class="ws-tabs">
-        <button class="ws-tab active" onclick="switchWS(0,this)">🌍 국제 영역 (13)</button>
-        <button class="ws-tab" onclick="switchWS(1,this)">🤝 긍휼 영역 (8)</button>
-      </div>
-      <div class="ws-panel active" id="ws-0">
-        <div class="ws-cards" id="lang-cards"></div>
-      </div>
-      <div class="ws-panel" id="ws-1">
-        <div class="ws-cards" id="neighbor-cards"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 스탬프 -->
-  <div class="sub-panel" id="wk-3">
-    <div class="card">
-      <div class="card-title">🎫 출석 스탬프</div>
-      <div class="stamp-name-row">
-        <input type="text" id="stamp-name" placeholder="이름 입력"/>
-        <button class="btn btn-accent btn-sm" onclick="saveStampName()">저장</button>
-      </div>
-      <div class="stamp-grid" id="stamp-grid"></div>
-      <div class="badge-row" id="badge-row"></div>
-      <button class="btn btn-primary" style="width:100%" onclick="addStamp()">✝ 오늘 출석 도장 찍기</button>
-    </div>
-  </div>
-
-  <!-- 파송 기도문 -->
-  <div class="sub-panel" id="wk-4">
-    <div class="card">
-      <div class="card-title">✉️ 파송 기도문 생성기</div>
-      <div class="field"><label class="field-label">사랑방 이름</label><input type="text" id="p-room" placeholder="예: 비추미마을 사랑방"/></div>
-      <div class="field"><label class="field-label">이번 주 본문</label><input type="text" id="p-verse" placeholder="예: 요한복음 15:5"/></div>
-      <div class="field"><label class="field-label">핵심 결단</label><input type="text" id="p-decision" placeholder="예: 날마다 포도나무에 붙어 살기로"/></div>
-      <div class="field"><label class="field-label">기도 제목 1</label><input type="text" id="p-prayer1" placeholder="예: 지체의 취업"/></div>
-      <div class="field"><label class="field-label">기도 제목 2</label><input type="text" id="p-prayer2" placeholder="예: 자녀의 건강"/></div>
-      <div class="field"><label class="field-label">VIP 이름</label><input type="text" id="p-vip" placeholder="예: 김철수 씨"/></div>
-      <div class="field"><label class="field-label">참석자 이름들 (쉼표 구분)</label><input type="text" id="p-members" placeholder="예: 홍길동, 이순신, 유관순"/></div>
-      <button class="btn btn-primary" style="width:100%" onclick="genPrayer()">✉️ 기도문 생성</button>
-      <div class="prayer-result" id="prayer-result"></div>
-      <div class="btn-row" id="prayer-btns" style="display:none">
-        <button class="btn btn-accent btn-sm" onclick="copyPrayer()">📋 복사</button>
-        <button class="btn btn-outline btn-sm" onclick="window.print()">🖨 인쇄</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 선교사 기도 -->
-  <div class="sub-panel" id="wk-5">
     <!-- 헤더 -->
     <div style="padding:16px 16px 0">
       <div class="card" style="background:linear-gradient(135deg,#1B4332,#40916C);color:#fff;margin-bottom:8px">
@@ -993,6 +911,32 @@ textarea{resize:vertical;min-height:80px}
             선교대원: 이승목 김수진 김일하 서경자 이규철 이미란 이용주 임명재 임효명 정순화 차윤정 황규범
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIP를 위한 기도 -->
+  <div class="sub-panel" id="wk-1">
+    <div class="card">
+      <div class="card-title">🙏 VIP 기도 카드</div>
+      <button class="btn btn-primary btn-sm" onclick="openVipModal()" style="margin-bottom:14px">+ VIP 추가</button>
+      <div class="vip-cards-grid" id="vip-cards"></div>
+    </div>
+  </div>
+
+  <!-- 웰컴사랑방 -->
+  <div class="sub-panel" id="wk-2">
+    <div class="card">
+      <div class="card-title">⛪ 웰컴사랑방 — 교회 안의 열방</div>
+      <div class="ws-tabs">
+        <button class="ws-tab active" onclick="switchWS(0,this)">🌍 국제 영역 (13)</button>
+        <button class="ws-tab" onclick="switchWS(1,this)">🤝 긍휼 영역 (8)</button>
+      </div>
+      <div class="ws-panel active" id="ws-0">
+        <div class="ws-cards" id="lang-cards"></div>
+      </div>
+      <div class="ws-panel" id="ws-1">
+        <div class="ws-cards" id="neighbor-cards"></div>
       </div>
     </div>
   </div>
