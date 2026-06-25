@@ -2600,24 +2600,43 @@ function renderConti(){
   var html='';
   contiList.forEach(function(s,i){
     var tip=flowTip(contiList[i-1],s);
-    html+='<div class="conti-item">'
-      +'<div class="conti-num">'+(i+1)+'</div>'
-      +'<div class="conti-info">'
-        +'<div class="conti-title">'+s.title+'</div>'
-        +'<div class="conti-meta">'+s.artist+' · Key '+s.key+' · '+bpmLabel(s.bpm)+'</div>'
-        +(i>0&&tip?'<div class="conti-flow">'+tip+'</div>':'')
+    var lyrId='cl-'+i;
+    var hasLyrics=s.lyrics&&s.lyrics.trim().length>0;
+    html+='<div style="border-bottom:1px solid var(--gray2)">'
+      +'<div class="conti-item" style="border-bottom:none;cursor:'+(hasLyrics?'pointer':'default')+'"'
+        +(hasLyrics?' onclick="toggleContiLyrics(\''+lyrId+'\')"':'')+'>'
+        +'<div class="conti-num">'+(i+1)+'</div>'
+        +'<div class="conti-info">'
+          +'<div class="conti-title">'+s.title+(hasLyrics?' <span style="font-size:10px;color:var(--accent);font-weight:400">가사 ▼</span>':'')+'</div>'
+          +'<div class="conti-meta">'+s.artist+' · Key '+s.key+' · '+bpmLabel(s.bpm)+'</div>'
+          +(i>0&&tip?'<div class="conti-flow">'+tip+'</div>':'')
+        +'</div>'
+        +'<div style="display:flex;flex-direction:column;gap:2px;align-items:center">'
+          +(i>0?'<button onclick="event.stopPropagation();moveConti('+i+',-1)" class="conti-del">↑</button>':'<span style="height:21px;display:block"></span>')
+          +(i<contiList.length-1?'<button onclick="event.stopPropagation();moveConti('+i+',1)" class="conti-del">↓</button>':'<span style="height:21px;display:block"></span>')
+          +'<button onclick="event.stopPropagation();removeFromConti('+i+')" class="conti-del" style="color:#e57373">✕</button>'
+        +'</div>'
       +'</div>'
-      +'<div style="display:flex;flex-direction:column;gap:2px;align-items:center">'
-        +(i>0?'<button onclick="moveConti('+i+',-1)" class="conti-del">↑</button>':'<span style="height:21px;display:block"></span>')
-        +(i<contiList.length-1?'<button onclick="moveConti('+i+',1)" class="conti-del">↓</button>':'<span style="height:21px;display:block"></span>')
-        +'<button onclick="removeFromConti('+i+')" class="conti-del" style="color:#e57373">✕</button>'
-      +'</div>'
+      +(hasLyrics?'<div id="'+lyrId+'" style="display:none;padding:10px 14px 14px 14px;background:var(--light)">'
+        +'<div style="font-size:12px;line-height:2;color:var(--text);white-space:pre-line">'+s.lyrics.replace(/\\n/g,'\n')+'</div>'
+        +'</div>':'')
       +'</div>';
   });
   el.innerHTML=html;
   if(footer){
     footer.style.display='block';
     if(stats)stats.textContent='총 '+contiList.length+'곡 · 약 '+Math.round(contiList.length*4)+'분 예상 (곡당 4분 기준)';
+  }
+}
+function toggleContiLyrics(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var open=el.style.display==='block';
+  el.style.display=open?'none':'block';
+  var item=el.previousElementSibling;
+  if(item){
+    var span=item.querySelector('.conti-title span');
+    if(span)span.textContent=open?'가사 ▼':'가사 ▲';
   }
 }
 function addToConti(title){
