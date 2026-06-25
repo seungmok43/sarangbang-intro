@@ -2796,8 +2796,7 @@ function delDecision(id){
   localStorage.setItem('sarangbang_decisions',JSON.stringify(list));loadDecisions();
 }
 let prevDOpen=false;
-function togglePrevD(){prevDOpen=!prevDOpen;document.getElementById('prev-decisions').classList.toggle('show',prevDOpen);}
-loadDecisions();
+function togglePrevD(){prevDOpen=!prevDOpen;document.getElementById('prev-decisions')?.classList.toggle('show',prevDOpen);}
 
 // ── Works: VIP ─────────────────────────────────────────
 function loadVips(){
@@ -2854,7 +2853,6 @@ function addStamp(){
   localStorage.setItem('sarangbang_stamps',JSON.stringify(data));
   renderStamps();
 }
-renderStamps();
 
 // ── Works: 선교사 기도 ──────────────────────────────────
 function toggleMCard(id){
