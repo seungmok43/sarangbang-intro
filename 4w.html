@@ -935,7 +935,7 @@ textarea{resize:vertical;min-height:80px}
       <div class="card-title">⛪ 웰컴사랑방 — 교회 안의 열방</div>
       <div class="ws-tabs">
         <button class="ws-tab active" onclick="switchWS(0,this)">🌍 국제 영역 (13)</button>
-        <button class="ws-tab" onclick="switchWS(1,this)">🤝 긍휼 영역 (8)</button>
+        <button class="ws-tab" onclick="switchWS(1,this)">🤝 긍휼 영역 (20)</button>
       </div>
       <div class="ws-panel active" id="ws-0">
         <div class="ws-cards" id="lang-cards"></div>
@@ -2279,14 +2279,31 @@ const LANG_MISSIONS=[
   {flag:'🇺🇿',name:'우즈베키스탄어 사랑방',desc:'중앙아시아 국적자'},
 ];
 const NEIGHBOR_MISSIONS=[
-  {icon:'💚',name:'사랑부',desc:'발달장애인과 비장애인 통합 사랑방'},
-  {icon:'👴',name:'어르신섬김부',desc:'독거·거동불편 어르신 정기 심방'},
-  {icon:'🌏',name:'다문화가정부',desc:'국제결혼 가정 신앙 양육'},
-  {icon:'🏗️',name:'이주노동자섬김부',desc:'외국인 이주노동자 지원 + 복음'},
-  {icon:'🇰🇷',name:'탈북민섬김부',desc:'탈북 정착민 남한 정착 + 신앙 연결'},
-  {icon:'👷',name:'외국인노동자부',desc:'외국인 근로자 권익 보호 + 복음'},
-  {icon:'🧒',name:'청소년돌봄부',desc:'방과후 돌봄, 상담, 신앙 멘토링'},
-  {icon:'🎓',name:'경계선청소년부',desc:'학교 밖 청소년 검정고시·진로 지원'},
+  // 경조사역조정실
+  {icon:'🕊️',name:'경조부',desc:'장례 집례·운구 등 일체 담당'},
+  {icon:'🎵',name:'백합부 A·B·C',desc:'장례 예배 시 찬양 섬김'},
+  {icon:'🏥',name:'호스피스',desc:'말기암환자 영적돌봄·예배 (요양·병원 방문)'},
+  // 일반복지사역조정실
+  {icon:'🌱',name:'기대나무',desc:'자립준비청년 상담·멘토링·자립 지원'},
+  {icon:'🏠',name:'재가봉사',desc:'장애·독거노인 가정 방문 예배·청소·말벗'},
+  {icon:'👦',name:'프렌즈',desc:'발달장애 학생·부모 만남 예배 및 영적 케어'},
+  {icon:'🎓',name:'원더풀 시니어 대학',desc:'예배·소그룹·문화체육 활동으로 시니어 섬김'},
+  {icon:'🏡',name:'보육원',desc:'은혜의집·에바다·NK아이빌 등 7개 시설 예배·교제'},
+  {icon:'👴',name:'양로원·요양원',desc:'동래양로원·요양병원 정기 예배사역'},
+  {icon:'✂️',name:'이미용',desc:'둘째·넷째 주일 이미용 봉사 (비전센터)'},
+  // 상담사역조정실
+  {icon:'💬',name:'상담센터·아카데미',desc:'수영로 심리상담센터 운영 · 상담사 양성 교육'},
+  {icon:'📖',name:'독서치유·정신건강',desc:'독서 치유 상담 · 정신건강 상담 진행'},
+  {icon:'🤝',name:'관계기술·생활법률',desc:'관계기술 훈련 · 매주 주일 긴급 법률 상담'},
+  // 장애인사역조정실
+  {icon:'🤟',name:'농아부·수어교실',desc:'농인 예배 공동체 · 수어교실 운영'},
+  {icon:'💚',name:'사랑부 1·2·3부',desc:'발달장애인 주일학교 예배·공과활동 (장년·청년·아동)'},
+  {icon:'🎭',name:'토요학교·엘미소·더드림',desc:'발달장애인 여가문화·오케스트라·연극팀'},
+  // 러브부산
+  {icon:'👶',name:'마더플러스·담쟁이스쿨',desc:'미혼모 시설 방문 예배 · 원데이클래스'},
+  {icon:'🔨',name:'위드하우스',desc:'주거취약계층 집수리·주거환경 개선'},
+  {icon:'🍲',name:'무료급식',desc:'노숙인 주 1회 급식 (부산희망드림센터)'},
+  {icon:'📱',name:'스마트폰·PC 교실',desc:'시니어 디지털 활용 강좌 (매주 화요일)'},
 ];
 
 // ── 탭 전환 ──────────────────────────────────────────
