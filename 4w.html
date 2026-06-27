@@ -39,7 +39,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--gray);color:var(--te
 .sub-btn{padding:7px 14px;font-size:12px;font-weight:600;border-radius:20px;border:1.5px solid var(--gray2);background:#fff;color:var(--sub);cursor:pointer;white-space:nowrap;transition:all .2s}
 .sub-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 /* Work 탭 전용 큰 카드 버튼 */
-.wk-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 16px 0;overflow:visible}
+.wk-nav{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:16px 16px 0;overflow:visible}
 .wk-nav .sub-btn{border-radius:16px;padding:16px 6px 14px;display:flex;flex-direction:column;align-items:center;gap:7px;white-space:normal;text-align:center;flex:none;width:auto}
 .wk-nav .wk-icon{font-size:26px;line-height:1}
 .wk-nav .wk-label{font-size:10px;font-weight:700;line-height:1.4;color:var(--sub)}
@@ -722,21 +722,38 @@ textarea{resize:vertical;min-height:80px}
 <div class="tab-panel" id="panel-3">
   <div class="wk-nav">
     <button class="sub-btn active" onclick="switchSub('wk',0)">
+      <span class="wk-icon">💰</span>
+      <span class="wk-label">헌금</span>
+    </button>
+    <button class="sub-btn" onclick="switchSub('wk',1)">
       <span class="wk-icon">🌍</span>
       <span class="wk-label">선교사님을<br>위한 기도</span>
     </button>
-    <button class="sub-btn" onclick="switchSub('wk',1)">
+    <button class="sub-btn" onclick="switchSub('wk',2)">
       <span class="wk-icon">🙏</span>
       <span class="wk-label">VIP를<br>위한 기도</span>
     </button>
-    <button class="sub-btn" onclick="switchSub('wk',2)">
+    <button class="sub-btn" onclick="switchSub('wk',3)">
       <span class="wk-icon">⛪</span>
       <span class="wk-label">웰컴사랑방</span>
     </button>
   </div>
 
-  <!-- 선교사님을 위한 기도 -->
+  <!-- 헌금 -->
   <div class="sub-panel active" id="wk-0">
+    <div class="card">
+      <div class="card-title">💰 헌금 계좌 안내</div>
+      <div style="background:#F0FFF4;border:1.5px solid #74C69D;border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px">34교구 사랑방 헌금</div>
+        <div style="font-size:14px;font-weight:800;color:var(--primary);letter-spacing:.5px;margin-bottom:4px">부산은행 101-2007-120805</div>
+        <div style="font-size:12px;color:var(--sub)">예금주: 수영로34교구모임</div>
+      </div>
+      <div style="font-size:11px;color:var(--sub);text-align:center;opacity:.8">헌금은 사랑방 사역과 교구 선교를 위해 사용됩니다.</div>
+    </div>
+  </div>
+
+  <!-- 선교사님을 위한 기도 -->
+  <div class="sub-panel" id="wk-1">
     <!-- 헤더 -->
     <div style="padding:16px 16px 0">
       <div class="card" style="background:linear-gradient(135deg,#1B4332,#40916C);color:#fff;margin-bottom:8px">
@@ -932,7 +949,7 @@ textarea{resize:vertical;min-height:80px}
   </div>
 
   <!-- VIP를 위한 기도 -->
-  <div class="sub-panel" id="wk-1">
+  <div class="sub-panel" id="wk-2">
     <div class="card">
       <div class="card-title">🙏 VIP 기도 카드</div>
       <button class="btn btn-primary btn-sm" onclick="openVipModal()" style="margin-bottom:14px">+ VIP 추가</button>
@@ -941,7 +958,7 @@ textarea{resize:vertical;min-height:80px}
   </div>
 
   <!-- 웰컴사랑방 -->
-  <div class="sub-panel" id="wk-2">
+  <div class="sub-panel" id="wk-3">
     <div class="card">
       <div class="card-title">⛪ 웰컴사랑방 — 교회 안의 열방</div>
       <div class="ws-tabs">
